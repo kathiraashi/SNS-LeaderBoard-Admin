@@ -1,0 +1,148 @@
+/* Page */
+.page{
+   margin-top:100px;
+   margin-bottom:100px;
+}
+/* --------------   Page Identity Section  ----------------- */
+.Page_Identity{
+   display: flex;
+   height:40px;
+   width: 100%;
+   margin-bottom: 5px;
+}
+.Page_Identity .Page_Track{
+   width:100%;
+   line-height: 35px;
+}
+.Page_Identity .Page_Track ul{
+   display: flex;
+   list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   align-items: center;
+   float: right;
+}
+.Page_Identity .Page_Track ul li {
+  font-size: 13px;
+   font-weight: 500;
+   margin-left: 5px;
+}
+.Page_Identity .Page_Track ul li.arrow{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+}
+.Page_Identity .Page_Track ul li.arrowGreen{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.HeaderName{
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.LinkName{
+   color: #226BAF;
+   cursor: pointer;
+}
+/* Form designs  */
+.Form_Input label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: #4e6a7a;
+}
+.Form_Input input {
+  padding: 4px 10px;
+  width: 100%;
+  height: 37px;
+  outline: none;
+  margin-bottom: 20px;
+  border: 1px solid #e8e8e8;
+  color: rgb(79, 107, 123);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+.Form_TextArea label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: #4e6a7a;
+}
+.Form_TextArea textarea {
+  padding: 4px 10px;
+  width: 100%;
+  outline: none;
+  margin-bottom: 20px;
+  border: 1px solid #e8e8e8;
+  color: rgb(79, 107, 123);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+.Form_Input input:-moz-placeholder{
+  color: #999999;
+  font-weight: 400;
+}
+.Form_Input input::-moz-placeholder{
+  color: #999999;
+  font-weight: 400;
+}
+.Form_Input input::-webkit-input-placeholder{
+  color: #999999;
+  font-weight: 400;
+}
+.Form_Input input:-ms-input-placeholder{
+  color: #999999;
+  font-weight: 400;
+}
+.Form_Select label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: #4e6a7a;
+}
+.Form_Select select{
+  width: 100%;
+  height: 37px;
+  outline: none;
+  padding: 0px 10px;
+  border: 1px solid #e8e8e8;
+  color: rgb(79, 107, 123);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+.Form_Select select option{
+  color: rgb(79, 107, 123);
+  width: 100%;
+}
+/* Company details */
+.Company_Details{
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 5px;
+   border-top: 2px solid #226BAF;
+   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.3);
+}
+.SectionIdentity{
+   color:#516570;
+   font-size:18px;
+   font-weight: 700;
+}
+.SectionIdentity .Highlight{
+   color:#226BAF;
+   font-size:18px;
+   font-weight: 700;
+}
+/* footer */
+.Footer {
+   position: fixed;
+   bottom: 0px;
+   width: 100%;
+   padding: 0px 15px;
+   background-color: rgb(167, 175, 179);
+   height: 45px;
+   text-align: right
+}

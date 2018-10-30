@@ -1,0 +1,48 @@
+.customClass .panel-heading .btn {
+   font-weight: 800;
+   color: #516570;
+   font-size: 16px;
+   width: 100%;
+   height: 40px;
+   text-align: left;
+   text-decoration: none;
+}
+.card-header{
+   padding:0px;
+}
+
+  
+/* Model Style Change */
+.modal-backdrop{
+   background-color: rgba(0, 0, 0, .6) !important;
+}
+.modal-backdrop.show{
+   opacity: .48 !important;
+}
+.modal-content{
+   box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+   border-radius: 2px;
+   border:none;
+}
+
+.min-width-350{
+   min-width: 350px;
+}
+
+@media (min-width: 992px) {
+   .modal-dialog.modal-lg.max-width-85{
+      max-width: 85%;
+   }
+   .modal-dialog.modal-lg.max-width-80{
+      max-width: 80%;
+   }
+   .modal-dialog.modal-lg.max-width-75{
+      max-width: 75%;
+   }
+   .modal-dialog.modal-lg.max-width-70{
+      max-width: 70%;
+   }
+   .modal-dialog.modal-lg.max-width-65{
+      max-width: 60%;
+   }
+}

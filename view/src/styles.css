@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/primeng/resources/themes/omega/theme.css';
+@import '../node_modules/primeng/resources/primeng.min.css';
+
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import './assets/Over-Write-Css/ngx-bootstrap-overwrite.css';
+@import './assets/Over-Write-Css/material-overwrite.css';
+@import './assets/Over-Write-Css/ng-select-overwrite.css';
+@import './assets/Over-Write-Css/Primeng-Overwrite.css';
+
+body {
+   background-color: #f3f3f3  !important;
+   margin: 0;
+   padding: 0;
+ }
+*{
+   outline: none !important
+}
+.Bg_Success{
+   background-color: #06a92c !important;
+}
+.Bg_warning{
+    background-color: rgb(255, 157, 11) !important;
+}
+.Bg_Info{
+    background-color: rgb(13, 141, 216) !important;
+}
+.Bg_Danger{
+    background-color: rgb(221, 10, 10) !important;
+}
+._Success{
+    color: #06a92c !important;
+}
+._warning{
+  color: #ff9b05 !important;
+}
+._Info{
+  color: #00a0ff !important;
+}
+._Danger{
+    color: rgb(221, 10, 10) !important;
+}

@@ -1,0 +1,60 @@
+<div class="Modal_Content" *ngIf="Type && Type === 'Create'">
+   <div class="Modal_Header">
+      <p> Course</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="row">
+         <div class="col-sm-6 Form_Input">
+            <label> Course Name:</label>
+            <input type="text">
+         </div>
+         <div class="col-sm-6 Form_Input">
+            <label>Short Code:</label>
+            <input type="text">
+         </div>
+         <div class="col-sm-6 Form_Input">
+            <label>No Of Years:</label>
+            <input type="text">
+         </div>
+         <div class="col-sm-6 Form_Input">
+            <label>Director:</label>
+            <input type="text">
+         </div>
+      </div>
+   </div>
+   <div class="Model_Footer">
+      <button mat-raised-button color="primary"> Submit </button>
+   </div>
+</div>
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>Courses</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class=" Static">Course Name </div>
+         <div class="dots"> : </div>
+         <div class=" Data">Bachelor Of Engineering</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">Short Code </div>
+         <div class="dots"> : </div>
+         <div class=" Data"> B.E</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">No Of Years </div>
+         <div class="dots"> : </div>
+         <div class=" Data"> 3 Years</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">Director </div>
+         <div class="dots"> : </div>
+         <div class=" Data"> yyyy</div>
+      </div>
+   </div>
+</div>
+   
+      
+   

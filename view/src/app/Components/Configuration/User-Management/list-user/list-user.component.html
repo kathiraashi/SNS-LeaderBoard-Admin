@@ -1,0 +1,127 @@
+<app-header></app-header>
+<!-- Page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName">Configuration </li>
+               <li class="arrow">>></li>
+               <li>User List</li>
+            </ul>
+         </div>
+      </div>
+      <!--  Header Part -->
+      <!-- Create and search Section -->
+      <div class="row header_part">
+         <div class="col-sm-6">
+            <button class="Create_Button" mat-button (click)="CreateUser()"> + Create </button>
+         </div>
+         <div class="col-sm-6">
+            <div class="Search_Section">
+               <input type="text" placeholder="Search.." name="search">
+               <i class="material-icons">search</i>
+            </div>
+         </div>
+      </div>
+      <!-- Table Section -->
+      <div class="Table_Section">
+         <table>
+            <thead>
+               <tr>
+                  <th>S.no</th>
+                  <th>User Name</th>
+                  <th>User Type</th>
+                  <th>Email Id</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <span class="S_no"> 1 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">aashi</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Admin</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> aashi@gmail.com</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span class="S_no"> 2 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">aashi</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Admin</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> aashi@gmail.com</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span class="S_no"> 3 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">aashi</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Admin</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> aashi@gmail.com</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span class="S_no"> 4 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">aashi</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Admin</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> aashi@gmail.com</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <br>
+   </div>
+</div>
+
+<!-- Dropdown menus -->
+<mat-menu class="MenuStyleOne" #Action="matMenu" [overlapTrigger]="false" xPosition="after" yPosition="below" class="MenuStyleOne">
+   <button mat-menu-item (click)="CreateUser()">
+      <span>Edit</span>
+   </button>
+   <button mat-menu-item (click)="ViewUser()">
+      <span>View</span>
+   </button>
+   <button mat-menu-item (click)="DeleteUser()">
+      <span>Delete</span>
+   </button>
+</mat-menu>
+

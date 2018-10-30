@@ -1,0 +1,161 @@
+/* Main Section */
+.Main_Section{
+   margin-top:100px;
+}
+/* --------------   Page Identity Section  ----------------- */
+.Page_Identity{
+   display: flex;
+   height:40px;
+   width: 100%;
+   margin-bottom: 5px;
+}
+.Page_Identity .Page_Track{
+   width:100%;
+   line-height: 35px;
+}
+.Page_Identity .Page_Track ul{
+   display: flex;
+   list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   align-items: center;
+   float: right;
+}
+.Page_Identity .Page_Track ul li {
+   font-size: 13px;
+   font-weight: 500;
+   margin-left: 5px;
+}
+.Page_Identity .Page_Track ul li.arrow{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+}
+.Page_Identity .Page_Track ul li.arrowGreen{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.HeaderName{
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.LinkName{
+   color: #226BAF;
+   cursor: pointer;
+}
+/* Cards */
+.Card {
+   background: linear-gradient(229deg, #74da8b, #009e26);
+   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.3);
+   height: 105px;
+}
+.Card .Card_Body {    
+   height: 70px;
+   display: flex;
+   align-items: center;
+}
+.Card .Card_Body .Card_Left {
+   width: 25%;
+   text-align: center;
+}
+.Card .Card_Body .Card_Left i {
+   font-size: 45px;
+   line-height: 85px;
+}
+.Card .Card_Body .Card_Left .people{
+   color: #d24330;
+}
+.Card .Card_Body .Card_Left .layers{
+   color:#049870;;
+}
+.Card .Card_Body .Card_Left .group1{
+   color:#3957b5;
+}
+.Card .Card_Body .Card_Left .group2{
+   color:#AF1437;
+}
+.Card .Card_Body .Card_Right {
+   text-align: center;
+   width: 75%;
+}
+.Card .Card_Body .Card_Right h5 {
+   color: #017f1e;
+   font-size: 16px;
+   line-height: 30px;
+   margin: 0px;
+}
+.Card .Card_Body .Card_Right h6 {
+   color: #ffffff;
+   font-size: 16px;
+}
+.Card .Card_Footer {
+   height: 35px;
+   background-color: #017f1e;
+   display: inline-block;
+   width: 100%;
+   align-items: center;
+   padding: 0px 10px;
+   line-height: 30px;
+   text-align: center;
+}
+.Card .Card_Footer .Card_Info {
+   font-size: 12px;
+   color: #ffffff;
+   font-weight: 500;
+   cursor:pointer;
+}
+
+.card_bg_Liner_1{
+   background: linear-gradient(229deg, #fd9a77, #fb827a) !important;
+}
+.card_bg_1{
+   background-color: #d24330 !important;
+}
+.card_color_1{
+   color: #d2432f !important;
+}
+
+.card_bg_Liner_2{
+   background: linear-gradient(229deg, #8edead, #43c6ac) !important;
+}
+.card_bg_2{
+   background-color: #049870 !important;
+}
+.card_color_2{
+   color: #049870 !important;
+}
+
+.card_bg_Liner_3{
+   background: linear-gradient(248deg, #348ac7, #7474bf);
+}
+.card_bg_3{
+   background-color: #3957b5 !important;
+}
+.card_color_3{
+   color: #3957b5 !important;
+}
+
+.card_bg_Liner_4{
+   background: linear-gradient(67deg, #f15f79, #b24592);
+}
+.card_bg_4{
+   background-color: #af1437 !important;
+}
+.card_color_4{ 
+   color: #af1437 !important;
+}
+.customer_name{
+   color: #626669;
+   font-weight:800;
+}
+span i{
+   color:#49B660;
+   padding: 5px;
+   cursor: pointer;
+}
+/* Calender */
+.Calender{
+   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.3);
+}
+

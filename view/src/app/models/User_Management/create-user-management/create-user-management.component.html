@@ -1,0 +1,56 @@
+<div class="Modal_Content" *ngIf="Type && Type === 'Create'">
+   <div class="Modal_Header">
+      <p> User</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="row">
+         <div class="col-sm-6 Form_Input">
+            <label> User Name:</label>
+            <input type="text">
+         </div>
+         <div class="col-sm-6 Form_Input">
+            <label> Password:</label>
+            <input type="password">
+         </div>
+         <div class="col-sm-6 Form_Input">
+            <label> User Type:</label>
+            <input type="text">
+         </div>
+         <div class="col-sm-6 Form_Input">
+            <label> Mail Id:</label>
+            <input type="text">
+         </div>
+      </div>
+   </div>
+   <div class="Model_Footer">
+      <button mat-raised-button color="primary"> Submit </button>
+   </div>
+</div>
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>User</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class=" Static"> User Name </div>
+         <div class="dots"> : </div>
+         <div class=" Data">aashi</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">User Type </div>
+         <div class="dots"> : </div>
+         <div class=" Data"> Admin</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">Email Id </div>
+         <div class="dots"> : </div>
+         <div class=" Data">aashi@gmail.com</div>
+      </div>
+   </div>
+</div>
+      
+         
+      
+   

@@ -1,0 +1,42 @@
+/* Dashboard Calender Style Overwrite */
+.Custom_Calender_1 .ui-calendar{
+    width: 100%;
+    margin-top: 0px;
+}
+.Custom_Calender_1 .ui-calendar .ui-widget-content{
+    border: 1px solid rgb(235, 237, 239) !important;
+}
+.Custom_Calender_1 .ui-datepicker.ui-datepicker-inline{
+    width:100%;
+}
+.Custom_Calender_1 .ui-datepicker.ui-widget .ui-datepicker-calendar td{
+    border-bottom: none;
+}
+.Custom_Calender_1 .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-highlight{
+    background-color: rgb(128, 181, 230);
+    color: #226BAF;
+    font-weight: 700;
+}
+.Custom_Calender_1 .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active{
+    background-color:#226BAF;
+    color: #ffffff;
+}
+.Custom_Calender_1 .ui-datepicker .ui-datepicker-calendar td:not(.ui-state-disabled) a:hover{
+    background: #226BAF;
+    color: #ffffff;
+}
+.Custom_Calender_1 .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active:hover{
+    background-color:#226BAF;
+    color: #ffffff;
+}
+.Custom_Calender_1  .ui-datepicker .ui-datepicker-header{
+    background: #ffffff;
+    padding: 7px 0px;
+    border: none;
+}
+.Custom_Calender_1 .ui-datepicker .ui-datepicker-prev, 
+.Custom_Calender_1 .ui-datepicker .ui-datepicker-next{
+    top: 3px;
+    height: 35px;
+    width: 35px;
+}

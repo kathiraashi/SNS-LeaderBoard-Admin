@@ -1,0 +1,88 @@
+.Login_Part {
+   margin: 50px 15px;
+ }
+ .Logo {
+   text-align: center;
+ }
+ .Logo img {
+   height: 80px;
+ }
+ 
+ .FormBox {
+   background-color: #ffffff;
+   text-align: center;
+   padding: 20px 30px;
+   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+   margin-top: 60px;
+   position: relative;
+ }
+ .Identity_Box { 
+   background-color: #226BAF;
+   color: #ffffff;
+   padding: 10px 0px;
+   position: absolute;
+   width: calc(100% - 60px);
+   top: -20px;
+   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+   border-radius: 2px;
+ }
+ .Identity_Box h5 {
+   margin: 0px;
+   letter-spacing: 0.5px;
+   font-size: 24px;
+ }
+ .Form_Area {
+   margin-top: 75px;
+   padding: 0px 25px;
+ }
+ .Form_Field {
+   margin-bottom: 35px;
+   width: 100%;
+   border: 1px solid #d5d5d5;
+   display: flex;
+   align-items: center;
+   height: 40px;
+ }
+ .Form_Field i {
+   width: 45px;
+   color: #516570;
+ }
+ .Form_Field input {
+   width: 100%;
+   border: none;
+   height: 38px;
+   font-weight: 500;
+   color: #516570;
+   letter-spacing: 0.5px;
+ }
+ .Form_Field input:-moz-placeholder{
+   color: #999999;
+   font-weight: 400;
+ }
+ .Form_Field input::-moz-placeholder{
+   color: #999999;
+   font-weight: 400;
+ }
+ .Form_Field input::-webkit-input-placeholder{
+   color: #999999;
+   font-weight: 400;
+ }
+ .Form_Field input:-ms-input-placeholder{
+   color: #999999;
+   font-weight: 400;
+ }
+ .Footer_Area {
+   border-top: 1px solid #d3cece;
+   margin-top: 20px;
+   padding: 10px 0px 20px 0px;
+   text-align: left;
+ }
+ .Footer_Area h6 {
+   color: #516570;
+ }
+ .Footer_Area h6 span {
+   color: #4E6A7A;
+   cursor: pointer;
+ }
+ 
+ 

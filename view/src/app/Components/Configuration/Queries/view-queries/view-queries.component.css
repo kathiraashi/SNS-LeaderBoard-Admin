@@ -1,0 +1,91 @@
+/* page */
+.page{
+   margin-top:100px;
+   margin-bottom:100px;
+}
+/* --------------   Page Identity Section  ----------------- */
+.Page_Identity{
+   display: flex;
+   height:40px;
+   width: 100%;
+   margin-bottom: 5px;
+}
+.Page_Identity .Page_Track{
+   width:100%;
+   line-height: 35px;
+}
+.Page_Identity .Page_Track ul{
+   display: flex;
+   list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   align-items: center;
+   float: right;
+}
+.Page_Identity .Page_Track ul li {
+  font-size: 13px;
+   font-weight: 500;
+   margin-left: 5px;
+}
+.Page_Identity .Page_Track ul li.arrow{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+}
+.Page_Identity .Page_Track ul li.arrowGreen{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.HeaderName{
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.LinkName{
+   color: #226BAF;
+   cursor: pointer;
+}
+
+/* Company details */
+.Company_Details{
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 5px;
+   border-top: 2px solid #226BAF;
+   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.3);
+}
+.SectionIdentity{
+   color:#516570;
+   font-size:18px;
+   font-weight: 700;
+}
+.SectionIdentity .Highlight{
+   color:#226BAF;
+   font-size:18px;
+   font-weight: 700;
+}
+
+/* ************************************ View Style ******************************* */
+.view_item {
+   display: grid;
+   grid-template-columns: 140px 15px auto;
+   margin-left: 20px;
+}
+.view_item .Static{
+   font-weight: 700;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .dots{
+   font-weight: 800;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .Data{
+   font-weight: 500;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 14px;
+}

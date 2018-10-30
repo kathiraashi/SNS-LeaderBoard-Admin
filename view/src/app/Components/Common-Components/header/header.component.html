@@ -1,0 +1,75 @@
+<!-- Header Page -->
+<div class="Header_Page">
+   <!-- Header One -->
+   <div class="Header_One">
+      <!-- Logo -->
+      <img src="/assets//images//basic/SNS.png" alt="Logo" class="Header_Logo"> 
+      <!-- Header Button -->
+      <span class="Header_Button">
+            <button mat-button color="primary"> + Create </button>
+      </span>
+      <!-- Search Section -->
+      <span class="search_section">
+         <input type="text" placeholder="search">
+         <i class="material-icons">search </i>
+      </span>
+      <!-- Notification -->
+      <span>
+         <i class="material-icons notification">notifications</i>
+      </span>
+      <!-- Profile -->
+      <span>
+         <i class="material-icons person">person </i>
+      </span>
+      <!-- Logout Button -->
+      <span class="Logout_Btn"> <span (click)="LogOut()"> Logout </span></span>
+   </div>
+   <!-- Header Two -->
+   <div class="Header_Two">
+      <ul class="Menus">
+         <!-- DashBoard -->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Dash_Board']">
+            <span class="Menu">
+               <i class="material-icons">dashboard</i>
+               <span> &nbsp; Dashboard </span> 
+            </span>
+         </li>
+         <!-- Students -->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Student_List']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Students </span> 
+               </span>
+            </span>
+         </li>
+         <!-- Configuration -->
+         <li [routerLinkActive]="['active']" class="Menu_List">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Configuration </span> 
+               </span>
+               <ul class="Menu_Tree_View">
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Institution_List']"><a> Institution Management </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/User_List']"><a> User Management  </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Level_List']"><a> Level Management  </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/List_Activity']"><a> Activities  </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Queries_List']"><a> Queries  </a></li>
+               </ul>
+            </span>
+         </li>
+         <!-- Reports -->
+         <li [routerLinkActive]="['active']" class="Menu_List">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Reports </span> 
+               </span>
+            </span>
+         </li>
+      </ul>
+   </div>
+</div>
+
+

@@ -1,0 +1,153 @@
+/* Page Section */
+.Page_Section{
+   margin-top:100px;
+   margin-bottom:100px;
+}
+/* --------------   Page Identity Section  ----------------- */
+.Page_Identity{
+   display: flex;
+   height:40px;
+   width: 100%;
+   margin-bottom: 5px;
+}
+.Page_Identity .Page_Track{
+   width:100%;
+   line-height: 35px;
+}
+.Page_Identity .Page_Track ul{
+   display: flex;
+   list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   align-items: center;
+   float: right;
+}
+.Page_Identity .Page_Track ul li {
+   font-size: 13px;
+   font-weight: 500;
+   margin-left: 5px;
+}
+.Page_Identity .Page_Track ul li.arrow{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+}
+.Page_Identity .Page_Track ul li.arrowGreen{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+   color: #4E6A7A;
+}
+.Page_Identity .Page_Track ul li.HeaderName{
+   color: #4E6A7A;
+}
+.Page_Identity .Page_Track ul li.LinkName{
+   color: #4E6A7A;
+   cursor: pointer;
+}
+.Page_Content.Hrms .Main_Section{
+   width:100%;
+   display:flex;
+}
+/* ----------- Create and Search Section ---------- */
+.header_part{
+   margin-bottom: 15px;
+}
+.Create_Button{
+   letter-spacing: 0.5px;
+   font-weight: 600;
+   font-size: 14px;
+}
+/* ---------- Search Section ----------- */
+.Search_Section{
+   position: relative;
+   background-color: #ffffff;
+   height: 36px;
+   box-shadow: 1px 2px 4px 0px rgba(0,0,0,.2);
+}
+.Search_Section input{
+   width: 100%;
+   border-radius: 0;
+   border: none;
+   background-color: transparent;
+   padding: 10px;
+   height: 36px;
+   color: #4f6a7a;
+   font-weight: 500;
+   outline: none;
+}
+.Search_Section input::placeholder{
+   color:#cccccc; 
+   font-weight:400;
+}
+.Search_Section i{
+   position: absolute;
+   right: 0px;
+   padding: 7px 5px;
+   color: #4E6A7A;
+   font-weight: 600;
+   cursor: pointer;
+}
+/* Table Section */
+.Table_Section table {
+   border: 1px solid lightgray;
+   width: 100%;
+   box-shadow: 2px 2px 3px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+}
+.Table_Section table thead {
+   line-height: 40px;
+   text-align: center;
+   background-color: #ffffff;
+   color: #4d6a7a;
+   font-size: 14px;
+   letter-spacing: 0.5px;
+}
+.Table_Section table thead th{
+   font-weight: 800;
+}
+.Table_Section table tbody {
+   border: 1px solid #e8e8e8;
+   background-color: #ffffff;
+}
+.Table_Section table tbody tr {
+   line-height: 42px;
+   text-align: center;
+   align-items: center;
+   border-bottom: 1px solid #eaeaea;
+}
+.Table_Section table tbody tr:nth-child(odd) {
+   background-color: #f1f1f185;
+}
+.Table_Section table tbody tr:hover {
+   background-color: #4f6a7a40;
+}
+.Table_Section table tbody tr td .S_no {
+   font-size: 14px;
+   color: #4d6a7a;
+}
+.Table_Section table tbody tr td .Style_1 {
+   font-size: 14px;
+   color: rgba(77, 106, 122, 0.84);
+   font-weight: 600;
+   cursor: pointer;
+}
+.Table_Section table tbody tr td .Action_Section{
+   color: #ffffff;
+   height: 35px;
+   width: 35px;
+   line-height: 30px;
+   display: flex;
+   border-radius: 5px;
+   cursor: pointer;
+   float: right;
+   margin-right: 10px;
+}
+.Table_Section table tbody tr td .Action_Section i {
+   width: 100%;
+   line-height: 35px;
+}
+
+
+
+
+

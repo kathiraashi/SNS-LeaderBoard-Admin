@@ -1,0 +1,645 @@
+<!-- Page -->
+<div class="page">
+   <div class="container-fluid">
+      <!-- page identity -->
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName">Configuration</li>
+               <li class="arrow">>></li>
+               <li class="LinkName" [routerLink]="['/Institution_List']">Institution List</li>
+               <li class="arrow">>></li>
+               <li> Institution Create </li>
+            </ul>
+         </div>
+      </div>
+      <div class="row">
+         <!-- Company details -->
+         <div class="col-sm-12">
+            <div class="Company_Details">
+               <h5 class="SectionIdentity"> 
+                  <span class="Highlight"> Institution </span> Details
+               </h5>
+               <div class="row">
+                  <div class="col-sm-4 Form_Input">
+                     <label>Institution Name:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Institution Code:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Year Of Incorporation:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Head Of The Institution:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Email Id:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Phone No:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Website:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_TextArea">
+                     <label>Address:</label>
+                     <textarea type="text" row="4"></textarea>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Tabs -->
+         <div class="col-sm-12">
+            <br>
+            <div class="Company_Details">
+               <div class="Tabs">
+                  <div class="Tab" [ngClass]="{'active': Active_Tab === 'Courses'}" (click)="Active_Tab_Change('Courses')">
+                     <span >Courses</span>
+                  </div>
+                  <div class="Tab" [ngClass]="{'active': Active_Tab === 'Departments'}" (click)="Active_Tab_Change('Departments')">
+                     <span >Departments</span>
+                  </div>
+                  <div class="Tab" [ngClass]="{'active': Active_Tab === 'Extra_Curricular_Activities'}" (click)="Active_Tab_Change('Extra_Curricular_Activities')">
+                     <span >Extra-Curricular-Activities</span>
+                  </div>
+                  <div class="Tab" [ngClass]="{'active': Active_Tab === 'Staffs'}" (click)="Active_Tab_Change('Staffs')">
+                     <span >Staffs</span>
+                  </div>
+               </div>
+               <br>
+               <!-- Table Section -->
+               <div *ngIf="Active_Tab === 'Departments'">
+                  <!--  Header Part -->
+                  <!-- Create and search Section -->
+                  <div class="row header_part">
+                     <div class="col-sm-6">
+                        <button class="Create_Button" mat-button (click)="CreateDepartment()"> + Create </button>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="Search_Section">
+                           <input type="text" placeholder="Search.." name="search">
+                           <i class="material-icons">search</i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <!-- Table Section -->
+                        <div class="Table_Section">
+                           <table>
+                              <thead>
+                                 <tr>
+                                    <th>S.no</th>
+                                    <th>Department Name</th>
+                                    <th>Department Head</th>
+                                    <th>Course</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 1 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Computer Science</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">B.E</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewDepartment()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateDepartment()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteDepartment()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 2 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Computer Science</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">B.E</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewDepartment()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateDepartment()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteDepartment()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 3 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Computer Science</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">B.E</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewDepartment()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateDepartment()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteDepartment()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 4 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Computer Science</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">B.E</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewDepartment()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateDepartment()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteDepartment()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div *ngIf="Active_Tab === 'Courses'">
+                  <!--  Header Part -->
+                  <!-- Create and search Section -->
+                  <div class="row header_part">
+                     <div class="col-sm-6">
+                        <button class="Create_Button" mat-button (click)="CreateCourse()"> + Create </button>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="Search_Section">
+                           <input type="text" placeholder="Search.." name="search">
+                           <i class="material-icons">search</i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <!-- Table Section -->
+                        <div class="Table_Section">
+                           <table>
+                              <thead>
+                                 <tr>
+                                    <th>S.no</th>
+                                    <th>Course Name</th>
+                                    <th>Short Code</th>
+                                    <th>No Of Years</th>
+                                    <th>Director</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 1 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Bachelor Of Engineering</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> B.E</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">4 Years</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewCourse()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateCourse()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteCourse()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 2 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Bachelor Of Engineering</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> B.E</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">4 Years</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewCourse()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateCourse()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteCourse()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 3 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Bachelor Of Engineering</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> B.E</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">4 Years</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewCourse()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateCourse()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteCourse()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 4 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Bachelor Of Engineering</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> B.E</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">4 Years</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewCourse()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateCourse()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)=" DeleteCourse()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div *ngIf="Active_Tab === 'Extra_Curricular_Activities'">
+                  <!--  Header Part -->
+                  <!-- Create and search Section -->
+                  <div class="row header_part">
+                     <div class="col-sm-6">
+                        <button class="Create_Button" mat-button (click)="CreateExtraCurricularActivities()"> + Create </button>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="Search_Section">
+                           <input type="text" placeholder="Search.." name="search">
+                           <i class="material-icons">search</i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <!-- Table Section -->
+                        <div class="Table_Section">
+                           <table>
+                              <thead>
+                                 <tr>
+                                    <th>S.no</th>
+                                    <th> Name</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 1 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewExtraCurricularActivities()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateExtraCurricularActivities()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteExtraCurricularActivities()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 2 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewExtraCurricularActivities()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateExtraCurricularActivities()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteExtraCurricularActivities()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 3 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewExtraCurricularActivities()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateExtraCurricularActivities()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteExtraCurricularActivities()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 4 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">xxxx</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewExtraCurricularActivities()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateExtraCurricularActivities()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteExtraCurricularActivities()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div *ngIf="Active_Tab === 'Staffs'">
+                  <!--  Header Part -->
+                  <!-- Create and search Section -->
+                  <div class="row header_part">
+                     <div class="col-sm-6">
+                        <button class="Create_Button" mat-button (click)="CreateStaffs()"> + Create </button>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="Search_Section">
+                           <input type="text" placeholder="Search.." name="search">
+                           <i class="material-icons">search</i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <!-- Table Section -->
+                        <div class="Table_Section">
+                           <table>
+                              <thead>
+                                 <tr>
+                                    <th>S.no</th>
+                                    <th>Name</th>
+                                    <th>Qualification</th>
+                                    <th>Date Of Joining</th>
+                                    <th>Experience</th>
+                                    <th>Gender</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 1 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">yyyy</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">25/08/13</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">5yrs</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Male</span>
+                                    </td>
+                                   <td>
+                                       <button (click)="ViewStaffs()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateStaffs()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteStaffs()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 2 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">yyyy</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">25/08/13</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">5yrs</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Male</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewStaffs()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateStaffs()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteStaffs()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 3 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">yyyy</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">25/08/13</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">5yrs</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Male</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewStaffs()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateStaffs()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteStaffs()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span class="S_no"> 4 </span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">yyyy</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1"> xxxx</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">25/08/13</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">5yrs</span>
+                                    </td>
+                                    <td>
+                                       <span class="Style_1">Male</span>
+                                    </td>
+                                    <td>
+                                       <button (click)="ViewStaffs()" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                                          <i class="material-icons">zoom_in</i>
+                                       </button>
+                                       <button  (click)="CreateStaffs()" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                                          <i class="material-icons">edit</i>
+                                       </button>
+                                       <button (click)="DeleteStaffs()" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                                          <i class="material-icons">delete_forever</i>
+                                       </button>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="Footer">
+   <button mat-raised-button color="primary" style = "top: 5px;"> Submit </button>
+</div>
+   
+                  
+               
+         
+         
+      

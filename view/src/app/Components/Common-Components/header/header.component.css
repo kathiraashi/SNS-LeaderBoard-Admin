@@ -1,0 +1,183 @@
+/* header page */
+.Header_Page{
+   width: 100%;
+   height: 90px;
+   position: fixed;
+   top: 0px;
+   z-index: 1000;
+}
+
+/* Header one */
+.Header_Page .Header_One{
+   width: 100%;
+   height: 55px;
+   background-color:#f1f4f7;
+   display:flex;
+   align-items: center;
+}
+
+/* Logo */
+.Header_Page .Header_One .Header_Logo{
+   height: 55px;
+   margin-left: 10px;
+   float: left;
+}
+
+/*  Header Button  */
+.Header_Button{
+   margin: 0px 20px;
+}
+
+/* search section */
+.search_section{
+   margin-left: 50px;
+   width: 42%;
+   position: relative;
+   display: flex;
+   align-items: center;
+   border-bottom: 1px solid #87a4bf;
+   margin-top: 6px;
+}
+.search_section input{
+   height: 26px;
+   position: relative;
+   background-color: transparent;
+   border: none;
+   width: calc(100% - 31px);
+   padding: 0px 10px;
+}
+.search_section input::placeholder{
+   color:#608db8;
+}
+.search_section i{
+   color:#728698;
+}
+
+/* Logout Button */
+.Header_Page .Header_One .Logout_Btn{
+   color: #ffffff;
+   line-height: 50px;
+   float: right;
+   font-size: 18px;
+   margin-right: 20px;
+   position:absolute;
+   right:20px;
+}
+.Header_Page .Header_One .Logout_Btn span{
+   text-decoration: none;
+   color: #3c77af;
+   font-weight: 600;
+   font-size: 20px;
+   cursor: pointer;
+}
+.Header_Page .Header_One .notification{
+   color: #3c77af;
+   line-height: 3px;
+   font-size: 23px;
+   position: absolute;
+   right: 9%;
+   cursor:pointer;
+}
+.Header_Page .Header_One .person{
+   color: #3c77af;
+   line-height: 3px;
+   font-size: 23px;
+   position: absolute;
+   right: 12%;
+   cursor:pointer;
+}
+
+/* Header two */
+.Header_Page .Header_Two{
+   width: 100%;
+   height: 40px;
+   background-color:#226baf;
+   box-shadow: 0 3px 1px -6px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+.Header_Page .Header_Two .Menus{
+   height: 40px;
+   list-style: none;
+   display: inline-block;
+   padding: 0px;
+}
+.Header_Page .Header_Two .Menus .Menu_List{
+   height: 40px;
+   line-height: 40px;
+   float: left;
+   min-width: 100px;
+}
+
+/* Menus */
+.Header_Page .Header_Two .Menus .Menu_List .Menu{
+   color: #ffffff;
+   cursor: pointer;
+   font-weight: 600;
+   padding: 0px 10px;
+   display: inline-flex;
+   align-items: center;
+   font-size: 15px;
+   
+   min-width: 100px;
+   height: 40px;
+   line-height: 40px;
+   text-align: center;
+}
+.Header_Page .Header_Two .Menus .Menu_List .Menu:hover,
+.Header_Page .Header_Two .Menus .Menu_List.active > .Menu{
+   color: #ffffff;
+   line-height: 40px;
+   background-color:#0e4477;
+   width: 100%;
+}
+.Header_Page .Menu_Tree{
+   position: relative;
+   display: inline-block;
+}
+.Header_Page .Menu_List.active .Menu{
+   background-color: #0e4477;
+}
+.Header_Page .Menu_Tree .Menu_Tree_View{
+   position: absolute;
+   display: none;
+   list-style: none;
+   min-width: 175px;
+   left: 0px;
+   padding-left: 0px;
+   padding-top: 2px;
+   z-index: 1;
+   top: 40px;
+}
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List{
+   width: 100%;
+   display: block;
+   height: 40px;
+   float: left;
+   background-color: #226baf;
+
+}
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List a{
+   display: block;
+   color: #ffffff;
+   text-decoration: none;
+   font-weight: 600;
+   line-height: 40px;
+   text-align: left;
+   width: 100%;
+   padding: 0px 10px;
+   cursor: pointer;
+}
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List a:hover,
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List.active>a{
+   color: #ffffff;
+   background-color: #0e4477;
+}
+.Header_Page .Menu_Tree:hover > .Menu_Tree_View {
+   display: block;
+}
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List > .Menu_Tree{
+   padding-top: 0px;
+}
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List > .Menu_Tree > .Menu_Tree_View{
+   left: 102%;
+   top: 0px;
+}

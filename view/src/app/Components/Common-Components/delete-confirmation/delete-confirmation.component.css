@@ -1,0 +1,47 @@
+/* Model Content */
+.Modal_Content {
+   width: 100%;
+   height: 100%;
+   padding: 0px 10px;
+}
+/* Model Header */
+.Modal_Header {
+   position: relative;
+   display: flex;
+   align-items: center;
+   height: 45px;
+   border-bottom: 1px solid #e8e8e8;
+}
+.Modal_Header p {
+   margin: 0px;
+   font-weight: 700;
+   font-size: 24px;
+   color: #4f6a7a;
+   letter-spacing: 0.3px;
+   width: 100%;
+   text-align: center;
+}
+/* Model body */
+.Model_Body {
+   position: relative;
+}
+.Model_Body p{
+   font-size: 17px;
+   font-weight: 500;
+   color: #4f6a7a;
+   text-align: center;
+   padding: 25px 0px;
+   margin: 0px;
+}
+/* Model Footer */
+.Model_Footer {
+   border-top: 1px solid #e8e8e8;
+   height: 55px;
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+.Model_Footer button:last-child {
+   position: absolute;
+   right: 0px;
+}

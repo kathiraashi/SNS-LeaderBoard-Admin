@@ -1,0 +1,93 @@
+<!-- Page -->
+<div class="page">
+   <div class="container-fluid">
+      <!-- page identity -->
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName">Students</li>
+               <li class="arrow">>></li>
+               <li class="LinkName" [routerLink]="['/Student_List']">Students List</li>
+               <li class="arrow">>></li>
+               <li> Students Create </li>
+            </ul>
+         </div>
+      </div>
+      <div class="row">
+         <!-- Company details -->
+         <div class="col-sm-12">
+            <div class="Company_Details">
+               <h5 class="SectionIdentity"> 
+                  <span class="Highlight"> Student </span> Details
+               </h5>
+               <form [formGroup]="Form">
+               <div class="row">
+                  <div class="col-sm-4 Form_Select">
+                     <label>Institution:</label>
+                     <ng-select class="NgSelect" [searchable]="true" placeholder="Select Institution">
+                        <ng-option *ngFor="let Institution of _Institution" [value]="Institution">{{Institution}}</ng-option>
+                     </ng-select>
+                  </div>
+                  <div class="col-sm-4 Form_Select">
+                     <label>Course:</label>
+                     <ng-select class="NgSelect" [searchable]="true" placeholder="Select Course">
+                        <ng-option *ngFor="let Course of _Course" [value]="Course">{{Course}}</ng-option>
+                     </ng-select>
+                  </div>
+                  <div class="col-sm-4 Form_Select">
+                     <label>Department:</label>
+                     <ng-select class="NgSelect" [searchable]="true" placeholder="Select Department">
+                        <ng-option *ngFor="let Department of _Department" [value]="Department">{{Department}}</ng-option>
+                     </ng-select>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Roll No:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Student Name:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Batch:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Email Id:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Contact No:</label>
+                     <input type="text">
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label>Tutor:</label>
+                     <ng-select class="NgSelect" [searchable]="true" placeholder="Select Tutor">
+                        <ng-option *ngFor="let Tutor of _Tutor" [value]="Tutor">{{Tutor}}</ng-option>
+                     </ng-select>
+                  </div>
+                  <div class="col-sm-4 Form_radio">
+                     <label>Gender:</label><br>
+                     <input type="radio">Male &nbsp;&nbsp;&nbsp;
+                     <input type="radio">Female
+                  </div>
+                  <div class="col-sm-4 Form_TextArea">
+                     <label>Address:</label>
+                     <textarea type="text" row="4"></textarea>
+                  </div>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="Footer">
+   <button mat-raised-button color="primary" style = "top: 5px;"> Submit </button>
+</div>
+
+               
+            
+      
+      
+   

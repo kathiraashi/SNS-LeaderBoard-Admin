@@ -1,0 +1,56 @@
+<div class="Modal_Content" *ngIf="Type && Type === 'Create'">
+   <div class="Modal_Header">
+      <p> Activity</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="row">
+         <div class="col-sm-6 Form_Input">
+            <label> Activity Name:</label>
+            <input type="text">
+         </div>
+         <div class="col-sm-6 Form_Select">
+            <label>Staff:</label>
+            <select>
+               <option disabled> Select Staff</option>
+               <option> Staff-1</option>
+               <option>Staff-2</option>
+            </select>
+         </div>
+         <div class="col-sm-6 Form_TextArea">
+            <label>Description:</label>
+            <textarea type="text" row="4"></textarea>
+         </div>
+      </div>
+   </div>
+   <div class="Model_Footer">
+      <button mat-raised-button color="primary"> Submit </button>
+   </div>
+</div>
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>Activity</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class=" Static">Activity Name </div>
+         <div class="dots"> : </div>
+         <div class=" Data">Name</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">Staff </div>
+         <div class="dots"> : </div>
+         <div class=" Data"> staff-1</div>
+      </div>
+      <div class="view_item">
+         <div class=" Static">Description </div>
+         <div class="dots"> : </div>
+         <div class=" Data">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+      </div>
+   </div>
+</div>
+      
+         
+      
+   

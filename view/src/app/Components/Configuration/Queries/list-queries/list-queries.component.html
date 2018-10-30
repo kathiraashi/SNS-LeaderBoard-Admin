@@ -1,0 +1,150 @@
+<app-header></app-header>
+<!-- Page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName">Configuration</li>
+               <li class="arrow">>></li>
+               <li>Queries List</li>
+            </ul>
+         </div>
+      </div>
+      <!--  Header Part -->
+      <!-- Create and search Section -->
+      <div class="row header_part">
+         <div class="col-sm-6">
+         </div>
+         <div class="col-sm-6">
+            <div class="Search_Section">
+               <input type="text" placeholder="Search.." name="search">
+               <i class="material-icons">search</i>
+            </div>
+         </div>
+      </div>
+      <!-- Table Section -->
+      <div class="Table_Section">
+         <table>
+            <thead>
+               <tr>
+                  <th>S.no</th>
+                  <th>Roll No</th>
+                  <th>Student Name</th>
+                  <th>Institution</th>
+                  <th>Department</th>
+                  <th>Course</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <span class="S_no"> 1 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">14</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> xxxx</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Jay Shriram</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Computer Science</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">B.E</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span class="S_no"> 2 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">15</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> xxxx</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Jay Shriram</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Computer Science</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">B.E</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span class="S_no"> 3 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">16</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> xxxx</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Jay Shriram</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Computer Science</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">B.E</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span class="S_no"> 4 </span>
+                  </td>
+                  <td>
+                     <span class="Style_1">17</span>
+                  </td>
+                  <td>
+                     <span class="Style_1"> xxxx</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Jay Shriram</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">Computer Science</span>
+                  </td>
+                  <td>
+                     <span class="Style_1">B.E</span>
+                  </td>
+                  <td>
+                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <br>
+   </div>
+</div>
+
+<!-- Dropdown menus -->
+<mat-menu class="MenuStyleOne" #Action="matMenu" [overlapTrigger]="false" xPosition="after" yPosition="below" class="MenuStyleOne">
+   <button mat-menu-item (click)="EditQueries()">
+      <span>Edit</span>
+   </button>
+   <button mat-menu-item [routerLink]="['/Queries_View']">
+      <span>View</span>
+   </button>
+</mat-menu>
+
+
