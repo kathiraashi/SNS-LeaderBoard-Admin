@@ -1,0 +1,166 @@
+<div class="Modal_Content" *ngIf=" Type && Type === 'Import'">
+   <div class="Modal_Header">
+      <p> Students Import </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <form [formGroup]="Form">
+         <div class="row">
+            <div class="col-sm-4 Form_Select">
+               <label> Institution: </label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution"
+                           [items]="Institutions_List"
+                           [bindLabel]="'Institution'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           (change)="InstitutionChange()"
+                           placeholder="Institution">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required"> Institution is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Select">
+               <label> Course & Department: </label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution_Management"
+                           [items]="Institution_Management_List"
+                           [bindLabel]="'CourseAndDepartment'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           (change)="InsManagementChange()"
+                           placeholder="Course & Department">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution_Management'].errors && !Form.controls['Institution_Management'].pristine">
+                  <span *ngIf="Form.controls['Institution_Management'].errors.required"> Course & Department is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Select">
+               <label> Yearly Batch </label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Yearly_Badge"
+                           [items]="Yearly_Badge_List"
+                           [bindLabel]="'Batch'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           (change)="YearlyBatch_Change()"
+                           placeholder="Yearly Badge">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Yearly_Badge'].errors && !Form.controls['Yearly_Badge'].pristine">
+                  <span *ngIf="Form.controls['Yearly_Badge'].errors.required"> Yearly Badge is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Select">
+               <label> Year </label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Year"
+                           [items]="Years_List"
+                           [bindLabel]="'Show_Year'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           (change)="Year_Change()"
+                           placeholder="Year">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Year'].errors && !Form.controls['Year'].pristine">
+                  <span *ngIf="Form.controls['Year'].errors.required"> Year is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Select">
+               <label> Semester </label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Semester"
+                           [items]="Semesters_List"
+                           [bindLabel]="'Semester_Name'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           (change)="Semester_Change()"
+                           placeholder="Semester">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Semester'].errors && !Form.controls['Semester'].pristine">
+                  <span *ngIf="Form.controls['Semester'].errors.required"> Semester is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Select">
+               <label> Section </label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Section"
+                           [items]="Sections_List"
+                           [searchable]="true"
+                           placeholder="Section">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Section'].errors && !Form.controls['Section'].pristine">
+                  <span *ngIf="Form.controls['Section'].errors.required"> Section is required</span>
+               </p>
+            </div>
+         </div>
+      </form>
+      <br>
+      <div class="Table_Section">
+         <form [formGroup]="Form">
+            <table>
+               <thead>
+                  <tr>
+                     <th> S.no </th>
+                     <th> Roll No</th>
+                     <th> Name </th>
+                     <th> Gender </th>
+                     <th> Blood Group </th>
+                     <th> Contact Number </th>
+                     <th> Email </th>
+                     <th>  </th>
+                  </tr>
+               </thead>
+               <tbody formArrayName="Students_Array">
+                  <tr *ngFor="let section of Form.controls['Students_Array']['controls']; let i = index" [formGroupName]="i">
+                     <td> 
+                        <span class="Style_1"> {{i + 1}} </span> 
+                     </td>
+                     <td>
+                        <div class="Form_Input">
+                           <input type="text" formControlName="Roll_No">
+                        </div>
+                     </td>
+                     <td>
+                        <div class="Form_Input">
+                           <input type="text" formControlName="Name">
+                        </div>
+                     </td>
+                     <td>
+                        <div class="Form_Input">
+                           <input type="text" formControlName="Gender">
+                        </div>
+                     </td>
+                     <td>
+                        <div class="Form_Input">
+                           <input type="text" formControlName="Blood_Group">
+                        </div>
+                     </td>
+                     <td>
+                        <div class="Form_Input">
+                           <input type="text" formControlName="Contact_Number">
+                        </div>
+                     </td>
+                     <td>
+                        <div class="Form_Input">
+                           <input type="text" formControlName="Email">
+                        </div>
+                     </td>
+                     <td>
+                        <button mat-icon-button color="primary" (click)="Remove_Student(i)">
+                           <i class="material-icons"> delete_forever </i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </form>
+      </div>
+   </div>
+   <div class="Model_Footer">
+      <button type="button" (click)="Submit()" [disabled]="Form.status !== 'VALID' || Async_Loading || Uploading" mat-raised-button color="primary">
+         <span *ngIf="!Uploading">Submit</span>
+         <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+      </button>
+   </div>
+</div>

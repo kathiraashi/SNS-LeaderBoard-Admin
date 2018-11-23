@@ -1,0 +1,129 @@
+/* ******************************************* Model Style ***************************************** */
+.Modal_Content {
+   width: 100%;
+   height: 100%;
+   padding: 0px 10px;
+}
+.Modal_Header {
+   position: relative;
+   display: flex;
+   align-items: center;
+   height: 45px;
+   border-bottom: 1px solid #e8e8e8;
+}
+.Modal_Header p {
+   margin: 0px;
+   font-weight: 700;
+   font-size: 24px;
+   color: #4f6a7a;
+   letter-spacing: 0.3px;
+   width: 100%;
+   text-align: center;
+}
+.Modal_Header span {
+   font-size: 30px;
+   position: absolute;
+   right: 0px;
+   font-weight: 900;
+   top: -4px;
+   cursor: pointer;
+}
+.Model_Body {
+   padding: 20px;
+}
+.Model_Footer {
+   border-top: 1px solid #e8e8e8;
+   height: 55px;
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+.Model_Footer button {
+   position: absolute;
+   right: 0px;
+}
+
+
+
+/* ************************************ View Style ******************************* */
+.view_item {
+   display: grid;
+   grid-template-columns: 30% 15px auto;
+}
+.view_item .Static{
+   font-weight: 700;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .dots{
+   font-weight: 800;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .Data{
+   font-weight: 500;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 14px;
+}
+.view_item .Data .Badge{
+   color: #4f6a7a;
+   padding: 2px 4px;
+   margin: 5px 2px;
+   font-size: 13px;
+   letter-spacing: 0.4px;
+   border: 1px solid #4f6a7a;
+   display: inline-flex;
+}
+
+
+
+.YearsBox {
+   box-shadow: 1px 1px 17px #d4d4d4;
+   margin-bottom: 15px;
+   padding-bottom: 5px;
+}
+.YearsBox_Header {
+   background-color: #d2d2d2;
+   padding: 7px 10px;
+   display: flex;
+   font-weight: 600;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.YearsBox_Header > span {
+   display: block;
+   margin-right: 10px;
+}
+.YearsBox_Body .Semesters_Box {
+   margin: 0px 20px;
+   padding: 7px 10px;
+   display: grid;
+   grid-template-columns: 50% 50%;
+   font-weight: 600;
+   color: #4f6a7ac7;
+   margin-bottom: 10px;
+   font-size: 15px;
+   box-shadow: 1px 1px 8px #d4d4d4;
+}
+.Semesters_Box > div {
+   display: flex;
+}
+.Semesters_Box > div > span {
+   display: block;
+   margin-right: 10px;
+}
+.Semesters_Box > div.Badges{
+   text-align: right;
+   display: inline-block !important;
+}
+.Semesters_Box > div.Badges > span {
+   border: 1px solid #d2d1d1;
+   margin: 3px;
+   padding: 0px 5px;
+   border-radius: 15px;
+   display: initial;
+}

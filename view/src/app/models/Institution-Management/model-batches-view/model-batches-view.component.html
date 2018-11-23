@@ -1,0 +1,129 @@
+
+<!-- If View The Institution -->
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>View Yearly Batch</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static"> Institution </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data.InstitutionManagement?.Institution?.Institution }} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Course </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data.InstitutionManagement?.Course?.Course }}-{{Data.InstitutionManagement?.Department?.Department }} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Batch Starting </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.Starting_MonthAndYear | date:'MMMM y'}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Batch Completion </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.Ending_MonthAndYear | date:'MMMM y'}} </div>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static">Created By </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.Created_By.Name}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Last Modified By </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.Last_Modified_By.Name}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Created Date </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.createdAt | date:'medium'}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Last Modified Date  </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.updatedAt | date:'medium'}} </div>
+            </div>
+         </div>
+      </div>
+      <br>
+      <div class="row">
+         <div class="col-sm-6">
+               <div class="view_item">
+                  <div class="Static"> Years & Semesters </div>
+                  <div class="dots"> : </div>
+               </div>
+         </div>
+         <div class="col-sm-12">
+            <div class="YearsBox" *ngFor="let Years of Data['Years_Array']; let i=index">
+               <div class="YearsBox_Header">
+                  <span> {{i + 1}})</span>
+                  <span> {{Years?.Show_Year}} </span>
+                  <span> ({{Years?.From_Year | date:'MMMM y'}} - {{Years?.To_Year | date:'MMMM y'}}) </span>
+               </div>
+               <div class="YearsBox_Body">
+                  <div class="Semesters_Box" *ngFor="let Semester of Years['Semesters']; let j=index">
+                     <div>
+                        <span> {{i + 1}}.{{j + 1}}) </span>
+                        <span> {{Semester?.Semester_Name}} </span>
+                        <span> ({{Semester?.Semester_Start | date:'MMMM y'}} - {{Semester?.Semester_End | date:'MMMM y'}})  </span>
+                     </div>
+                     <div class="Badges">
+                        <span *ngFor="let Section of Semester['Sections_Arr']"> {{Section}} </span> 
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- <div class="view_item">
+         <div class="Static">Institution </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Institution}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Institution Code</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Institution_Code}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Year Of Incorporation</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.YearOfIncorporation}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Email</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Email}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Phone</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Phone}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Website</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Website}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Address</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Address}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Departments </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            <span class="Badge" *ngFor="let Department of Data.Departments; let j=index"> {{Department?.Department}} </span> 
+         </div>
+      </div> -->
+
+   </div>
+</div>

@@ -1,0 +1,13 @@
+[2018-11-14T18:24:29.963] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './server/web/routes/Settings/Department.routes.js'"}
+[2018-11-14T18:24:35.222] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './server/web/routes/Settings/Department.routes.js'"}
+[2018-11-14T18:24:39.495] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../models/Settings/Department.model.js'"}
+[2018-11-14T18:24:45.340] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../controller/Settings/Department.controller.js'"}
+[2018-11-14T18:25:02.040] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../models/Settings/Department.model.js'"}
+[2018-11-14T18:52:54.982] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './server/web/routes/Configuration/Course.routes.js'"}
+[2018-11-14T18:52:55.298] [ERROR] Error - {"Error_Name":"Mongodb Connection Error","Error_Address":"Server.js","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-11-14T18:52:55.300] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-11-14T18:53:11.952] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: require(...) is not a function"}
+[2018-11-14T18:53:28.513] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../controller/Configuration/Course.controller.js'"}
+[2018-11-14T18:53:49.192] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../controller/Configuration/Course.controller.js'"}
+[2018-11-14T18:54:03.073] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../controller/Configuration/Course.controller.js'"}
+[2018-11-14T18:54:17.844] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Route.post() requires a callback function but got a [object Undefined]"}

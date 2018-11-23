@@ -1,56 +1,64 @@
-<div class="Modal_Content" *ngIf="Type && Type === 'Create'">
+<div class="Modal_Content">
    <div class="Modal_Header">
-      <p> User</p>
+      <p> Create User</p>
       <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
    </div>
    <div class="Model_Body">
-      <div class="row">
-         <div class="col-sm-6 Form_Input">
-            <label> User Name:</label>
-            <input type="text">
+      <Form [formGroup]="Form"> 
+         <div class="row">
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Name'].errors && !Form.controls['Name'].pristine, 'Form_Success': Form.controls['Name'].valid && !Form.controls['Name'].pristine }">
+               <label> Name : </label>
+               <input type="text" formControlName="Name" >
+               <p class="error" *ngIf="Form.controls['Name'].errors && !Form.controls['Name'].pristine">
+                  <span *ngIf="Form.controls['Name'].errors.required">Name is required</span>
+               </p>
+            </div><br>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': !Form.controls['User_Name'].pristine && Form.controls['User_Name'].errors, 'Form_Success': Form.controls['User_Name'].valid && !Form.controls['User_Name'].pristine }">
+               <label> User Name :</label>
+               <input type="text" formControlName="User_Name"> 
+               <p class="error" *ngIf="Form.controls['User_Name'].errors && !Form.controls['User_Name'].pristine">
+                  <span *ngIf="Form.controls['User_Name'].errors.required"> User Name is required</span>
+                  <span *ngIf="Form.controls['User_Name'].errors.UserName_NotAvailable"> User Name Already Exist</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['User_Password'].errors && !Form.controls['User_Password'].pristine, 'Form_Success': Form.controls['User_Password'].valid && !Form.controls['User_Password'].pristine }">
+               <label> User Password :</label>
+               <input type="password" formControlName="User_Password" >
+               <p class="error" *ngIf="Form.controls['User_Password'].errors && !Form.controls['User_Password'].pristine">
+                  <span *ngIf="Form.controls['User_Password'].errors.required"> User Password is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Email'].errors && !Form.controls['Email'].pristine, 'Form_Success': Form.controls['Email'].valid && !Form.controls['Email'].pristine }">
+               <label> Email :</label>
+               <input type="email" formControlName="Email" >
+               <p class="error" *ngIf="Form.controls['Email'].errors && !Form.controls['Email'].pristine">
+                  <span *ngIf="Form.controls['Email'].errors.required"> Email is required</span>
+                  <span *ngIf="Form.controls['Email'].errors.email"> Email must be a valid email address </span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input">
+               <label> Phone :</label>
+               <input type="text" formControlName="Phone" >
+            </div>
+            <div class="col-sm-6 Form_Select">
+               <label>User Type :</label>
+               <ng-select class="NgSelect"
+                        [searchable]="true"
+                        formControlName="User_Type">
+                  <ng-option *ngFor="let Type of _UserTypes" [value]="Type">{{Type}}</ng-option>
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['User_Type'].errors && !Form.controls['User_Type'].pristine">
+                  <span *ngIf="Form.controls['User_Type'].errors.required"> User Type is required</span>
+               </p>
+            </div>
          </div>
-         <div class="col-sm-6 Form_Input">
-            <label> Password:</label>
-            <input type="password">
-         </div>
-         <div class="col-sm-6 Form_Input">
-            <label> User Type:</label>
-            <input type="text">
-         </div>
-         <div class="col-sm-6 Form_Input">
-            <label> Mail Id:</label>
-            <input type="text">
-         </div>
-      </div>
+      </Form>
    </div>
    <div class="Model_Footer">
-      <button mat-raised-button color="primary"> Submit </button>
+         <button type="submit"   [disabled]="Form.status !== 'VALID' || Uploading"  mat-raised-button color="primary">
+            <span *ngIf="!Uploading" >Submit</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      <button mat-raised-button (click)="submit()" [disabled]="!Form.valid" color="primary" > Submit </button>
    </div>
 </div>
-<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
-   <div class="Modal_Header">
-      <p>User</p>
-      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
-   </div>
-   <div class="Model_Body">
-      <div class="view_item">
-         <div class=" Static"> User Name </div>
-         <div class="dots"> : </div>
-         <div class=" Data">aashi</div>
-      </div>
-      <div class="view_item">
-         <div class=" Static">User Type </div>
-         <div class="dots"> : </div>
-         <div class=" Data"> Admin</div>
-      </div>
-      <div class="view_item">
-         <div class=" Static">Email Id </div>
-         <div class="dots"> : </div>
-         <div class=" Data">aashi@gmail.com</div>
-      </div>
-   </div>
-</div>
-      
-         
-      
-   

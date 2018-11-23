@@ -44,3 +44,99 @@ body {
 ._Danger{
     color: rgb(221, 10, 10) !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Data Loading Styles */
+.DataLoaderStyle_1{
+   display: block;
+   opacity: 1;
+   position: absolute;
+   height: 100%;
+   background-color: rgba(255, 255, 255, 1);
+   z-index: 99;
+   width: calc(100% + 6px);
+   min-height: 500px;
+   border: 1px solid #efefef;
+   color: black;
+   top: -3px;
+   left: -3px;
+   transform: scaleY(1);
+   transform-origin: right top ;
+}
+.DataLoaderStyle_1.Hide{
+   transform: scale(0);
+   opacity: 0;
+   transition: all 400ms linear;
+}
+.DataLoaderStyle_1 .Loading{
+   margin: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.DataLoaderStyle_1 .spinner {
+   width: 100px;
+   height: 50px;
+   text-align: center;
+   font-size: 10px;
+}
+.DataLoaderStyle_1 .spinner > div {
+   background-color: #4f6a7a;
+   height: 100%;
+   width: 5px;
+   margin-right: 5px;
+   display: inline-block;
+   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+   animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+.DataLoaderStyle_1 .spinner .rect2 {
+   -webkit-animation-delay: -1.1s;
+   animation-delay: -1.1s;
+}
+.DataLoaderStyle_1 .spinner .rect3 {
+   -webkit-animation-delay: -1.0s;
+   animation-delay: -1.0s;
+}
+.DataLoaderStyle_1 .spinner .rect4 {
+   -webkit-animation-delay: -0.9s;
+   animation-delay: -0.9s;
+}
+.DataLoaderStyle_1 .spinner .rect5 {
+   -webkit-animation-delay: -0.8s;
+   animation-delay: -0.8s;
+}
+.DataLoaderStyle_1 .spinner .rect6 {
+   -webkit-animation-delay: -0.7s;
+   animation-delay: -0.7s;
+}
+@-webkit-keyframes sk-stretchdelay {
+   0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+   20% { -webkit-transform: scaleY(1.0) }
+}
+@keyframes sk-stretchdelay {
+   0%, 40%, 100% { 
+      transform: scaleY(0.4);
+      -webkit-transform: scaleY(0.4);
+   }  20% { 
+      transform: scaleY(1.0);
+      -webkit-transform: scaleY(1.0);
+   }
+}
+.LoadedDataStyle_1{
+   display: none;
+}
+.LoadedDataStyle_1.Show{
+   display: block;
+}

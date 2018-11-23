@@ -1,0 +1,109 @@
+<!-- page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <!-- page Identity -->
+      <div class="Page_Identity">
+         <div class="Page_Name">
+            <h5> INSTITUTIONS </h5>
+         </div>
+         <div class="Page_Track">
+            <ul >
+               <li class="HeaderName"> Configurations </li>
+               <li class="arrow">>></li>
+               <li> Institutions </li>
+            </ul>
+         </div>
+      </div>
+      <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+         <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
+            </div>
+         </div>
+      </div>
+      <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+         <!-- Page Header Part -->
+         <div class="row header_part">
+            <div class="col-sm-6">
+               <button class="Create_Button" mat-raised-button (click)="CreateInstitution()"> + Create </button>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+               <div class="Search_Section">
+                  <input type="text" placeholder="Search.." name="search">
+                  <i class="material-icons">search</i>
+               </div>
+            </div>
+         </div>
+         <!-- Table Section -->
+         <div class="Table_Section">
+            <table >
+               <thead>
+                  <tr>
+                     <th>S.no</th>
+                     <th>Institution Name</th>
+                     <th>Institution Code</th>
+                     <th> Phone </th>
+                     <th> Email </th>
+                     <th> No.of Departments </th>
+                     <th>Created By </th>
+                     <th>Last Modified By</th>
+                     <th>Action</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let Item of _List; let i=index">
+                     <td>
+                        <span class="S_no"> {{ i + 1}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Item.Institution}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Item.Institution_Code}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Item.Phone}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Item.Email}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Item.Departments.length}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Item.Created_By.Name}}
+                           <br> 
+                           <span class="Time"> {{Item.createdAt | date:'medium'}}  </span>
+                        </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> 
+                           {{Item.Last_Modified_By.Name}} 
+                           <br> 
+                           <span class="Time"> {{Item.updatedAt | date:'medium'}}  </span>
+                        </span>
+                     </td>
+                     <td>
+                        <button (click)="ViewInstitution(i)" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                           <i class="material-icons">zoom_in</i>
+                        </button>
+                        <button (click)="EditInstitution(i)" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
+                           <i class="material-icons">edit</i>
+                        </button>
+                        <!-- <button (click)="DeleteInstitution(i)" class="Table_Action_mini Bg_Danger" mat-mini-fab color="primary">
+                           <i class="material-icons">delete_forever</i>
+                        </button> -->
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,166 @@
+<!-- If Create Or Edit The Institution -->
+<div class="Modal_Content" *ngIf="Type && ( Type === 'Create' || Type === 'Edit')">
+   <div class="Modal_Header">
+      <p> {{Type}} Institution </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-3"> </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Institution'].errors && !Form.controls['Institution'].pristine, 'Form_Success': Form.controls['Institution'].valid && !Form.controls['Institution'].pristine }">
+               <label>Institution:</label>
+               <input type="text" formControlName="Institution">
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required">Institution is required</span>
+                  <span *ngIf="Form.controls['Institution'].errors.Institution_NotAvailable">Institution Already Exist</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Institution_Code'].errors && !Form.controls['Institution_Code'].pristine, 'Form_Success': Form.controls['Institution_Code'].valid && !Form.controls['Institution_Code'].pristine }">
+               <label>Institution Code:</label>
+               <input type="text" formControlName="Institution_Code">
+               <p class="error" *ngIf="Form.controls['Institution_Code'].errors && !Form.controls['Institution_Code'].pristine">
+                  <span *ngIf="Form.controls['Institution_Code'].errors.required">Institution Code is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['YearOfIncorporation'].errors && !Form.controls['YearOfIncorporation'].pristine, 'Form_Success': Form.controls['YearOfIncorporation'].valid && !Form.controls['YearOfIncorporation'].pristine }">
+               <label>Year Of Incorporation:</label>
+               <input type="text" formControlName="YearOfIncorporation">
+               <p class="error" *ngIf="Form.controls['YearOfIncorporation'].errors && !Form.controls['YearOfIncorporation'].pristine">
+                   <span *ngIf="Form.controls['YearOfIncorporation'].errors.required">Year Of Incorporation is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Email'].errors && !Form.controls['Email'].pristine, 'Form_Success': Form.controls['Email'].valid && !Form.controls['Email'].pristine }">
+               <label>Email:</label>
+               <input type="text" formControlName="Email">
+               <p class="error" *ngIf="Form.controls['Email'].errors && !Form.controls['Email'].pristine">
+                  <span *ngIf="Form.controls['Email'].errors.required">Email is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Phone'].errors && !Form.controls['Phone'].pristine, 'Form_Success': Form.controls['Phone'].valid && !Form.controls['Phone'].pristine }">
+               <label>Phone Number:</label>
+               <input type="text" formControlName="Phone">
+               <p class="error" *ngIf="Form.controls['Phone'].errors && !Form.controls['Phone'].pristine">
+                  <span *ngIf="Form.controls['Phone'].errors.required">Phone Number is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Website'].errors && !Form.controls['Website'].pristine, 'Form_Success': Form.controls['Website'].valid && !Form.controls['Website'].pristine }">
+               <label> Website:</label>
+               <input type="text" formControlName="Website">
+               <p class="error" *ngIf="Form.controls['Website'].errors && !Form.controls['Website'].pristine">
+                  <span *ngIf="Form.controls['Website'].errors.required">Website is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_TextArea" [ngClass]="{'Form_Err': Form.controls['Address'].errors && !Form.controls['Address'].pristine, 'Form_Success': Form.controls['Address'].valid && !Form.controls['Address'].pristine }">
+               <label>Address:</label>
+               <textarea formControlName="Address" ></textarea>
+               <p class="error" *ngIf="Form.controls['Address'].errors && !Form.controls['Address'].pristine">
+                  <span *ngIf="Form.controls['Address'].errors.required">Address is required</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Select">
+               <label>Departments:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Departments"
+                           [items]="_List"
+                           [bindLabel]="'Department'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           [hideSelected]="true"
+                           [multiple]="true"
+                           placeholder=" Departments">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Departments'].errors && !Form.controls['Departments'].pristine">
+                  <span *ngIf="Form.controls['Departments'].errors.required"> Departments is required</span>
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="Model_Footer">
+         <button type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+            <span *ngIf="Type === 'Edit' && !Uploading">Update</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      </div>
+   </form>
+</div>
+
+<!-- If View The Institution -->
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>View Institution</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class="Static">Institution </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Institution}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Institution Code</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Institution_Code}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Year Of Incorporation</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.YearOfIncorporation}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Email</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Email}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Phone</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Phone}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Website</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Website}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Address</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Address}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Departments </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            <span class="Badge" *ngFor="let Department of Data.Departments; let j=index"> {{Department?.Department}} </span> 
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Created By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Created_By.Name}} 
+            <!-- <span class="Badge"> {{Data.Created_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Last_Modified_By.Name}}
+            <!-- <span class="Badge"> {{Data.Last_Modified_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Created Date </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.createdAt | date:'medium'}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified Date  </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.updatedAt | date:'medium'}}</div>
+      </div>
+   </div>
+</div>
+
+
+

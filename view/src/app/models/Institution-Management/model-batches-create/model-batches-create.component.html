@@ -1,0 +1,90 @@
+<!-- If Create Or Edit The Department -->
+<div class="Modal_Content" *ngIf="Type && ( Type === 'Create' || Type === 'Edit')">
+   <div class="Modal_Header">
+      <p> {{Type}} Batch </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-2" *ngIf="Proceed_Stage ==='Stage_2' || Proceed_Stage ==='Stage_3'"></div>
+            <div class="col-sm-4 Form_Input" [ngClass]="{'Form_Err': Form.controls['Starting_MonthAndYear'].errors && !Form.controls['Starting_MonthAndYear'].pristine, 'Form_Success': Form.controls['Starting_MonthAndYear'].valid && !Form.controls['Starting_MonthAndYear'].pristine }">
+               <label> Starting Month and Year:</label>
+               <input type="text" formControlName="Starting_MonthAndYear" [matDatepicker]="Datepicker" (click)="Datepicker.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+               <mat-datepicker #Datepicker panelClass="DisableDate" (monthSelected)="chosenMonthHandler($event, Datepicker)" startView="multi-year"></mat-datepicker>
+               <p class="error" *ngIf="Form.controls['Starting_MonthAndYear'].errors && !Form.controls['Starting_MonthAndYear'].pristine">
+                  <span *ngIf="Form.controls['Starting_MonthAndYear'].errors.required">Starting Month and Year is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Input" [ngClass]="{'Form_Err': Form.controls['Ending_MonthAndYear'].errors && !Form.controls['Ending_MonthAndYear'].pristine, 'Form_Success': Form.controls['Ending_MonthAndYear'].valid && !Form.controls['Ending_MonthAndYear'].pristine }">
+               <label> Ending Month and Year:</label>
+               <input type="text" formControlName="Ending_MonthAndYear" [matDatepicker]="Datepicker_1" (click)="Datepicker_1.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+               <mat-datepicker #Datepicker_1 panelClass="DisableDate" (monthSelected)="chosenMonthHandler_1($event, Datepicker_1)" startView="multi-year"></mat-datepicker>
+               <p class="error" *ngIf="Form.controls['Ending_MonthAndYear'].errors && !Form.controls['Ending_MonthAndYear'].pristine">
+                  <span *ngIf="Form.controls['Ending_MonthAndYear'].errors.required">Ending Month And Year is required</span>
+               </p>
+            </div>
+         </div>
+         <!-- Stage 2 Start -->
+         <ng-container *ngIf="Proceed_Stage ==='Stage_2' || Proceed_Stage ==='Stage_3'" formArrayName="Years_Array">
+            <hr>
+            <div [ngClass]="{'YearSection': Proceed_Stage === 'Stage_3'}" *ngFor="let section of getYears_Array(); let i = index" [formGroupName]="i">
+               <div class="row" [ngClass]="{'highlight': Proceed_Stage === 'Stage_3'}" >
+                  <div class="col-sm-3 Form_Input">
+                     <label> Year:</label>
+                     <input type="text" formControlName="Show_Year" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                  </div>
+                  <div class="col-sm-3 Form_Input">
+                     <label> Starting Month and Year:</label>
+                     <input type="text" formControlName="From_Year" [min]="Year_Min" [max]="Year_Max" [matDatepicker]="Datepicker_2" (click)="Datepicker_2.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                     <mat-datepicker #Datepicker_2 panelClass="DisableDate" (monthSelected)="chosenMonthHandler_2($event, i, Datepicker_2)" startView="multi-year"></mat-datepicker>
+                  </div>
+                  <div class="col-sm-3 Form_Input">
+                     <label> Ending Month and Year:</label>
+                     <input type="text" formControlName="To_Year" [min]="Year_Min" [max]="Year_Max" [matDatepicker]="Datepicker_3" (click)="Datepicker_3.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                     <mat-datepicker #Datepicker_3 panelClass="DisableDate" (monthSelected)="chosenMonthHandler_3($event, i, Datepicker_3)" startView="multi-year"></mat-datepicker>
+                  </div>
+                  <div class="col-sm-3 Form_Input">
+                     <label> No Of Semesters:</label>
+                     <input type="number" formControlName="NoOfSemesters" >
+                  </div>
+               </div>
+               <ng-container *ngIf="Proceed_Stage === 'Stage_3'" formArrayName="Semesters">
+                  <div *ngFor="let section_part of getSemesters_Array(i); let j = index" [formGroupName]="j">
+                     <div class="row" >
+                        <div class="col-sm-3 Form_Input">
+                           <label> Semester:</label>
+                           <input type="text" formControlName="Semester_Name" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                        </div>
+                        <div class="col-sm-3 Form_Input">
+                           <label> Starting Month and Year:</label>
+                           <input type="text" formControlName="Semester_Start" [min]="Semester_Min(i)" [max]="Semester_Max(i)" [matDatepicker]="Datepicker_4" (click)="Datepicker_4.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                           <mat-datepicker #Datepicker_4 panelClass="DisableDate" (monthSelected)="chosenMonthHandler_4($event, i, j, Datepicker_4)" startView="multi-year"></mat-datepicker>
+                        </div>
+                        <div class="col-sm-3 Form_Input">
+                           <label> Ending Month and Year:</label>
+                           <input type="text" formControlName="Semester_End" [min]="Semester_Min(i)" [max]="Semester_Max(i)" [matDatepicker]="Datepicker_5" (click)="Datepicker_5.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                           <mat-datepicker #Datepicker_5 panelClass="DisableDate" (monthSelected)="chosenMonthHandler_5($event, i, j, Datepicker_5)" startView="multi-year"></mat-datepicker>
+                        </div>
+                        <div class="col-sm-3 Form_Input">
+                           <label> No Of Sections:</label>
+                           <input type="number" formControlName="NoOfSections" (ngModelChange)="NoOfSectionsChange($event, i, j)">
+                           <span class="ShowSectionStyle" *ngFor="let item of Form.controls['Years_Array']['controls'][i]['controls']['Semesters']['controls'][j]['controls']['Sections_Arr'].value">
+                              {{item}} </span>
+                        </div>
+                     </div>
+                  </div>
+               </ng-container>
+            </div>
+         </ng-container>
+      </div>
+      <div class="Model_Footer">
+         <button *ngIf="Proceed_Stage !== 'Stage_3'" type="button" (click)="GoToProceed()" [disabled]="Form.status !== 'VALID'" mat-raised-button color="primary"> Proceed </button>
+         <button *ngIf="Proceed_Stage === 'Stage_3'" type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+            <span *ngIf="Type === 'Edit' && !Uploading">Update</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      </div>
+   </form>
+</div>

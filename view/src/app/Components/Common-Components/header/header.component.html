@@ -4,15 +4,6 @@
    <div class="Header_One">
       <!-- Logo -->
       <img src="/assets//images//basic/SNS.png" alt="Logo" class="Header_Logo"> 
-      <!-- Header Button -->
-      <span class="Header_Button">
-            <button mat-button color="primary"> + Create </button>
-      </span>
-      <!-- Search Section -->
-      <span class="search_section">
-         <input type="text" placeholder="search">
-         <i class="material-icons">search </i>
-      </span>
       <!-- Notification -->
       <span>
          <i class="material-icons notification">notifications</i>
@@ -43,6 +34,45 @@
                </span>
             </span>
          </li>
+         <!-- Level Management-->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Level_List']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp;Level Management </span> 
+               </span>
+            </span>
+         </li>
+         <!-- Activities -->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/List_Activity']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Activities </span> 
+               </span>
+            </span>
+         </li>
+         <!-- Queries -->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Queries_List']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Queries </span> 
+               </span>
+            </span>
+         </li>
+         <!-- Reports -->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Institution_Management']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Institution Management </span>
+               </span>
+               <span class="Hidden_Links"> 
+                  <span [routerLink]="['/Yearly_Batches']"></span>
+               </span>
+            </span>
+         </li>
          <!-- Configuration -->
          <li [routerLinkActive]="['active']" class="Menu_List">
             <span class="Menu_Tree">
@@ -51,21 +81,11 @@
                   <span> &nbsp; Configuration </span> 
                </span>
                <ul class="Menu_Tree_View">
-                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Institution_List']"><a> Institution Management </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Courses_Config']"><a> Courses Config </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Departments_Config']"><a> Departments Config </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Institutions_Config']"><a> Institutions Config </a></li>
                   <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/User_List']"><a> User Management  </a></li>
-                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Level_List']"><a> Level Management  </a></li>
-                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/List_Activity']"><a> Activities  </a></li>
-                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Queries_List']"><a> Queries  </a></li>
                </ul>
-            </span>
-         </li>
-         <!-- Reports -->
-         <li [routerLinkActive]="['active']" class="Menu_List">
-            <span class="Menu_Tree">
-               <span class="Menu">
-                  <i class="material-icons">people</i>
-                  <span> &nbsp; Reports </span> 
-               </span>
             </span>
          </li>
       </ul>

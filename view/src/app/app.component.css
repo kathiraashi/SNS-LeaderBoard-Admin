@@ -1,0 +1,165 @@
+.Toastr_Message {
+   position: absolute;
+   display: flex;
+   align-items: center;
+   right: 10px;
+   top: 10px;
+   z-index: 1040;
+   background-color: #ffffff;
+   width: 345px;
+   height: 60px;
+   border-radius: 2px;
+   box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
+.Message_Icon {
+  background-color: #d8d8d8;
+  line-height: 72px;
+  width: 45px;
+  height: 60px;
+  text-align: center;
+  color: #4c6a7a;
+}
+.Message_Icon i{
+  font-size: 26px;
+}
+.Message {
+  width: 300px;
+  padding: 0px 5px;
+  height: 60px;
+}
+.Message .Title{
+  margin: 0px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+  line-height: 25px;
+}
+.Message .body{
+  margin: 0px;
+  font-size: 13px;
+  letter-spacing: 0.1px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.Message_Close {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  text-align: center;
+  color: #4c6a7a;
+  width: 25px;
+  height: 25px;
+  line-height: 33px;
+  background-color: #d8d8d8;
+  cursor: pointer;
+}
+.Message_Close i {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.Toastr_Message.Hidden{
+  display: none;
+}
+
+.Toastr_Message.Warning {
+  background-color: #FDBA29;
+  color: #ffffff;
+}
+.Toastr_Message.Success {
+  background-color: #82BD49;
+  color: #ffffff;
+}
+.Toastr_Message.Error {
+  background-color: #F03A37;
+  color: #ffffff;
+}
+.Toastr_Message.Info {
+  background-color: #21A1F0;
+  color: #ffffff;
+}
+
+
+.Warning .Message_Icon {
+  background-color: #dea322;
+  color: #ffffff;
+}
+.Success .Message_Icon{
+  background-color: #659239;
+  color: #ffffff;
+}
+.Error .Message_Icon{
+  background-color: #d03532;
+  color: #ffffff;
+}
+.Info .Message_Icon{
+  background-color: #2288c7;
+  color: #ffffff;
+}
+
+
+.Warning .Message_Close{
+  background-color: #dea322;
+  color: #ffffff;
+}
+.Success .Message_Close{
+  background-color: #659239;
+  color: #ffffff;
+}
+.Error .Message_Close{
+  background-color: #d03532;
+  color: #ffffff;
+}
+.Info .Message_Close{
+  background-color: #2288c7;
+  color: #ffffff;
+}
+
+.loader {
+ height: 4px;
+ width: 100%;
+ position: absolute;
+ overflow: hidden;
+ bottom: -4px;
+}
+.loader:before{
+ display: block;
+ position: absolute;
+ content: "";
+ left: -100%;
+ width: 100%;
+ top: 1px;
+ height: 3px;
+ background-color: transparent;
+ border-top: 2px dotted;
+ animation: loading 4s linear;
+}
+.Warning .loader{
+  background-color: #FDBA29;
+}
+.Success .loader{
+  background-color: #82BD49;
+}
+.Error .loader{
+  background-color: #F03A37;
+}
+.Info .loader{
+  background-color: #21A1F0;
+}
+.Warning .loader:before{
+  border-color: #dea322;
+}
+.Success .loader:before{
+  border-color: #659239;
+}
+.Error .loader:before{
+  border-color: #d03532;
+}
+.Info .loader:before{
+  border-color: #2288c7;
+}
+
+@keyframes loading {
+   from {left: -100%;}
+   to {left: 0%;}
+}

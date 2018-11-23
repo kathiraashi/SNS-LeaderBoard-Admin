@@ -1,0 +1,104 @@
+<div class="Page_Section">
+   <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+      <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
+            </div>
+      </div>
+   </div>
+   <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+      <div class="container-fluid">
+         <div class="Page_Identity">
+            <div class="Page_Name">
+               <h5>INSTITUTION MANAGEMENT</h5>
+            </div>
+           <div class="Page_Track">
+               <ul >
+                  <li class="HeaderName">Institution Management</li>
+               </ul>
+            </div>
+         </div>
+         <div class="Page_Content">
+            <div class="Main_Section">
+               <div class="Left_Section">
+                  <ul class="Tabs">
+                     <li *ngFor="let Institution of _Institutions_List; let i=index" class="Tab" (click)="Load_Courses(i)" [ngClass]="{'active': Institution?.class === 'active'}"> 
+                        <span class="Tab_Content"> {{ Institution?.Institution }} </span> 
+                     </li>
+                  </ul>
+               </div>
+               <div class="Right_Section">
+                  <div [ngClass]="{'Hide': !Loader_1}" class="DataLoaderStyle_1">
+                     <div class="Loading">
+                           <div class="spinner">
+                              <div class="rect1"></div>
+                              <div class="rect2"></div>
+                              <div class="rect3"></div>
+                              <div class="rect4"></div>
+                              <div class="rect5"></div>
+                              <div class="rect6"></div>
+                           </div>
+                     </div>
+                  </div>
+                  <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader_1}">
+                  <!-- Page Header Part -->
+                     <div class="row header_part">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                           <div class="Search_Section">
+                           <input type="text" placeholder="Search.." name="search">
+                           <i class="material-icons">search</i>
+                           </div>
+                        </div>
+                     </div>
+                  <!-- Table Section -->
+                     <div class="Table_Section">
+                        <table >
+                           <thead>
+                              <tr>
+                                 <th>S.no</th>
+                                 <th> Course & Department </th>
+                                 <th> No.Of Batches </th>
+                                 <th> No.Of Students </th>
+                                 <th> Status </th>
+                                 <th> Action </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let Item of _List; let i=index">
+                                 <td>
+                                    <span class="S_no"> {{ i + 1 }} </span>
+                                 </td>
+                                 <td>
+                                    <span class="Style_1">{{ Item?.Course?.Course}} - {{ Item?.Department?.Department}}</span>
+                                 </td>
+                                 <td>
+                                    <span class="Style_1"> {{Item.NoOfBatches}} </span>
+                                 </td>
+                                 <td>
+                                    <span class="Style_1"> {{Item.NoOfStudents}} </span>
+                                 </td>
+                                 <td>
+                                    <span class="Style_1"> {{Item.Status}} </span>
+                                 </td>
+                                 <td>
+                                    <button [routerLink]="['/Yearly_Batches', Item._id]" class="Table_Action_mini Bg_Info" mat-raised-button color="primary"> Batches </button>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+   

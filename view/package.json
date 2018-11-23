@@ -30,6 +30,7 @@
     "ngx-bootstrap": "^3.0.0",
     "primeng": "^5.2.7",
     "rxjs": "^6.0.0",
+    "xlsx": "^0.14.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

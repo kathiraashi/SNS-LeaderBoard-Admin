@@ -14,18 +14,19 @@
 // Future Modules
    import { ModalModule, AccordionModule} from 'ngx-bootstrap';
    import {CalendarModule} from 'primeng/calendar';
-   import {MatButtonModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule, MatMenuModule} from '@angular/material';
+   import {MatButtonModule,  MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule, MatMenuModule} from '@angular/material';
    import {MatRadioModule} from '@angular/material/radio';
    import { NgSelectModule } from '@ng-select/ng-select';
 
 // Custom Modules;
    import { AppRoutingModule } from './app.routing.module';
+   import { AuthGuard } from './Authentication/auth.guard';
 
 // Components
-   // Commo-Components
+   // Common-Components
       // Header
          import { HeaderComponent } from './Components/Common-Components/header/header.component';
-            import { DeleteConfirmationComponent } from './Components/Common-Components/delete-confirmation/delete-confirmation.component';
+         import { DeleteConfirmationComponent } from './Components/Common-Components/delete-confirmation/delete-confirmation.component';
       // Login
          import { LoginComponent } from './Components/Common-Components/login/login.component';
    // DashBoard
@@ -34,38 +35,48 @@
       import { StudentCreateComponent } from './Components/Students/student-create/student-create.component';
       import { StudentListComponent } from './Components/Students/student-list/student-list.component';
       import { StudentViewComponent } from './Components/Students/student-view/student-view.component';
+   // Level Management
+      import { CreateLevelComponent } from './Components/Level-Management/create-level/create-level.component';
+      import { ListLevelComponent } from './Components/Level-Management/list-level/list-level.component';
+      import { ViewLevelComponent } from './Components/Level-Management/view-level/view-level.component';
+   // Activity
+      import { ListActivityComponent } from './Components/Activities/list-activity/list-activity.component';
+   // Queries
+      import { ListQueriesComponent } from './Components/Queries/list-queries/list-queries.component';
+      import { ViewQueriesComponent } from './Components/Queries/view-queries/view-queries.component';
+   // Institution Management
+      import { ListInstitutionManagementComponent } from './Components/Institution-Management/list-institution-management/list-institution-management.component';
+      import { ListYearlyBatchesComponent } from './Components/Institution-Management/list-yearly-batches/list-yearly-batches.component';
    // Configuration
-      // Institution
-         import { ListInstitutionComponent } from './Components/Configuration/Institution/list-institution/list-institution.component';
-         import { CreateInstitutionComponent } from './Components/Configuration/Institution/create-institution/create-institution.component';
-         import { ViewInstitutionComponent } from './Components/Configuration/Institution/view-institution/view-institution.component';
       // User Management
-         import { CreateUserComponent } from './Components/Configuration/User-Management/create-user/create-user.component';
          import { ListUserComponent } from './Components/Configuration/User-Management/list-user/list-user.component';
-         import { ViewUserComponent } from './Components/Configuration/User-Management/view-user/view-user.component';
-      // Level Management
-         import { CreateLevelComponent } from './Components/Configuration/Level-Management/create-level/create-level.component';
-         import { ListLevelComponent } from './Components/Configuration/Level-Management/list-level/list-level.component';
-         import { ViewLevelComponent } from './Components/Configuration/Level-Management/view-level/view-level.component';
-      // Activity
-         import { ListActivityComponent } from './Components/Configuration/Activities/list-activity/list-activity.component';
-      // Queries
-         import { ListQueriesComponent } from './Components/Configuration/Queries/list-queries/list-queries.component';
-         import { ViewQueriesComponent } from './Components/Configuration/Queries/view-queries/view-queries.component';
+      // Deportment Config
+         import { ListDepartmentComponent } from './Components/Configuration/Department_Config/list-department/list-department.component';
+      // Deportment Config
+         import { ListInstitutionsComponent } from './Components/Configuration/Institutions_Config/list-institutions/list-institutions.component';
+      // Courses Config
+         import { ListCoursesComponent } from './Components/Configuration/Courses_Config/list-courses/list-courses.component';
 
 // models
-   // Institution
-      import { CreateDepartmentModelComponent } from './models/Institution/create-department-model/create-department-model.component';
-      import { CreateCourseModelComponent } from './models/Institution/create-course-model/create-course-model.component';
-      import { CreateExtraCurricularActivitiesModelComponent } from './models/Institution/create-extra-curricular-activities-model/create-extra-curricular-activities-model.component';
-      import { CreateStaffsModelComponent } from './models/Institution/create-staffs-model/create-staffs-model.component';
+   // Students
+      import { ModelStudentImportComponent } from './models/Students/model-student-import/model-student-import.component';
    // Activities
       import { CreateActivityModelComponent } from './models/Activities/create-activity-model/create-activity-model.component';
    // Queries
       import { EditQueriesComponent } from './models/Queries/edit-queries/edit-queries.component';
    // User-Management
       import { CreateUserManagementComponent } from './models/User_Management/create-user-management/create-user-management.component';
+   // Institution Management
+      import { ModelBatchesCreateComponent } from './models/Institution-Management/model-batches-create/model-batches-create.component';
+      import { ModelBatchesViewComponent } from './models/Institution-Management/model-batches-view/model-batches-view.component';
 
+   // Configuration
+      // Department Config
+         import { ModelDepartmentConfigComponent } from './models/Configurations/model-department-config/model-department-config.component';
+      // Department Config
+         import { ModelInstitutionConfigComponent } from './models/Configurations/model-institution-config/model-institution-config.component';
+      // Courses Config
+         import { ModelCourseConfigComponent } from './models/Configurations/model-course-config/model-course-config.component';
 
 
 
@@ -74,7 +85,7 @@
   declarations: [
    AppComponent,
    // Components
-      // Commo-Components
+      // Common-Components
          // Header
             HeaderComponent,
             DeleteConfirmationComponent,
@@ -86,36 +97,46 @@
          StudentCreateComponent,
          StudentListComponent,
          StudentViewComponent,
+      // Level Management
+         CreateLevelComponent,
+         ListLevelComponent,
+         ViewLevelComponent,
+      // Activity
+         ListActivityComponent,
+      // Queries
+         ListQueriesComponent,
+         ViewQueriesComponent,
+      // Institution Management
+         ListInstitutionManagementComponent,
       // Configuration
-         // Institution
-            ListInstitutionComponent,
-            CreateInstitutionComponent,
-            ViewInstitutionComponent,
          // User Management
-            CreateUserComponent,
             ListUserComponent,
-            ViewUserComponent,
-         // Level Management
-            CreateLevelComponent,
-            ListLevelComponent,
-            ViewLevelComponent,
-         // Activity
-            ListActivityComponent,
-         // Queries
-            ListQueriesComponent,
-            ViewQueriesComponent,
+         // Department Config
+            ListDepartmentComponent,
+         // Institutions Config
+            ListInstitutionsComponent,
+         // Courses Config
+            ListCoursesComponent,
    // models
-      // Institution
-         CreateDepartmentModelComponent,
-         CreateCourseModelComponent,
-         CreateExtraCurricularActivitiesModelComponent,
-         CreateStaffsModelComponent,
+      // Students
+         ModelStudentImportComponent,
       // Activities
          CreateActivityModelComponent,
       // Queries
          EditQueriesComponent,
       // User-Management
          CreateUserManagementComponent,
+         ListYearlyBatchesComponent,
+      // Institution Management
+         ModelBatchesCreateComponent,
+         ModelBatchesViewComponent,
+      // Configuration
+         // Department Config
+            ModelDepartmentConfigComponent,
+         // Institution Config
+            ModelInstitutionConfigComponent,
+         // Courses Config
+            ModelCourseConfigComponent,
 
   ],
   imports: [
@@ -137,19 +158,23 @@
       MatCheckboxModule,
       MatMenuModule,
       MatRadioModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
    // Custom Modules
       AppRoutingModule,
   ],
   providers: [],
   entryComponents: [
    DeleteConfirmationComponent,
-   CreateDepartmentModelComponent,
-   CreateCourseModelComponent,
-   CreateExtraCurricularActivitiesModelComponent,
-   CreateStaffsModelComponent,
    CreateActivityModelComponent,
    EditQueriesComponent,
-   CreateUserManagementComponent
+   CreateUserManagementComponent,
+   ModelDepartmentConfigComponent,
+   ModelCourseConfigComponent,
+   ModelInstitutionConfigComponent,
+   ModelBatchesCreateComponent,
+   ModelBatchesViewComponent,
+   ModelStudentImportComponent
  ],
   bootstrap: [AppComponent]
 })

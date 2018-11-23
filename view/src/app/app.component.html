@@ -1,3 +1,21 @@
+<ng-container *ngFor="let Toastr of ToastrList; let i=index">
+   <div class="Toastr_Message" [ngClass]="Toastr.Type" [style.top.px]="Toastr.Top">
+      <div class="loader"></div>
+      <div class="Message_Icon">
+         <i *ngIf="Toastr.Type === 'Success'" class="material-icons">check_circle</i>
+         <i *ngIf="Toastr.Type === 'Info'" class="material-icons">info</i>
+         <i *ngIf="Toastr.Type === 'Warning'" class="material-icons">error</i>
+         <i *ngIf="Toastr.Type === 'Error'" class="material-icons">cancel</i>
+      </div>
+      <div class="Message">
+         <h6 class="Title"> {{Toastr.Type}} Message </h6>
+         <h6 class="body"> {{Toastr.Message | slice:0:42}} {{Toastr.Message?.length > 42 ? '...' : ' ' }} </h6>
+      </div>
+      <div class="Message_Close" (click)="HideToastr(i)">
+         <i class="material-icons">close</i>
+      </div>
+   </div>
+</ng-container>
 
 <ng-container *ngIf="UserLoggedIn">
    <app-header ></app-header>

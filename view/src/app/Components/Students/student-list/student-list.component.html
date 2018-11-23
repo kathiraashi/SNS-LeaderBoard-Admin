@@ -15,8 +15,13 @@
       <!-- Create and search Section -->
       <div class="row header_part">
          <div class="col-sm-6">
-            <button class="Create_Button" mat-button [routerLink]="['/Student_Create']"> + Create </button>
-            <button mat-raised-button color="primary" class="Import_Button"> Import </button>
+            <!-- <button class="Create_Button" mat-button [routerLink]="['/Student_Create']"> + Create </button> -->
+            <button mat-raised-button color="primary"> 
+               <label style="margin: 0px; cursor: pointer;"> 
+                  <input type="file" style="display: none" (change)="onUploadFileChange($event)" #fileInputFile/>
+                  + Excel Import 
+               </label>
+            </button>
          </div>
          <div class="col-sm-6">
             <div class="Search_Section">
@@ -35,124 +40,37 @@
                   <th>Student Name</th>
                   <th>Institution</th>
                   <th>Department</th>
-                  <th>Course</th>
                   <th>Batch</th>
-                  <th>Email Id</th>
+                  <th>Year </th>
+                  <th>Semester </th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
-               <tr>
+               <tr *ngFor="let Student of Students_List; let i=index">
                   <td>
-                     <span class="S_no"> 1 </span>
+                     <span class="S_no"> {{ i + 1}} </span>
                   </td>
                   <td>
-                     <span class="Style_1">14</span>
+                     <span class="Style_1"> {{Student.Roll_No}} </span>
                   </td>
                   <td>
-                     <span class="Style_1"> xxxx</span>
+                     <span class="Style_1"> {{Student.Name}} </span>
                   </td>
                   <td>
-                     <span class="Style_1">Jay Shriram</span>
+                     <span class="Style_1"> {{Student.Institution_Management?.Institution?.Institution}} </span>
                   </td>
                   <td>
-                     <span class="Style_1">Computer Science</span>
+                     <span class="Style_1"> {{Student.Institution_Management?.Course?.Course}} - {{Student.Institution_Management?.Department?.Department}} </span>
                   </td>
                   <td>
-                     <span class="Style_1">B.E</span>
+                     <span class="Style_1"> {{Student.Yearly_Badge?.Starting_MonthAndYear | date:'MMMM yyyy'}} - {{Student.Yearly_Badge?.Ending_MonthAndYear | date:'MMMM yyyy'}} </span>
                   </td>
                   <td>
-                     <span class="Style_1">2013-2017</span>
+                     <span class="Style_1"> {{ Student.Year?.Show_Year }} </span>
                   </td>
                   <td>
-                     <span class="Style_1">student@gmail.com</span>
-                  </td>
-                  <td>
-                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <span class="S_no"> 2 </span>
-                  </td>
-                  <td>
-                     <span class="Style_1">15</span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> xxxx</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">Jay Shriram</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">Computer Science</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">B.E</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">2013-2017</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">student@gmail.com</span>
-                  </td>
-                  <td>
-                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <span class="S_no"> 3 </span>
-                  </td>
-                  <td>
-                     <span class="Style_1">16</span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> xxxx</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">Jay Shriram</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">Computer Science</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">B.E</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">2013-2017</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">student@gmail.com</span>
-                  </td>
-                  <td>
-                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <span class="S_no"> 4 </span>
-                  </td>
-                  <td>
-                     <span class="Style_1">17</span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> xxxx</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">Jay Shriram</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">Computer Science</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">B.E</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">2013-2017</span>
-                  </td>
-                  <td>
-                     <span class="Style_1">student@gmail.com</span>
+                     <span class="Style_1"> {{ Student.Semester?.Semester_Name }} </span>
                   </td>
                   <td>
                      <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>

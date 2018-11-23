@@ -1,0 +1,11 @@
+[2018-11-15T13:16:28.881] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../controller/Settings/Institution.controller.js'"}
+[2018-11-15T18:36:44.026] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"SyntaxError: Invalid shorthand property initializer"}
+[2018-11-15T18:37:17.223] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: Cannot read property 'map' of undefined"}
+[2018-11-15T18:38:41.917] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: Cannot read property 'map' of undefined"}
+[2018-11-15T18:38:42.408] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: Cannot read property 'map' of undefined"}
+[2018-11-15T18:39:23.953] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: Cannot read property 'map' of undefined"}
+[2018-11-15T18:48:30.650] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"ReferenceError: a is not defined"}
+[2018-11-15T19:28:04.060] [ERROR] Error - {"Error_Name":"Mongodb Connection Error","Error_Address":"Server.js","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-11-15T19:28:04.064] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-11-15T19:29:25.451] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"ReferenceError: Courses_Arr is not defined"}
+[2018-11-15T19:34:01.361] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Route.post() requires a callback function but got a [object Undefined]"}

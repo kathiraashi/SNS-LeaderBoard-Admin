@@ -7,7 +7,10 @@
  .Logo img {
    height: 80px;
  }
- 
+ .Form_Area {
+   margin-top: 75px;
+   padding: 0px 25px;
+ }
  .FormBox {
    background-color: #ffffff;
    text-align: center;
@@ -31,31 +34,28 @@
    letter-spacing: 0.5px;
    font-size: 24px;
  }
- .Form_Area {
-   margin-top: 75px;
-   padding: 0px 25px;
- }
- .Form_Field {
+
+.Form_Field {
    margin-bottom: 35px;
    width: 100%;
    border: 1px solid #d5d5d5;
    display: flex;
    align-items: center;
    height: 40px;
- }
- .Form_Field i {
+}
+.Form_Field i {
    width: 45px;
    color: #516570;
- }
- .Form_Field input {
+}
+.Form_Field input {
    width: 100%;
    border: none;
    height: 38px;
    font-weight: 500;
    color: #516570;
    letter-spacing: 0.5px;
- }
- .Form_Field input:-moz-placeholder{
+}
+.Form_Field input:-moz-placeholder{
    color: #999999;
    font-weight: 400;
  }
@@ -76,13 +76,31 @@
    margin-top: 20px;
    padding: 10px 0px 20px 0px;
    text-align: left;
- }
- .Footer_Area h6 {
+}
+.Footer_Area h6 {
    color: #516570;
- }
- .Footer_Area h6 span {
-   color: #4E6A7A;
+}
+.Footer_Area h6 span {
+   color: #226BAF;
    cursor: pointer;
- }
- 
+}
+
+
+
+.error {
+  margin: 0px;
+  color: rgb(221, 10, 10);
+  font-weight: 500;
+  text-align: left;
+  font-size: 13px;
+  word-spacing: 1px;
+  letter-spacing: 0.4px;
+}
+.Form_Field.Form_Err{
+  border-color: rgb(221, 10, 10);
+}
+.Form_Field.Form_Success{
+  border-color: #4ab65f;
+}
+
  

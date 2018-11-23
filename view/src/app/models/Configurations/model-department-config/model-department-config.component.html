@@ -1,0 +1,105 @@
+<!-- If Create Or Edit The Department -->
+<div class="Modal_Content" *ngIf="Type && ( Type === 'Create' || Type === 'Edit')">
+   <div class="Modal_Header">
+      <p> {{Type}} Department </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-12 Form_Input" [ngClass]="{'Form_Err': Form.controls['Department'].errors && !Form.controls['Department'].pristine, 'Form_Success': Form.controls['Department'].valid && !Form.controls['Department'].pristine }">
+               <label>Department:</label>
+               <input type="text" formControlName="Department">
+               <p class="error" *ngIf="Form.controls['Department'].errors && !Form.controls['Department'].pristine">
+                  <span *ngIf="Form.controls['Department'].errors.required">Department is required</span>
+                  <span *ngIf="Form.controls['Department'].errors.Department_NotAvailable">Department Already Exist</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Input" [ngClass]="{'Form_Err': Form.controls['Department_Code'].errors && !Form.controls['Department_Code'].pristine, 'Form_Success': Form.controls['Department_Code'].valid && !Form.controls['Department_Code'].pristine }">
+               <label>Department Code:</label>
+               <input type="text" formControlName="Department_Code">
+               <p class="error" *ngIf="Form.controls['Department_Code'].errors && !Form.controls['Department_Code'].pristine">
+                  <span *ngIf="Form.controls['Department_Code'].errors.required">Department Code is required</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Select">
+               <label>Courses:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Courses"
+                           [items]="_List"
+                           [bindLabel]="'Course'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           [hideSelected]="true"
+                           [multiple]="true"
+                           placeholder=" Courses">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Courses'].errors && !Form.controls['Courses'].pristine">
+                  <span *ngIf="Form.controls['Courses'].errors.required"> Courses is required</span>
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="Model_Footer">
+         <button type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+            <span *ngIf="Type === 'Edit' && !Uploading">Update</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      </div>
+   </form>
+</div>
+
+<!-- If View The Department -->
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>View Department</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class="Static">Department </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Department}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Department Code</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Department_Code}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Courses </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            <span class="Badge" *ngFor="let Course of Data.Courses; let j=index"> {{Course?.Course}} </span> 
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Created By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Created_By.Name}} 
+            <!-- <span class="Badge"> {{Data.Created_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Last_Modified_By.Name}}
+            <!-- <span class="Badge"> {{Data.Last_Modified_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Created Date </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.createdAt | date:'medium'}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified Date  </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.updatedAt | date:'medium'}}</div>
+      </div>
+   </div>
+</div>
+
+
+
