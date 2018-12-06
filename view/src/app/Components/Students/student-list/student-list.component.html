@@ -1,4 +1,3 @@
-<app-header></app-header>
 <!-- Page section -->
 <div class="Page_Section">
    <div class="container-fluid">
@@ -12,74 +11,88 @@
          </div>
       </div>
       <!--  Header Part -->
-      <!-- Create and search Section -->
-      <div class="row header_part">
-         <div class="col-sm-6">
-            <!-- <button class="Create_Button" mat-button [routerLink]="['/Student_Create']"> + Create </button> -->
-            <button mat-raised-button color="primary"> 
-               <label style="margin: 0px; cursor: pointer;"> 
-                  <input type="file" style="display: none" (change)="onUploadFileChange($event)" #fileInputFile/>
-                  + Excel Import 
-               </label>
-            </button>
-         </div>
-         <div class="col-sm-6">
-            <div class="Search_Section">
-               <input type="text" placeholder="Search.." name="search">
-               <i class="material-icons">search</i>
+      <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+         <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
             </div>
          </div>
       </div>
-      <!-- Table Section -->
-      <div class="Table_Section">
-         <table>
-            <thead>
-               <tr>
-                  <th>S.no</th>
-                  <th>Roll No</th>
-                  <th>Student Name</th>
-                  <th>Institution</th>
-                  <th>Department</th>
-                  <th>Batch</th>
-                  <th>Year </th>
-                  <th>Semester </th>
-                  <th>Action</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr *ngFor="let Student of Students_List; let i=index">
-                  <td>
-                     <span class="S_no"> {{ i + 1}} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{Student.Roll_No}} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{Student.Name}} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{Student.Institution_Management?.Institution?.Institution}} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{Student.Institution_Management?.Course?.Course}} - {{Student.Institution_Management?.Department?.Department}} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{Student.Yearly_Badge?.Starting_MonthAndYear | date:'MMMM yyyy'}} - {{Student.Yearly_Badge?.Ending_MonthAndYear | date:'MMMM yyyy'}} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{ Student.Year?.Show_Year }} </span>
-                  </td>
-                  <td>
-                     <span class="Style_1"> {{ Student.Semester?.Semester_Name }} </span>
-                  </td>
-                  <td>
-                     <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
+      <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+         <!-- Create and search Section -->
+         <div class="row header_part">
+            <div class="col-sm-6">
+               <!-- <button class="Create_Button" mat-button [routerLink]="['/Student_Create']"> + Create </button> -->
+               <button mat-raised-button color="primary"> 
+                  <label style="margin: 0px; cursor: pointer;"> 
+                     <input type="file" style="display: none" (change)="onUploadFileChange($event)" #fileInputFile/>
+                     + Excel Import 
+                  </label>
+               </button>
+            </div>
+            <div class="col-sm-6">
+               <div class="Search_Section">
+                  <input type="text" placeholder="Search.." name="search">
+                  <i class="material-icons">search</i>
+               </div>
+            </div>
+         </div>
+         <!-- Table Section -->
+         <div class="Table_Section">
+            <table>
+               <thead>
+                  <tr>
+                     <th>S.no</th>
+                     <th>Roll No</th>
+                     <th>Student Name</th>
+                     <th>Institution</th>
+                     <th>Department</th>
+                     <th>Batch</th>
+                     <th>Year </th>
+                     <th>Semester </th>
+                     <th>Action</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let Student of Students_List; let i=index">
+                     <td>
+                        <span class="S_no"> {{ i + 1}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Student.Roll_No}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Student.Name}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Student.Institution_Management?.Institution?.Institution}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Student.Institution_Management?.Course?.Course}} - {{Student.Institution_Management?.Department?.Department}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Student.Yearly_Badge?.Starting_MonthAndYear | date:'MMMM yyyy'}} - {{Student.Yearly_Badge?.Ending_MonthAndYear | date:'MMMM yyyy'}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Student.Year?.Show_Year }} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Student.Semester?.Semester_Name }} </span>
+                     </td>
+                     <td>
+                        <!-- <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button> -->
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <br>
       </div>
-      <br>
    </div>
 </div>
 

@@ -47,7 +47,6 @@ export class StudentListComponent implements OnInit {
                 const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
                 const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
                 this.Students_List = DecryptedData;
-                console.log(this.Students_List);
              } else if (response['status'] === 400 || response['status'] === 417 && !ResponseData['Status']) {
                 this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
              } else if (response['status'] === 401 && !ResponseData['Status']) {

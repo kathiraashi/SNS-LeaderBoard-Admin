@@ -1,0 +1,106 @@
+<!-- If Create Or Edit The ActivityLevel -->
+<div class="Modal_Content" *ngIf="Type && ( Type === 'Create' || Type === 'Edit')">
+   <div class="Modal_Header">
+      <p> {{Type}} Activity Level </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-8 Form_Input" [ngClass]="{'Form_Err': Form.controls['ActivityLevel'].errors && !Form.controls['ActivityLevel'].pristine, 'Form_Success': Form.controls['ActivityLevel'].valid && !Form.controls['ActivityLevel'].pristine }">
+               <label>Activity Level:</label>
+               <input type="text" formControlName="ActivityLevel">
+               <p class="error" *ngIf="Form.controls['ActivityLevel'].errors && !Form.controls['ActivityLevel'].pristine">
+                  <span *ngIf="Form.controls['ActivityLevel'].errors.required"> Activity Level is required</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Select" *ngIf="Type === 'Create'">
+               <label>Institutions:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution"
+                           [items]="_List"
+                           [bindLabel]="'Institution'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           [hideSelected]="true"
+                           [multiple]="true"
+                           placeholder="Institutions">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required"> Institutions is required</span>
+                  <span *ngIf="Form.controls['Institution'].errors.NotAvailable"> Some Institution Already exist in this Activity Level</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Select" *ngIf="Type === 'Edit'">
+               <label>Institution:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution"
+                           [items]="_List"
+                           [bindLabel]="'Institution'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           placeholder="Institution">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required"> Institution is required</span>
+                  <span *ngIf="Form.controls['Institution'].errors.NotAvailable"> Institution Already exist in this Activity Level</span>
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="Model_Footer">
+         <button type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+            <span *ngIf="Type === 'Edit' && !Uploading">Update</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      </div>
+   </form>
+</div>
+
+<!-- If View The ActivityLevel -->
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>View Activity Level</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class="Static">Activity Level </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.ActivityLevel}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Institution </div>
+         <div class="dots"> : </div>
+         <div class="Data">  {{Data?.Institution?.Institution}} </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Created By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Created_By.Name}} 
+            <!-- <span class="Badge"> {{Data.Created_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Last_Modified_By.Name}}
+            <!-- <span class="Badge"> {{Data.Last_Modified_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Created Date </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.createdAt | date:'medium'}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified Date  </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.updatedAt | date:'medium'}}</div>
+      </div>
+   </div>
+</div>
+
+
+

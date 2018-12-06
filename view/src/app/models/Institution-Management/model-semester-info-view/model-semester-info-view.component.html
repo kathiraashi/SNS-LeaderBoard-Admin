@@ -1,0 +1,87 @@
+
+<!-- If View The Institution -->
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>View Semester Details</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static"> Institution </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data.InstitutionManagement?.Institution?.Institution }} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Course </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data.InstitutionManagement?.Course?.Course }} - {{Data.InstitutionManagement?.Department?.Department }} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Batch </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.YearlyBatch?.Starting_MonthAndYear | date:'MMMM y'}} - {{Data.YearlyBatch?.Ending_MonthAndYear | date:'MMMM y'}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Batch Year </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.BatchYear?.Show_Year}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Semester </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.YearSemester?.Semester_Name}} </div>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static">Created By </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.Created_By.Name}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Last Modified By </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.Last_Modified_By.Name}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Created Date </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.createdAt | date:'medium'}} </div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Last Modified Date  </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{Data.updatedAt | date:'medium'}} </div>
+            </div>
+         </div>
+      </div>
+      <br>
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static"> Subject & Staff's </div>
+               <div class="dots"> : </div>
+            </div>
+         </div>
+         <div class="col-sm-12">
+            <div class="SectionBox" *ngFor="let Section of Data['Sections_Arr']; let i=index">
+               <div class="SectionBox_Header">
+                  <span> {{Section?.Section}} </span>
+               </div>
+               <div class="SectionBox_Body">
+                  <div class="Subject_Box" *ngFor="let Subject of Section['More']; let j=index">
+                     <div>
+                        <span> {{j + 1}}) </span>
+                        <span> {{Subject?.Subject?.Subject}} </span>
+                        <span> --> </span>
+                        <span> {{Subject?.Staff?.Name}} </span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

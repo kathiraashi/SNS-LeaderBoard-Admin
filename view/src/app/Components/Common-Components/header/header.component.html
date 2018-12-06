@@ -3,7 +3,7 @@
    <!-- Header One -->
    <div class="Header_One">
       <!-- Logo -->
-      <img src="/assets//images//basic/SNS.png" alt="Logo" class="Header_Logo"> 
+      <img src="/assets/images/basic/SNS.png" alt="Logo" class="Header_Logo"> 
       <!-- Notification -->
       <span>
          <i class="material-icons notification">notifications</i>
@@ -34,12 +34,23 @@
                </span>
             </span>
          </li>
-         <!-- Level Management-->
-         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Level_List']">
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Staff_List']">
             <span class="Menu_Tree">
                <span class="Menu">
                   <i class="material-icons">people</i>
-                  <span> &nbsp;Level Management </span> 
+                  <span> &nbsp; Staff's </span> 
+               </span>
+               <span class="Hidden_Links"> 
+                  <span [routerLink]="['/Staff_Create']"></span>
+               </span>
+            </span>
+         </li>
+         <!-- Level Management-->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/List_Level']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp;Levels </span> 
                </span>
             </span>
          </li>
@@ -53,14 +64,14 @@
             </span>
          </li>
          <!-- Queries -->
-         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Queries_List']">
+         <!-- <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Queries_List']">
             <span class="Menu_Tree">
                <span class="Menu">
                   <i class="material-icons">people</i>
                   <span> &nbsp; Queries </span> 
                </span>
             </span>
-         </li>
+         </li> -->
          <!-- Reports -->
          <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Institution_Management']">
             <span class="Menu_Tree">
@@ -70,6 +81,7 @@
                </span>
                <span class="Hidden_Links"> 
                   <span [routerLink]="['/Yearly_Batches']"></span>
+                  <span [routerLink]="['/Semester_Management']"></span>
                </span>
             </span>
          </li>
@@ -84,6 +96,19 @@
                   <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Courses_Config']"><a> Courses Config </a></li>
                   <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Departments_Config']"><a> Departments Config </a></li>
                   <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Institutions_Config']"><a> Institutions Config </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Subjects_Config']"><a> Subjects Config </a></li>
+                  <li [routerLinkActive]="['active']" class="Menu_Tree_List" >
+                     <span class="Menu_Tree">
+                        <span class="Menu">
+                           <span> Activities Config </span> 
+                        </span>
+                        <ul class="Menu_Tree_View">
+                           <li [routerLinkActive]="['active']" [routerLink]="['/Activity_Levels']" class="Menu_Tree_List">  <a> Activity level </a>  </li>
+                           <li [routerLinkActive]="['active']" [routerLink]="['/Achievement_Types']" class="Menu_Tree_List">  <a> Achievement Type </a>  </li>
+                           <li [routerLinkActive]="['active']" [routerLink]="['/Redemption_Methods']" class="Menu_Tree_List">  <a> Redemption Method</a>  </li>
+                        </ul>
+                     </span>
+                  </li>
                   <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/User_List']"><a> User Management  </a></li>
                </ul>
             </span>

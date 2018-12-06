@@ -1,0 +1,85 @@
+/* ******************************************* Model Style ***************************************** */
+.Modal_Content {
+   width: 100%;
+   height: 100%;
+   padding: 0px 10px;
+}
+.Modal_Header {
+   position: relative;
+   display: flex;
+   align-items: center;
+   height: 45px;
+   border-bottom: 1px solid #e8e8e8;
+}
+.Modal_Header p {
+   margin: 0px;
+   font-weight: 700;
+   font-size: 24px;
+   color: #4f6a7a;
+   letter-spacing: 0.3px;
+   width: 100%;
+   text-align: center;
+}
+.Modal_Header span {
+   font-size: 30px;
+   position: absolute;
+   right: 0px;
+   font-weight: 900;
+   top: -4px;
+   cursor: pointer;
+}
+.Model_Body {
+   padding: 20px;
+}
+.Model_Footer {
+   border-top: 1px solid #e8e8e8;
+   height: 55px;
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+.Model_Footer button {
+   position: absolute;
+   right: 0px;
+}
+.Model_Footer .UploadingBtn{
+   color: #5a798c;
+}
+.Model_Footer .UploadingBtn i{
+   color: #4f6a7a;
+}
+
+
+/* ************************************ View Style ******************************* */
+.view_item {
+   display: grid;
+   grid-template-columns: 40% 15px auto;
+}
+.view_item .Static{
+   font-weight: 700;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .dots{
+   font-weight: 800;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .Data{
+   font-weight: 500;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 14px;
+}
+.view_item .Data .Badge{
+   color: #4f6a7a;
+   padding: 2px 4px;
+   margin: 5px 2px;
+   font-size: 13px;
+   letter-spacing: 0.4px;
+   border: 1px solid #4f6a7a;
+   display: inline-flex;
+}
+

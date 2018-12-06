@@ -18,7 +18,6 @@ export class ModelBatchesViewComponent implements OnInit {
 
    ngOnInit() {
       this.onClose = new Subject();
-      console.log(this.Data);
    }
 
 }

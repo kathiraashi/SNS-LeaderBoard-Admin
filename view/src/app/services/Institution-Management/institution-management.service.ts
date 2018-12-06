@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { LoginService } from './../LoginService/login.service';
 
-const API_URL = 'http://localhost:5000/API/Institution-Management/';
+const API_URL = 'http://139.59.20.129:5000/API/Institution-Management/';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +65,55 @@ export class InstitutionManagementService {
             return this.ValidateEveryRequest();
          }
       }
+      public InstitutionManagement_YearlyBatchView(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionManagement_YearlyBatchView', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
+
+
+   // Semester-Management
+      public InstitutionManagement_SemesterManagementsList(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionManagement_SemesterManagementsList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
+      public InstitutionManagement_SemesterManagementsAsyncValidate(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionManagement_SemesterManagementsAsyncValidate', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
+      public InstitutionManagement_SemesterManagementsCreate(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionManagement_SemesterManagementsCreate', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
+      public InstitutionManagement_SemesterManagementView(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionManagement_SemesterManagementView', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
+
 
 
 }

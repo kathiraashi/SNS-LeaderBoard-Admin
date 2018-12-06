@@ -116,11 +116,11 @@
    display: inline-flex;
    align-items: center;
    font-size: 15px;
-   
    min-width: 100px;
    height: 40px;
    line-height: 40px;
    text-align: center;
+   width: 100%;
 }
 .Header_Page .Header_Two .Menus .Menu_List .Menu:hover,
 .Header_Page .Header_Two .Menus .Menu_List.active > .Menu{
@@ -133,7 +133,7 @@
    position: relative;
    display: inline-block;
 }
-.Header_Page .Menu_List.active .Menu{
+.Header_Page .Menu_List.active > .Menu_Tree > .Menu{
    background-color: #0e4477;
 }
 .Header_Page .Menu_Tree .Hidden_Links{
@@ -179,8 +179,34 @@
 }
 .Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List > .Menu_Tree{
    padding-top: 0px;
+   width: 100%;
+}
+.Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List.active > .Menu_Tree{
+   background-color: #0e4477;
 }
 .Header_Page .Menu_Tree .Menu_Tree_View .Menu_Tree_List > .Menu_Tree > .Menu_Tree_View{
-   left: 102%;
+   left: 101%;
+   top: 0px;
+}
+
+
+
+span.SubMenu_Tree {
+   display: block;
+   color: #ffffff;
+   font-weight: 600;
+   width: 100%;
+   cursor: pointer;
+   position: relative;
+}
+ul.SubMenu_Tree_View {
+   position: absolute;
+   left: 101%;
+   background-color: #216baf;
+   list-style: none;
+   min-width: 175px;
+   padding-left: 0px;
+   padding-top: 2px;
+   z-index: 1;
    top: 0px;
 }

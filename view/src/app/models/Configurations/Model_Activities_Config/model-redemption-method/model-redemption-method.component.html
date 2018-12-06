@@ -1,0 +1,130 @@
+<!-- If Create Or Edit The RedemptionMethod -->
+<div class="Modal_Content" *ngIf="Type && ( Type === 'Create' || Type === 'Edit')">
+   <div class="Modal_Header">
+      <p> {{Type}} Redemption Method </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-7 Form_Input">
+               <label>Redemption Method Title:</label>
+               <input type="text" formControlName="RedemptionMethod">
+               <p class="error" *ngIf="Form.controls['RedemptionMethod'].errors && !Form.controls['RedemptionMethod'].pristine">
+                  <span *ngIf="Form.controls['RedemptionMethod'].errors.required"> Redemption Method is required</span>
+               </p>
+            </div>
+            <div class="col-sm-5 Form_Input">
+               <label>Maximum Points Regarding:</label>
+               <input type="text" formControlName="MaximumPointsRegarding">
+               <p class="error" *ngIf="Form.controls['MaximumPointsRegarding'].errors && !Form.controls['MaximumPointsRegarding'].pristine">
+                  <span *ngIf="Form.controls['MaximumPointsRegarding'].errors.required"> Maximum Points Regarding is required</span>
+               </p>
+            </div>
+            <div class="col-sm-7 Form_TextArea">
+               <label>Converted To Description:</label>
+               <textarea formControlName="ConvertedToDescription" rows="4"></textarea>
+               <p class="error" *ngIf="Form.controls['ConvertedToDescription'].errors && !Form.controls['ConvertedToDescription'].pristine">
+                  <span *ngIf="Form.controls['ConvertedToDescription'].errors.required"> Converted To Description is required</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Select" *ngIf="Type === 'Create'">
+               <label>Institutions:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution"
+                           [items]="_List"
+                           [bindLabel]="'Institution'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           [hideSelected]="true"
+                           [multiple]="true"
+                           placeholder="Institutions">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required"> Institutions is required</span>
+                  <span *ngIf="Form.controls['Institution'].errors.NotAvailable"> Some Institution Already exist in this Redemption Method</span>
+               </p>
+            </div>
+            <div class="col-sm-12 Form_Select" *ngIf="Type === 'Edit'">
+               <label>Institution:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution"
+                           [items]="_List"
+                           [bindLabel]="'Institution'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           placeholder="Institution">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required"> Institution is required</span>
+                  <span *ngIf="Form.controls['Institution'].errors.NotAvailable"> Institution Already exist in this Redemption Method</span>
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="Model_Footer">
+         <button type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+            <span *ngIf="Type === 'Edit' && !Uploading">Update</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      </div>
+   </form>
+</div>
+
+<!-- If View The RedemptionMethod -->
+<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
+   <div class="Modal_Header">
+      <p>View Redemption Method</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class="Static">Redemption Method </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.RedemptionMethod}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Maximum Points Regarding </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.MaximumPointsRegarding}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Converted To Description</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.ConvertedToDescription}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Institution </div>
+         <div class="dots"> : </div>
+         <div class="Data">  {{Data?.Institution?.Institution}} </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Created By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Created_By.Name}} 
+            <!-- <span class="Badge"> {{Data.Created_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Last_Modified_By.Name}}
+            <!-- <span class="Badge"> {{Data.Last_Modified_By.User_Type.User_Type}} </span> -->
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Created Date </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.createdAt | date:'medium'}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified Date  </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.updatedAt | date:'medium'}}</div>
+      </div>
+   </div>
+</div>
+
+
+

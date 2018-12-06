@@ -11,7 +11,7 @@
                <li class="LinkName" [routerLink]="['/Institution_Management']" > Institution Management </li>
                <li class="arrow"> >> </li>
                <ng-container *ngIf="_Basic_Data !== undefined">
-                  <li> {{_Basic_Data?.Institution?.Institution}} </li>
+                  <li class="LinkName" [routerLink]="['/Institution_Management', _Basic_Data?.Institution?._id]"> {{_Basic_Data?.Institution?.Institution}} </li>
                   <li class="arrow"> >> </li>
                   <li> {{_Basic_Data?.Course?.Course}}-{{_Basic_Data?.Department?.Department}} </li>
                </ng-container>
@@ -92,6 +92,9 @@
                      <td>
                         <button (click)="ViewYearlyBatch(i)" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
                            <i class="material-icons">zoom_in</i>
+                        </button>
+                        <button [routerLink]="['/Semester_Management', Item._id]" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                           <i class="material-icons">list_alt</i>
                         </button>
                         <!-- <button (click)="EditInstitution(i)" class="Table_Action_mini Bg_warning" mat-mini-fab color="primary">
                            <i class="material-icons">edit</i>

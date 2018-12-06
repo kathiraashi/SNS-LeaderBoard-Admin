@@ -55,7 +55,7 @@ export class ModelCourseConfigComponent implements OnInit {
                                                                         asyncValidators: [this.Course_AsyncValidate.bind(this)],
                                                                         updateOn: 'blur' }),
                Course_ShortCode: new FormControl(this.Data.Course_ShortCode, Validators.required ),
-               NoOfYears: new FormControl(this.Data.NoOfYears, Validators.required ),
+               NoOfYears: new FormControl({value: this.Data.NoOfYears, disabled: true}, Validators.required ),
                Course_Id: new FormControl(this.Data._id, Validators.required),
                Modified_By: new FormControl(this.User_Id, Validators.required)
             });

@@ -1,0 +1,147 @@
+<!-- Page -->
+<div class="page">
+   <div class="container-fluid">
+      <!-- page identity -->
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName">Staff's</li>
+               <li class="arrow">>></li>
+               <li class="LinkName" [routerLink]="['/Staff_List']">Staff's List</li>
+               <li class="arrow">>></li>
+               <li> Staff Create </li>
+            </ul>
+         </div>
+      </div>
+      <div class="row">
+         <!-- Company details -->
+         <div class="col-sm-12">
+            <div class="Company_Details">
+               <h5 class="SectionIdentity"> 
+                  <span class="Highlight"> Staff </span> Details
+               </h5>
+               <form [formGroup]="Form">
+               <div class="row">
+                  <div class="col-sm-4 Form_Select">
+                     <label> Institution: </label>
+                     <ng-select class="NgSelect ValueBold"
+                                 formControlName="Institution"
+                                 [items]="Institutions_List"
+                                 [bindLabel]="'Institution'"
+                                 [bindValue]="'_id'"
+                                 [searchable]="true"
+                                 (change)="Institution_Change($event)"
+                                 placeholder="Select Institution">
+                     </ng-select>
+                  </div>
+                  <div *ngIf="Show_Department" class="col-sm-4 Form_Select">
+                     <label> Department: </label>
+                     <ng-select class="NgSelect ValueBold"
+                                 formControlName="Department"
+                                 [items]="Departments_List"
+                                 [bindLabel]="'Department'"
+                                 [bindValue]="'_id'"
+                                 [searchable]="true"
+                                 placeholder="Select Department">
+                     </ng-select>
+                  </div>
+                  <div class="col-sm-4 Form_Select">
+                     <label> Staff Role: </label>
+                     <ng-select class="NgSelect ValueBold"
+                                 formControlName="StaffRole"
+                                 [items]="_StaffRole"
+                                 [searchable]="true"
+                                 (change)="StaffRoll_Change($event)"
+                                 placeholder="Select Staff Role">
+                     </ng-select>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-4 Form_Input">
+                     <label> Name :</label>
+                     <input type="text" formControlName="Name">
+                     <p class="error" *ngIf="Form.controls['Name'].errors && !Form.controls['Name'].pristine">
+                        <span *ngIf="Form.controls['Name'].errors.required"> Name is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Qualification: </label>
+                     <input type="text" formControlName="Qualification">
+                     <p class="error" *ngIf="Form.controls['Qualification'].errors && !Form.controls['Qualification'].pristine">
+                        <span *ngIf="Form.controls['Qualification'].errors.required"> Qualification is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Date Of Joining: </label>
+                     <input type="text" formControlName="DateOfJoining" [matDatepicker]="Datepicker_1" (click)="Datepicker_1.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                     <mat-datepicker #Datepicker_1></mat-datepicker>
+                     <p class="error" *ngIf="Form.controls['DateOfJoining'].errors && !Form.controls['DateOfJoining'].pristine">
+                        <span *ngIf="Form.controls['DateOfJoining'].errors.required"> Date Of Joining is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Gender :</label>
+                     <ng-select class="NgSelect ValueBold"
+                                 formControlName="Gender"
+                                 [items]="_Gender"
+                                 placeholder="Select Gender">
+                     </ng-select>
+                     <p class="error" *ngIf="Form.controls['Gender'].errors && !Form.controls['Gender'].pristine">
+                        <span *ngIf="Form.controls['Gender'].errors.required"> Gender is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Blood Group :</label>
+                     <input type="text" formControlName="BloodGroup">
+                     <p class="error" *ngIf="Form.controls['BloodGroup'].errors && !Form.controls['BloodGroup'].pristine">
+                        <span *ngIf="Form.controls['BloodGroup'].errors.required"> Blood Group is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Date Of Birth :</label>
+                     <input type="text" formControlName="DateOfBirth" [matDatepicker]="Datepicker_2" (click)="Datepicker_2.open()" (keypress)="NotAllow()" (keydown)="NotAllow()">
+                     <mat-datepicker #Datepicker_2></mat-datepicker>
+                     <p class="error" *ngIf="Form.controls['DateOfBirth'].errors && !Form.controls['DateOfBirth'].pristine">
+                        <span *ngIf="Form.controls['DateOfBirth'].errors.required"> Date Of Birth is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Mobile: </label>
+                     <input type="text" formControlName="Mobile">
+                     <p class="error" *ngIf="Form.controls['Mobile'].errors && !Form.controls['Mobile'].pristine">
+                        <span *ngIf="Form.controls['Mobile'].errors.required"> Mobile is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_Input">
+                     <label> Email: </label>
+                     <input type="text" formControlName="Email">
+                     <p class="error" *ngIf="Form.controls['Email'].errors && !Form.controls['Email'].pristine">
+                        <span *ngIf="Form.controls['Email'].errors.required"> Email is required</span>
+                     </p>
+                  </div>
+                  <div class="col-sm-4 Form_TextArea">
+                     <label>Address:</label>
+                     <textarea type="text" row="4" formControlName="Address"></textarea>
+                     <p class="error" *ngIf="Form.controls['Address'].errors && !Form.controls['Address'].pristine">
+                        <span *ngIf="Form.controls['Address'].errors.required"> Address is required</span>
+                     </p>
+                  </div>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="Footer">
+      <button type="button" (click)="Submit()" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary" style="top: 5px;">
+         <span *ngIf="!Uploading">Submit</span>
+         <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+      </button>
+</div>
+
+               
+            
+      
+      
+   

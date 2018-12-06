@@ -1,0 +1,11 @@
+[2018-12-01T12:08:24.067] [ERROR] Error - {"Error_Name":"Mongodb Connection Error","Error_Address":"Server.js","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-12-01T12:08:24.076] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-12-01T12:33:19.108] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: Cannot read property 'map' of undefined"}
+[2018-12-01T12:34:15.326] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"TypeError: Cannot read property 'map' of undefined"}
+[2018-12-01T13:27:30.559] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Cannot find module './../../controller/Configuration/Subject.controller.js'"}
+[2018-12-01T13:27:46.469] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Route.post() requires a callback function but got a [object Undefined]"}
+[2018-12-01T13:29:31.604] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Route.post() requires a callback function but got a [object Undefined]"}
+[2018-12-01T13:29:54.084] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Route.post() requires a callback function but got a [object Undefined]"}
+[2018-12-01T16:31:14.286] [ERROR] Error - {"Error_Name":"Mongodb Connection Error","Error_Address":"Server.js","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-12-01T16:31:14.290] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":{"name":"MongoNetworkError","message":"failed to connect to server [ds255403.mlab.com:55403] on first connect [MongoNetworkError: getaddrinfo EAI_AGAIN ds255403.mlab.com:55403]"}}
+[2018-12-01T16:33:36.115] [ERROR] Error - {"Error_Name":"","Error_Address":"","Error_Message":"Error: Route.post() requires a callback function but got a [object Undefined]"}

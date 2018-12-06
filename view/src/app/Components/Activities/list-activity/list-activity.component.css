@@ -57,6 +57,7 @@
    letter-spacing: 0.5px;
    font-weight: 600;
    font-size: 14px;
+   color: #4f6a7a;
 }
 /* ---------- Search Section ----------- */
 .Search_Section{
@@ -110,7 +111,6 @@
    background-color: #ffffff;
 }
 .Table_Section table tbody tr {
-   line-height: 42px;
    text-align: center;
    align-items: center;
    border-bottom: 1px solid #eaeaea;
@@ -130,6 +130,11 @@
    color: rgba(77, 106, 122, 0.84);
    font-weight: 600;
    cursor: pointer;
+}
+.Table_Section table tbody tr td .Style_1 .Time{
+   font-size: 12px;
+   font-weight: 500;
+   color: #8ca5b3;
 }
 .Table_Section table tbody tr td .Action_Section{
    color: #ffffff;

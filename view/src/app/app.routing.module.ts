@@ -11,10 +11,12 @@ import { AuthGuard } from './Authentication/auth.guard';
    import { StudentListComponent } from './Components/Students/student-list/student-list.component';
    import { StudentCreateComponent } from './Components/Students/student-create/student-create.component';
    import { StudentViewComponent } from './Components/Students/student-view/student-view.component';
-// Level Management
-   import { ListLevelComponent } from './Components/Level-Management/list-level/list-level.component';
-   import { CreateLevelComponent } from './Components/Level-Management/create-level/create-level.component';
-   import { ViewLevelComponent } from './Components/Level-Management/view-level/view-level.component';
+// Staff's
+   import { StaffListComponent } from './Components/Staffs/staff-list/staff-list.component';
+   import { StaffCreateComponent } from './Components/Staffs/staff-create/staff-create.component';
+   import { StaffViewComponent } from './Components/Staffs/staff-view/staff-view.component';
+// Levels
+   import { ListLevelsComponent } from './Components/Levels/list-levels/list-levels.component';
 // Activities
    import { ListActivityComponent } from './Components/Activities/list-activity/list-activity.component';
 // Queries
@@ -23,7 +25,8 @@ import { AuthGuard } from './Authentication/auth.guard';
 // Institution Management
    import { ListInstitutionManagementComponent } from './Components/Institution-Management/list-institution-management/list-institution-management.component';
    import { ListYearlyBatchesComponent } from './Components/Institution-Management/list-yearly-batches/list-yearly-batches.component';
-// Configuration
+   import { ListSemesterManagementComponent } from './Components/Institution-Management/list-semester-management/list-semester-management.component';
+   // Configuration
    // User Management
       import { ListUserComponent } from './Components/Configuration/User-Management/list-user/list-user.component';
    // Department Config
@@ -32,6 +35,12 @@ import { AuthGuard } from './Authentication/auth.guard';
       import { ListCoursesComponent } from './Components/Configuration/Courses_Config/list-courses/list-courses.component';
    // Deportment Config
       import { ListInstitutionsComponent } from './Components/Configuration/Institutions_Config/list-institutions/list-institutions.component';
+   // Activities Config
+      import { ListActivityLevelComponent } from './Components/Configuration/Activities_Config/Activity_Level/list-activity-level/list-activity-level.component';
+      import { ListAchievementTypeComponent } from './Components/Configuration/Activities_Config/Achievement_Type/list-achievement-type/list-achievement-type.component';
+      import { ListRedemptionMethodComponent } from './Components/Configuration/Activities_Config/Redemption_Method/list-redemption-method/list-redemption-method.component';
+      // Subjects Config
+      import { ListSubjectsComponent } from './Components/Configuration/Subjects_Config/list-subjects/list-subjects.component';
 
    const appRoutes: Routes = [
       {
@@ -71,24 +80,31 @@ import { AuthGuard } from './Authentication/auth.guard';
             canActivate: [AuthGuard],
             data: { animation: { value: 'Student_View'}  }
          },
+      // Staff's
+         {
+            path: 'Staff_List',
+            component: StaffListComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Staff_List'}  }
+         },
+         {
+            path: 'Staff_Create',
+            component: StaffCreateComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Staff_Create'}  }
+         },
+         {
+            path: 'Staff_View',
+            component: StaffViewComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Staff_View'}  }
+         },
       // Level Management
          {
-            path: 'Level_List',
-            component: ListLevelComponent,
+            path: 'List_Level',
+            component: ListLevelsComponent,
             canActivate: [AuthGuard],
-            data: { animation: { value: 'Level_List'}  }
-         },
-         {
-            path: 'Level_Create',
-            component: CreateLevelComponent,
-            canActivate: [AuthGuard],
-            data: { animation: { value: 'Level_Create'}  }
-         },
-         {
-            path: 'Level_View',
-            component: ViewLevelComponent,
-            canActivate: [AuthGuard],
-            data: { animation: { value: 'Level_View'}  }
+            data: { animation: { value: 'List_Level'}  }
          },
       // Activities
          {
@@ -118,10 +134,22 @@ import { AuthGuard } from './Authentication/auth.guard';
             data: { animation: { value: 'Institution_Management'}  }
          },
          {
+            path: 'Institution_Management/:Institution_Id',
+            component: ListInstitutionManagementComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Institution_Management'}  }
+         },
+         {
             path: 'Yearly_Batches/:InsManagement_Id',
             component: ListYearlyBatchesComponent,
             canActivate: [AuthGuard],
             data: { animation: { value: 'Yearly_Batches'}  }
+         },
+         {
+            path: 'Semester_Management/:YearlyBatch_Id',
+            component: ListSemesterManagementComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Semester_Management'}  }
          },
       // Configuration
          // User Management
@@ -151,6 +179,32 @@ import { AuthGuard } from './Authentication/auth.guard';
                component: ListCoursesComponent,
                canActivate: [AuthGuard],
                data: { animation: { value: 'Courses_Config'}  }
+            },
+         // Activities Config
+            {
+               path: 'Activity_Levels',
+               component: ListActivityLevelComponent,
+               canActivate: [AuthGuard],
+               data: { animation: { value: 'Activity_Levels'}  }
+            },
+            {
+               path: 'Achievement_Types',
+               component: ListAchievementTypeComponent,
+               canActivate: [AuthGuard],
+               data: { animation: { value: 'Achievement_Types'}  }
+            },
+            {
+               path: 'Redemption_Methods',
+               component: ListRedemptionMethodComponent,
+               canActivate: [AuthGuard],
+               data: { animation: { value: 'Redemption_Methods'}  }
+            },
+         // Subjects Config
+            {
+               path: 'Subjects_Config',
+               component: ListSubjectsComponent,
+               canActivate: [AuthGuard],
+               data: { animation: { value: 'Subjects_Config'}  }
             },
 ];
 

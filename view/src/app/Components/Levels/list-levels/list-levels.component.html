@@ -1,0 +1,94 @@
+<!-- Page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName">Configuration</li>
+               <li class="arrow">>></li>
+               <li> Levels List </li>
+            </ul>
+         </div>
+      </div>
+      <!--  Header Part -->
+      <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+         <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
+            </div>
+         </div>
+      </div>
+      <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+         <!-- Create and search Section -->
+         <div class="row header_part">
+            <div class="col-sm-6">
+               <button class="Create_Button" mat-raised-button (click)="CreateLevel()"> + Create </button>
+            </div>
+            <div class="col-sm-6">
+               <div class="Search_Section">
+                  <input type="text" placeholder="Search.." name="search">
+                  <i class="material-icons">search</i>
+               </div>
+            </div>
+         </div>
+         <!-- Table Section -->
+         <div class="Table_Section">
+            <table>
+               <thead>
+                  <tr>
+                     <th> S.no </th>
+                     <th> Level Name </th>
+                     <th> Institution </th>
+                     <th> Department </th>
+                     <th> No.Of Activities </th>
+                     <th> Base Level </th>
+                     <th> Created By </th>
+                     <th> Action </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let Level of Levels_List; let i=index">
+                     <td>
+                        <span class="S_no"> {{ i + 1}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Level.Level_Name}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Level.Institution?.Institution}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Level.Department?.Department}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Level.Activities.length}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1" *ngIf="Level.ItsBaseLevel"> Yes </span>
+                        <span class="Style_1" *ngIf="!Level.ItsBaseLevel"> No </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Level.Created_By.Name}}
+                           <br> 
+                           <span class="Time"> {{Level.createdAt | date:'medium'}}  </span>
+                        </span>
+                     </td>
+                     <td>
+                        <button (click)="ViewLevel(i)" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                           <i class="material-icons">zoom_in</i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <br>
+      </div>
+   </div>
+</div>
+

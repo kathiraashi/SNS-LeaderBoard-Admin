@@ -1,0 +1,105 @@
+<!-- page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <!-- page Identity -->
+      <div class="Page_Identity">
+         <div class="Page_Name">
+            <h5> SEMESTER INFO </h5>
+         </div>
+         <div class="Page_Track">
+            <ul >
+               <li class="LinkName" [routerLink]="['/Institution_Management']" > Institution Management </li>
+               <li class="arrow"> >> </li>
+               <ng-container *ngIf="_Basic_Data !== undefined">
+                  <li class="LinkName" [routerLink]="['/Institution_Management', _Basic_Data?.InstitutionManagement?.Institution?._id]"> {{_Basic_Data?.InstitutionManagement?.Institution?.Institution}} </li>
+                  <li class="arrow"> >> </li>
+                  <li class="LinkName" [routerLink]="['/Yearly_Batches', _Basic_Data.InstitutionManagement._id]" > {{_Basic_Data?.InstitutionManagement?.Course?.Course}}-{{_Basic_Data?.InstitutionManagement?.Department?.Department}} </li>
+                  <li class="arrow"> >> </li>
+                  <li> {{_Basic_Data?.Starting_MonthAndYear | date:'MMMM y' }} -  {{_Basic_Data?.Ending_MonthAndYear | date:'MMMM y' }} </li>
+               </ng-container>
+            </ul>
+         </div>
+      </div>
+      <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+         <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
+            </div>
+         </div>
+      </div>
+      <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+         <!-- Page Header Part -->
+         <div class="row header_part">
+            <div class="col-sm-6">
+               <button class="Create_Button" mat-raised-button (click)="CreateSemesterDetails()"> + Create </button>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+               <div class="Search_Section">
+                  <input type="text" placeholder="Search.." name="search">
+                  <i class="material-icons">search</i>
+               </div>
+            </div>
+         </div>
+         <!-- Table Section -->
+         <div class="Table_Section">
+            <table >
+               <thead>
+                  <tr>
+                     <th>S.no</th>
+                     <th> Semester </th>
+                     <th> Year </th>
+                     <th> No.Of Subjects </th>
+                     <th> No.Of Sections </th>
+                     <th> Created By </th>
+                     <th> Last Modified By </th>
+                     <th> Action </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let Semester of _Semesters_List; let i=index">
+                     <td>
+                        <span class="S_no"> {{ i + 1}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Semester.YearSemester?.Semester_Name }} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Semester.BatchYear?.Show_Year}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Semester.Subjects.length}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Semester.Sections_Arr.length}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{Semester.Created_By.Name}}
+                           <br> 
+                           <span class="Time"> {{Semester.createdAt | date:'medium'}}  </span>
+                        </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> 
+                           {{Semester.Last_Modified_By.Name}} 
+                           <br> 
+                           <span class="Time"> {{Semester.updatedAt | date:'medium'}}  </span>
+                        </span>
+                     </td>
+                     <td>
+                        <button (click)="ViewSemesterDetails(i)" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                           <i class="material-icons">zoom_in</i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>

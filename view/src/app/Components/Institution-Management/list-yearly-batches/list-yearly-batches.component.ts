@@ -52,6 +52,7 @@ export class ListYearlyBatchesComponent implements OnInit {
                      const CryptoBytes_1  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
                      const DecryptedData_1 = JSON.parse(CryptoBytes_1.toString(CryptoJS.enc.Utf8));
                      this._Batches_List = DecryptedData_1;
+                     console.log(DecryptedData_1);
                      this._Batches_List.map(obj => {
                         let NoOfSemesters = 0;
                         obj['Years_Array'].map(obj_1 => {

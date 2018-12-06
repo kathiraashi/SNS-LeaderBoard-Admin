@@ -1,0 +1,123 @@
+<!-- If Create Or Edit The Department -->
+<div class="Modal_Content" *ngIf="Type && ( Type === 'Create' || Type === 'Edit')">
+   <div class="Modal_Header">
+      <p> Update Semester Details </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-12">
+               <h6 class="Identifier"> 
+                  ( {{Show_Course}} )
+                  <span> >> </span>
+                  ( {{Show_YearlyBatch}} )
+                  <ng-container *ngIf="Proceed_Stage ==='Stage_2'">
+                     <span> >> </span>
+                     ( {{Show_BatchYear}} )
+                     <span> >> </span>
+                     ( {{Show_YearSemester}} )
+                  </ng-container>
+               </h6>
+            </div>
+            <ng-container *ngIf="Proceed_Stage ==='Stage_1'">
+               <div class="col-sm-1"></div>
+               <div class="col-sm-5 Form_Input">
+                  <label> Year:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="BatchYear"
+                              [items]="BatchYears_List"
+                              [bindLabel]="'Show_Year'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              (change)="ChangeBatchYear($event)"
+                              placeholder="Years">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['BatchYear'].errors && Form.controls['BatchYear'].touched">
+                     <span *ngIf="Form.controls['BatchYear'].errors.required"> Batch Year is required</span>
+                  </p>
+               </div>
+               <div class="col-sm-5 Form_Input" >
+                  <label> Semester :</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="YearSemester"
+                              [items]="YearSemesters_List"
+                              [bindLabel]="'Semester_Name'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              placeholder="Semester">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['YearSemester'].errors && Form.controls['YearSemester'].touched">
+                     <span *ngIf="Form.controls['YearSemester'].errors.required"> Semester is required</span>
+                     <span *ngIf="Form.controls['YearSemester'].errors.Semester_NotAvailable"> Semester Details Already Updated</span>
+                  </p>
+               </div>
+               <div class="col-sm-1"></div>
+               <div class="col-sm-1"></div>
+               <div class="col-sm-10 Form_Select" >
+                  <label> Subjects :</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="Subjects"
+                              [items]="Subject_List"
+                              [bindLabel]="'Subject'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              [hideSelected]="true"
+                              [multiple]="true"
+                              placeholder="Subjects">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['Subjects'].errors && Form.controls['Subjects'].touched">
+                     <span *ngIf="Form.controls['Subjects'].errors.required"> Subjects is required</span>
+                  </p>
+               </div>
+            </ng-container>
+         </div>
+         <ng-container *ngIf="Proceed_Stage ==='Stage_2'" formArrayName="Sections_Arr">
+            <div class="HighlightSection" *ngFor="let Section of Form.controls['Sections_Arr']['controls']; let i = index" [formGroupName]="i">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <h5 class="SectionHeader"> {{Section.controls['Section'].value}} </h5>
+                     <ng-container formArrayName="More">
+                        <div class="SubForm_Section">
+                           <div class="row" *ngFor="let Subject of Section['controls']['More']['controls']; let j = index" [formGroupName]="j">
+                              <div class="col-sm-1"> </div>
+                              <div class="col-sm-5 Form_Select">
+                                 <label> Subject :</label>
+                                 <ng-select class="NgSelect ValueBold"
+                                             formControlName="Subject"
+                                             [items]="Subject_List"
+                                             [bindLabel]="'Subject'"
+                                             [bindValue]="'_id'"
+                                             [searchable]="true"
+                                             placeholder="Subject">
+                                 </ng-select>
+                              </div>
+                              <div class="col-sm-5 Form_Select">
+                                 <label> Staff :</label>
+                                 <ng-select class="NgSelect ValueBold"
+                                             formControlName="Staff"
+                                             [items]="Staffs_List"
+                                             [bindLabel]="'Name'"
+                                             [bindValue]="'_id'"
+                                             [searchable]="true"
+                                             placeholder="Staff">
+                                 </ng-select>
+                              </div>
+                              <div class="col-sm-1"> </div>
+                           </div>
+                        </div>
+                     </ng-container>
+                  </div>
+               </div>
+            </div>
+         </ng-container>
+      </div>
+      <div class="Model_Footer">
+         <button *ngIf="Proceed_Stage !== 'Stage_2'" type="button" (click)="GoToProceed()" [disabled]="Form.status !== 'VALID'" mat-raised-button color="primary"> Proceed </button>
+         <button *ngIf="Proceed_Stage === 'Stage_2'" type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+      </div>
+   </form>
+</div>

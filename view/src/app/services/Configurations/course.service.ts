@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { LoginService } from './../LoginService/login.service';
 
-const API_URL = 'http://localhost:5000/API/Configuration/Course/';
+const API_URL = 'http://139.59.20.129:5000/API/Configuration/Course/';
 
 @Injectable({
   providedIn: 'root'

@@ -1,54 +1,147 @@
-<div class="Modal_Content" *ngIf="Type && Type === 'Create'">
+<!-- If Create Or Edit The Activity_Name -->
+<div class="Modal_Content">
    <div class="Modal_Header">
-      <p> Activity</p>
-      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+      <p> Create Activity </p>
+      <span  *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
    </div>
-   <div class="Model_Body">
-      <div class="row">
-         <div class="col-sm-6 Form_Input">
-            <label> Activity Name:</label>
-            <input type="text">
+   <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="Model_Body">
+         <div class="row">
+            <div class="col-sm-4 Form_Input">
+               <label>Activity Name:</label>
+               <input type="text" formControlName="Activity_Name">
+               <p class="error" *ngIf="Form.controls['Activity_Name'].errors && !Form.controls['Activity_Name'].pristine">
+                  <span *ngIf="Form.controls['Activity_Name'].errors.required">Activity Name is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Input">
+               <label>Institution :</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Institution"
+                           [items]="Institutions_List"
+                           [bindLabel]="'Institution'"
+                           [bindValue]="'_id'"
+                           [searchable]="true"
+                           (change)="InstitutionChange($event)"
+                           placeholder="Institution">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required">Institution is required</span>
+               </p>
+            </div>
+            <div class="col-sm-4 Form_Input">
+               <label>Activity Type:</label>
+               <ng-select class="NgSelect ValueBold"
+                           formControlName="Activity_Type"
+                           [items]="Activity_Types"
+                           [bindLabel]="'Value'"
+                           [searchable]="true"
+                           (change)="ActivityTypeChange($event)"
+                           placeholder="Activity Type">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Activity_Type'].errors && !Form.controls['Activity_Type'].pristine">
+                  <span *ngIf="Form.controls['Activity_Type'].errors.required">Activity Type is required</span>
+               </p>
+            </div>
+            <div *ngIf="!Form.controls['Form_Extended'].value" class="col-sm-4 Form_Input">
+               <label>Max Points:</label>
+               <input type="text" formControlName="Max_Points">
+               <p class="error" *ngIf="Form.controls['Max_Points'].errors && !Form.controls['Max_Points'].pristine">
+                   <span *ngIf="Form.controls['Max_Points'].errors.required">Max Points Allowed is required</span>
+               </p>
+            </div>
+            <!-- Form Extended -->
+            <ng-container *ngIf="Form.controls['Form_Extended'].value">
+               <div class="col-sm-6 Form_Select">
+                  <label>Activity Levels:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="Activity_Levels"
+                              [items]="ActivityLevels_List"
+                              [bindLabel]="'ActivityLevel'"
+                              [searchable]="true"
+                              [hideSelected]="true"
+                              [multiple]="true"
+                              placeholder="Activity Levels">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['Activity_Levels'].errors && !Form.controls['Activity_Levels'].pristine">
+                     <span *ngIf="Form.controls['Activity_Levels'].errors.required"> Activity Levels is required</span>
+                  </p>
+               </div>
+               <div class="col-sm-6 Form_Select">
+                  <label>Achievement Types:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="Achievement_Types"
+                              [items]="AchievementTypes_List"
+                              [bindLabel]="'AchievementType'"
+                              [searchable]="true"
+                              [hideSelected]="true"
+                              [multiple]="true"
+                              placeholder="Achievement Types">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['Achievement_Types'].errors && !Form.controls['Achievement_Types'].pristine">
+                     <span *ngIf="Form.controls['Achievement_Types'].errors.required"> Achievement Types is required</span>
+                  </p>
+               </div>
+            </ng-container>
+            <div class="col-sm-6 Form_TextArea">
+               <label>Description:</label>
+               <textarea formControlName="Description"></textarea>
+               <p class="error" *ngIf="Form.controls['Description'].errors && !Form.controls['Description'].pristine">
+                  <span *ngIf="Form.controls['Description'].errors.required">Description is required</span>
+               </p>
+            </div>
+            <ng-container *ngIf="Form.controls['Form_Extended'].value">
+               <div class="col-sm-4" style="padding-top: 30px;">
+                  <mat-checkbox formControlName="Skip_Activity" class="example-margin" [labelPosition]="'after'"> Skip Activity </mat-checkbox>
+               </div>
+            </ng-container>
          </div>
-         <div class="col-sm-6 Form_Select">
-            <label>Staff:</label>
-            <select>
-               <option disabled> Select Staff</option>
-               <option> Staff-1</option>
-               <option>Staff-2</option>
-            </select>
+         <div class="row" *ngIf="Form.controls['Form_Extended'].value && ShowMaxPoints_Table">
+            <div class="col-sm-12">
+               <div class="TableSection">
+                  <h5> Max Points Table</h5>
+                  <div class="row">
+                     <div class="col-sm-1">
+                        <h6> S.No</h6>
+                     </div>
+                     <div class="col-sm-6">
+                        <h6> Activity Level & Achievement Type </h6>
+                     </div>
+                     <div class="col-sm-5">
+                        <h6> Max Points Allowed </h6>
+                     </div>
+                  </div>
+                  <ng-container formArrayName="MaxPoints_Array">
+                     <div class="row" *ngFor="let Section of Form.controls['MaxPoints_Array']['controls']; let i = index" [formGroupName]="i">
+                        <div class="col-sm-1 Form_Input">
+                           <p> {{i + 1}} </p>
+                        </div>
+                        <div class="col-sm-6 Form_Input">
+                           <input type="text" formControlName="ActivityLevel_And_AchievementType">
+                        </div>
+                        <div class="col-sm-5 Form_Input">
+                           <input type="text" formControlName="Max_Points">
+                        </div>
+                     </div>
+                  </ng-container>
+               </div>
+            </div>
          </div>
-         <div class="col-sm-6 Form_TextArea">
-            <label>Description:</label>
-            <textarea type="text" row="4"></textarea>
-         </div>
       </div>
-   </div>
-   <div class="Model_Footer">
-      <button mat-raised-button color="primary"> Submit </button>
-   </div>
-</div>
-<div class="Modal_Content" *ngIf=" Type && Type === 'View'">
-   <div class="Modal_Header">
-      <p>Activity</p>
-      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
-   </div>
-   <div class="Model_Body">
-      <div class="view_item">
-         <div class=" Static">Activity Name </div>
-         <div class="dots"> : </div>
-         <div class=" Data">Name</div>
+      <div class="Model_Footer">
+         <button *ngIf="Form.controls['Form_Extended'].value && !ShowMaxPoints_Table" type="button" (click)="Proceed()" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span> Proceed </span>
+         </button>
+         <button *ngIf="ShowMaxPoints_Table" type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="!Uploading">Submit</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
+         <button *ngIf="!Form.controls['Form_Extended'].value" type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+            <span *ngIf="!Uploading">Submit</span>
+            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+         </button>
       </div>
-      <div class="view_item">
-         <div class=" Static">Staff </div>
-         <div class="dots"> : </div>
-         <div class=" Data"> staff-1</div>
-      </div>
-      <div class="view_item">
-         <div class=" Static">Description </div>
-         <div class="dots"> : </div>
-         <div class=" Data">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-      </div>
-   </div>
+   </form>
 </div>
       
          

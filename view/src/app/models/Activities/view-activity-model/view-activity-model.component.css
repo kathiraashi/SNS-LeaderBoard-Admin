@@ -1,0 +1,122 @@
+/* ******************************************* Model Style ***************************************** */
+.Modal_Content {
+   width: 100%;
+   height: 100%;
+   padding: 0px 10px;
+}
+.Modal_Header {
+   position: relative;
+   display: flex;
+   align-items: center;
+   height: 45px;
+   border-bottom: 1px solid #e8e8e8;
+}
+.Modal_Header p {
+   margin: 0px;
+   font-weight: 700;
+   font-size: 24px;
+   color: #4f6a7a;
+   letter-spacing: 0.3px;
+   width: 100%;
+   text-align: center;
+}
+.Modal_Header span {
+   font-size: 30px;
+   position: absolute;
+   right: 0px;
+   font-weight: 900;
+   top: -4px;
+   cursor: pointer;
+}
+.Model_Body {
+   padding: 20px;
+}
+.Model_Footer {
+   border-top: 1px solid #e8e8e8;
+   height: 55px;
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+.Model_Footer button {
+   position: absolute;
+   right: 0px;
+}
+.Model_Footer .UploadingBtn{
+   color: #5a798c;
+}
+.Model_Footer .UploadingBtn i{
+   color: #4f6a7a;
+}
+
+
+/* ************************************ View Style ******************************* */
+.view_item {
+   display: grid;
+   grid-template-columns: 40% 15px auto;
+}
+.view_item .Static{
+   font-weight: 700;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .dots{
+   font-weight: 800;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 15px;
+}
+.view_item .Data{
+   font-weight: 500;
+   color: #4f6a7a;
+   margin-bottom: 10px;
+   font-size: 14px;
+}
+.view_item .Data .Badge{
+   color: #4f6a7a;
+   padding: 2px 4px;
+   margin: 5px 2px;
+   font-size: 13px;
+   letter-spacing: 0.4px;
+   border: 1px solid #4f6a7a;
+   display: inline-flex;
+}
+
+
+.Table_Sec table {
+   border: 1px solid lightgray;
+   width: 100%;
+   box-shadow: 2px 2px 3px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+}
+.Table_Sec table thead {
+   line-height: 40px;
+   text-align: center;
+   background-color: #ffffff;
+   color: #4d6a7a;
+   font-size: 14px;
+   letter-spacing: 0.5px;
+}
+.Table_Sec table thead th{
+   font-weight: 800;
+}
+.Table_Sec table tbody {
+   border: 1px solid #e8e8e8;
+   background-color: #ffffff;
+}
+.Table_Sec table tbody tr {
+   height: 42px;
+   text-align: center;
+   align-items: center;
+   border-bottom: 1px solid #eaeaea;
+}
+.Table_Sec table tbody tr:nth-child(odd) {
+   background-color: #f1f1f185;
+}
+.Table_Sec table tbody tr:hover {
+   background-color: #4f6a7a40;
+}
+.Table_Sec table tbody tr td{
+   font-size: 14px;
+   color: #4d6a7a;
+}

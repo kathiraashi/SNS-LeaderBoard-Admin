@@ -1,0 +1,101 @@
+<!-- If Create Level-->
+<div class="Modal_Content">
+      <div class="Modal_Header">
+         <p> Create Level </p>
+         <span *ngIf="!Uploading" data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+      </div>
+      <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+         <div class="Model_Body">
+            <div class="row">
+               <div class="col-sm-4 Form_Input">
+                  <label>Level Name:</label>
+                  <input type="text" formControlName="Level_Name" (ngModelChange)="LevelNameChange($event)" (blur)="ValidateNameAndDepartment()">
+                  <p class="error" *ngIf="Form.controls['Level_Name'].errors && !Form.controls['Level_Name'].pristine">
+                     <span *ngIf="Form.controls['Level_Name'].errors.required">Level Name is required</span>
+                     <span *ngIf="Form.controls['Level_Name'].errors.LevelName_NotAvailable">Level Name Already Exist</span>
+                  </p>
+               </div>
+               <div class="col-sm-4 Form_Select">
+                  <label>Institution:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="Institution"
+                              [items]="_Institutions"
+                              [bindLabel]="'Institution'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              (change)="InstitutionChange($event)"
+                              placeholder="Institution">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                     <span *ngIf="Form.controls['Institution'].errors.required"> Institution is required</span>
+                  </p>
+               </div>
+               <div class="col-sm-4 Form_Select">
+                  <label>Department:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="Department"
+                              [items]="_Departments"
+                              [bindLabel]="'Department'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              (change)="ValidateNameAndDepartment()"
+                              placeholder="Department">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['Department'].errors && !Form.controls['Department'].pristine">
+                     <span *ngIf="Form.controls['Department'].errors.required"> Department is required</span>
+                  </p>
+               </div>
+               <div class="col-sm-6 Form_Select">
+                  <label>Activities:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="Activities"
+                              [items]="_Activities"
+                              [bindLabel]="'Activity_Name'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              [hideSelected]="true"
+                              [multiple]="true"
+                              placeholder="Activity">
+                  </ng-select>
+                  <p class="error" *ngIf="Form.controls['Activities'].errors && !Form.controls['Activities'].pristine">
+                     <span *ngIf="Form.controls['Activities'].errors.required"> Activities is required</span>
+                  </p>
+               </div>
+               <div class="col-sm-4" style="padding-top: 30px;">
+                  <mat-checkbox formControlName="ItsBaseLevel" [labelPosition]="'after'"> Base Level </mat-checkbox>
+               </div>            
+            </div>
+            <hr *ngIf="!Form.controls['ItsBaseLevel'].value">
+            <div class="row" *ngIf="!Form.controls['ItsBaseLevel'].value">
+               <div class="col-sm-12">
+                  <h5> Eligibility </h5>
+               </div>
+               <div class="col-sm-1"></div>
+               <div class="col-sm-6 Form_Input">
+                  <label>Eligible Points:</label>
+                  <input type="text" formControlName="EligiblePoints">
+               </div>
+               <div class="col-sm-5"></div>
+               <div class="col-sm-1"></div>
+               <div class="col-sm-6 Form_Input">
+                  <label>Eligible Previous Level:</label>
+                  <ng-select class="NgSelect ValueBold"
+                              formControlName="EligiblePreviousLevel"
+                              [items]="_Previous_Levels"
+                              [bindLabel]="'Level_Name'"
+                              [bindValue]="'_id'"
+                              [searchable]="true"
+                              placeholder="Previous Levels">
+                  </ng-select>
+               </div>
+            </div>
+         </div>
+         <div class="Model_Footer">
+            <button type="submit" [disabled]="Form.status !== 'VALID' || Uploading" mat-raised-button color="primary">
+               <span *ngIf="Type === 'Create' && !Uploading">Submit</span>
+               <span *ngIf="Type === 'Edit' && !Uploading">Update</span>
+               <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+            </button>
+         </div>
+      </form>
+   </div>

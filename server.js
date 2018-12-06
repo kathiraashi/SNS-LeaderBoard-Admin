@@ -46,12 +46,22 @@ app.use('/API/Uploads', express.static('Uploads'));
    require('./server/web/routes/Admin/AdminManagement.routes.js')(app);
 // Students
    require('./server/web/routes/Students.routes.js')(app);
+// Staff's
+   require('./server/web/routes/Staffs.routes.js')(app);
+// Activities
+   require('./server/web/routes/Activities.routes.js')(app);
+// Levels
+   require('./server/web/routes/Levels.routes.js')(app);
 // Institution Management
    require('./server/web/routes/Institution-Management.routes.js')(app);
 // Configuration
    require('./server/web/routes/Configuration/Institution.routes.js')(app);
    require('./server/web/routes/Configuration/Department.routes.js')(app);
    require('./server/web/routes/Configuration/Course.routes.js')(app);
+   require('./server/web/routes/Configuration/Activity_Config/ActivityLevel.routes.js')(app);
+   require('./server/web/routes/Configuration/Activity_Config/AchievementType.routes.js')(app);
+   require('./server/web/routes/Configuration/Activity_Config/RedemptionMethod.routes.js')(app);
+   require('./server/web/routes/Configuration/Subject.routes.js')(app);
 
 
    app.use(express.static(__dirname + '/view/dist/view/'));

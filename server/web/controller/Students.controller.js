@@ -18,7 +18,9 @@ exports.Students_List= function(req, res) {
          .populate({ path: 'Institution_Management', select: 'Institution', populate: { path: 'Institution', select: 'Institution' } })
          .populate({ path: 'Institution_Management', select: 'Course', populate: { path: 'Course', select: ['Course', 'NoOfYears'] } })
          .populate({ path: 'Institution_Management', select: 'Department', populate: { path: 'Department', select: 'Department' } })
-         .populate({ path: 'Yearly_Badge', select: ['Starting_MonthAndYear', 'Ending_MonthAndYear', 'Years_Array']})
+         .populate({ path: 'Yearly_Badge', select: ['Starting_MonthAndYear', 'Ending_MonthAndYear']})
+         .populate({ path: 'Year', select: ['From_Year', 'To_Year', 'Show_Year']})
+         .populate({ path: 'Semester', select: ['Semester_Start', 'Semester_End', 'Semester_Name']})
          .populate({ path: 'Created_By', select: ['Name', 'User_Type'] })
          .populate({ path: 'Last_Modified_By', select: ['Name', 'User_Type'] })
          .exec(function(err, result) {
@@ -27,26 +29,6 @@ exports.Students_List= function(req, res) {
                res.status(417).send({status: false, Message: "Some error occurred while Find The Students !."});
             } else {
                result = JSON.parse(JSON.stringify(result));
-               result = result.map(obj => {
-                           var NewYear = {};
-                           var NewSemester = {};
-                           obj['Yearly_Badge']['Years_Array'].map(obj_1 => {
-                              if (obj_1['_id'] === obj['Year']) {
-                                 NewYear = obj_1;
-                                 obj_1['Semesters'].map(obj_2 => {
-                                    if (obj_2['_id'] === obj['Semester']) {
-                                       NewSemester = obj_2;
-                                    }
-                                 })                        
-                              }
-                           });
-                           delete NewSemester['Sections_Arr'];
-                           delete NewYear['Semesters'];
-                           delete obj['Yearly_Badge']['Years_Array'];
-                           obj.Year = NewYear;
-                           obj.Semester = NewSemester;
-                           return obj;
-                        })
                var ReturnData = CryptoJS.AES.encrypt(JSON.stringify(result), 'SecretKeyOut@123');
                ReturnData = ReturnData.toString();
                res.status(200).send({Status: true, Response: ReturnData });
@@ -115,7 +97,6 @@ exports.Students_Import = function(req, res) {
       });
    }
 };
-
 
 
 // Student View -----------------------------------------------

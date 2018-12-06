@@ -1,0 +1,59 @@
+<!-- If View The Activity -->
+<div class="Modal_Content">
+   <div class="Modal_Header">
+      <p>View Level</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class="Static"> Level Name</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Level_Name}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Institution </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Institution?.Institution}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Department </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Department?.Department}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static"> Activities </div>
+         <div class="dots"> : </div>
+         <div class="Data"> <span class="Badge" *ngFor="let Activity of Data.Activities"> {{Activity?.Activity_Name}} </span> </div>
+      </div>
+      <div class="view_item" >
+         <div class="Static"> Base Level </div>
+         <div class="dots"> : </div>
+         <div class="Data" *ngIf="Data.ItsBaseLevel"> Yes </div>
+         <div class="Data" *ngIf="!Data.ItsBaseLevel"> No </div>
+      </div>
+      <div class="view_item" *ngIf="!Data.ItsBaseLevel">
+         <div class="Static"> Eligible Points</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.EligiblePoints}}</div>
+      </div>
+      <div class="view_item" *ngIf="!Data.ItsBaseLevel">
+         <div class="Static"> Eligible Previous Level</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.EligiblePreviousLevel?.Level_Name}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Created By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            {{Data.Created_By.Name}} <small> ({{Data.createdAt | date:'medium'}}) </small>
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            {{Data.Last_Modified_By.Name}} <small> ({{Data.updatedAt | date:'medium'}}) </small>
+         </div>
+      </div>
+   </div>
+</div>

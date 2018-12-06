@@ -1,0 +1,91 @@
+<!-- If View The Activity -->
+<div class="Modal_Content">
+   <div class="Modal_Header">
+      <p>View Activity</p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="view_item">
+         <div class="Static">Institution </div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Institution?.Institution}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Activity Name</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Activity_Name}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Activity Type</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Activity_Type?.Value}}</div>
+      </div>
+      <div class="view_item" *ngIf="!Data.Form_Extended">
+         <div class="Static">Maximum Points</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Max_Points}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Description</div>
+         <div class="dots"> : </div>
+         <div class="Data"> {{Data.Description}}</div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Created By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            {{Data.Created_By.Name}} <small> ({{Data.createdAt | date:'medium'}}) </small>
+         </div>
+      </div>
+      <div class="view_item">
+         <div class="Static">Last Modified By </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            {{Data.Last_Modified_By.Name}} <small> ({{Data.updatedAt | date:'medium'}}) </small>
+         </div>
+      </div>
+      <div class="view_item" *ngIf="Data.Form_Extended">
+         <div class="Static"> Activity Levels </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            <span class="Badge" *ngFor="let ActivityLevel of Data.Activity_Levels; let j=index"> {{ActivityLevel?.ActivityLevel}} </span> 
+         </div>
+      </div>
+      <div class="view_item" *ngIf="Data.Form_Extended">
+         <div class="Static"> Achievement Types </div>
+         <div class="dots"> : </div>
+         <div class="Data"> 
+            <span class="Badge" *ngFor="let AchievementType of Data.Achievement_Types; let j=index"> {{AchievementType?.AchievementType}} </span> 
+         </div>
+      </div>
+      <div class="view_item" *ngIf="Data.Form_Extended">
+         <div class="Static"> Skip Activity </div>
+         <div class="dots"> : </div>
+         <div class="Data" *ngIf="Data.Skip_Activity === true"> Yes </div>
+         <div class="Data" *ngIf="Data.Skip_Activity !== true || Data.Skip_Activity === null"> No </div>
+      </div>
+      <div class="view_item" *ngIf="Data.Form_Extended">
+         <div class="Static"> Maximum Points Table </div>
+         <div class="dots"> : </div>
+         <div class="Data"> </div>
+      </div>
+      <div class="Table_Sec"  *ngIf="Data.Form_Extended">
+         <table>
+            <thead>
+               <tr>               
+                  <th> S.No </th>
+                  <th> Activity Level & Achievement Type </th>
+                  <th> Max Points Allowed </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let item of Data.MaxPoints_Array; let i=index">
+                  <td> {{ i + 1}} </td>
+                  <td> {{ item.Activity_Level?.ActivityLevel }} - {{ item.Achievement_Type?.AchievementType }} </td>
+                  <td> {{ item.Max_Points}} </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>

@@ -145,7 +145,6 @@ constructor(   public bsModalRef: BsModalRef,
    }
    InsManagementChange() {
       const Ins_Management = this.Form.controls['Institution_Management'].value;
-      console.log(Ins_Management);
       this.Form.controls['Yearly_Badge'].setValue(null);
       this.Form.controls['Yearly_Badge'].disable();
       this.Form.controls['Year'].setValue(null);
@@ -219,7 +218,6 @@ constructor(   public bsModalRef: BsModalRef,
 
    Submit() {
       if (this.Form.status === 'VALID' && !this.Async_Loading && !this.Uploading) {
-         console.log(this.Form.getRawValue());
          this.Uploading = true;
          const Data = this.Form.getRawValue();
          let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
