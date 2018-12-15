@@ -75,6 +75,9 @@
    padding: 7px;
    text-align: center;
 }
+.HighlightSection .SubForm_Section {
+   padding: 0px 20px;
+}
 
 
 /* ************************************ Create And Edit Form Style ******************************* */

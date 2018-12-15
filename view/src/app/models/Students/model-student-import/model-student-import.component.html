@@ -14,7 +14,6 @@
                            [bindLabel]="'Institution'"
                            [bindValue]="'_id'"
                            [searchable]="true"
-                           (change)="InstitutionChange()"
                            placeholder="Institution">
                </ng-select>
                <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
@@ -29,7 +28,6 @@
                            [bindLabel]="'CourseAndDepartment'"
                            [bindValue]="'_id'"
                            [searchable]="true"
-                           (change)="InsManagementChange()"
                            placeholder="Course & Department">
                </ng-select>
                <p class="error" *ngIf="Form.controls['Institution_Management'].errors && !Form.controls['Institution_Management'].pristine">
@@ -44,53 +42,10 @@
                            [bindLabel]="'Batch'"
                            [bindValue]="'_id'"
                            [searchable]="true"
-                           (change)="YearlyBatch_Change()"
                            placeholder="Yearly Badge">
                </ng-select>
                <p class="error" *ngIf="Form.controls['Yearly_Badge'].errors && !Form.controls['Yearly_Badge'].pristine">
                   <span *ngIf="Form.controls['Yearly_Badge'].errors.required"> Yearly Badge is required</span>
-               </p>
-            </div>
-            <div class="col-sm-4 Form_Select">
-               <label> Year </label>
-               <ng-select class="NgSelect ValueBold"
-                           formControlName="Year"
-                           [items]="Years_List"
-                           [bindLabel]="'Show_Year'"
-                           [bindValue]="'_id'"
-                           [searchable]="true"
-                           (change)="Year_Change()"
-                           placeholder="Year">
-               </ng-select>
-               <p class="error" *ngIf="Form.controls['Year'].errors && !Form.controls['Year'].pristine">
-                  <span *ngIf="Form.controls['Year'].errors.required"> Year is required</span>
-               </p>
-            </div>
-            <div class="col-sm-4 Form_Select">
-               <label> Semester </label>
-               <ng-select class="NgSelect ValueBold"
-                           formControlName="Semester"
-                           [items]="Semesters_List"
-                           [bindLabel]="'Semester_Name'"
-                           [bindValue]="'_id'"
-                           [searchable]="true"
-                           (change)="Semester_Change()"
-                           placeholder="Semester">
-               </ng-select>
-               <p class="error" *ngIf="Form.controls['Semester'].errors && !Form.controls['Semester'].pristine">
-                  <span *ngIf="Form.controls['Semester'].errors.required"> Semester is required</span>
-               </p>
-            </div>
-            <div class="col-sm-4 Form_Select">
-               <label> Section </label>
-               <ng-select class="NgSelect ValueBold"
-                           formControlName="Section"
-                           [items]="Sections_List"
-                           [searchable]="true"
-                           placeholder="Section">
-               </ng-select>
-               <p class="error" *ngIf="Form.controls['Section'].errors && !Form.controls['Section'].pristine">
-                  <span *ngIf="Form.controls['Section'].errors.required"> Section is required</span>
                </p>
             </div>
          </div>
@@ -102,7 +57,7 @@
                <thead>
                   <tr>
                      <th> S.no </th>
-                     <th> Roll No</th>
+                     <th> Reg No</th>
                      <th> Name </th>
                      <th> Gender </th>
                      <th> Blood Group </th>
@@ -118,7 +73,7 @@
                      </td>
                      <td>
                         <div class="Form_Input">
-                           <input type="text" formControlName="Roll_No">
+                           <input type="text" formControlName="Reg_No">
                         </div>
                      </td>
                      <td>

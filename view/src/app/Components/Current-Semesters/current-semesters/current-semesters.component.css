@@ -1,0 +1,168 @@
+/* Page Section */
+.Page_Section{
+   margin-top:100px;
+   margin-bottom:100px;
+}
+/* --------------   Page Identity Section  ----------------- */
+.Page_Identity{
+   display: flex;
+   height:40px;
+   width: 100%;
+   margin-bottom: 5px;
+}
+.Page_Identity .Page_Track{
+   width:100%;
+   line-height: 35px;
+}
+.Page_Identity .Page_Track ul{
+   display: flex;
+   list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   align-items: center;
+   float: right;
+}
+.Page_Identity .Page_Track ul li {
+   font-size: 13px;
+   font-weight: 500;
+   margin-left: 5px;
+}
+.Page_Identity .Page_Track ul li.arrow{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+}
+.Page_Identity .Page_Track ul li.arrowGreen{
+   letter-spacing: -4px;
+   font-size: 19px;
+   transform: scale(.6, 1);
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.HeaderName{
+   color: #226BAF;
+}
+.Page_Identity .Page_Track ul li.LinkName{
+   color: #226BAF;
+   cursor: pointer;
+}
+.Page_Content.Hrms .Main_Section{
+   width:100%;
+   display:flex;
+}
+/* ----------- Create and Search Section ---------- */
+.header_part{
+   margin-bottom: 15px;
+}
+.Select_Section{
+   display: grid;
+   grid-template-columns: 100px auto;
+   align-items: center;
+}
+.Select_Section h6{
+   color: rgb(79, 107, 123);
+   font-weight: 700;
+   font-size: 15px;
+   letter-spacing: 0.3px;
+}
+
+.Content_Section {
+   width: 100%;
+   height: 100%;
+   position: relative;
+   margin-top: 25px;
+   margin-bottom: 25px;
+}
+.First_Section {
+   box-shadow: 1px 1px 14px #d4d4d4;
+   background-color: #ffffff;
+   padding: 10px;
+   margin-bottom: 20px;
+}
+.First_Section_Details {
+   display: grid;
+   grid-template-columns: auto auto;
+   align-items: center;
+}
+.First_Section_Details .Identity {
+   margin: 0px;
+   padding: 0px 10px;
+   letter-spacing: 0.5px;
+   font-size: 15px;
+   font-weight: 700;
+   color: #64788a;
+}
+.First_Section_Details .Identity span {
+   display: inline-block;
+   padding-right: 10px;
+}
+.First_Section_Details .Right_Section {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+}
+.First_Section_Details .Right_Section .Expend_Box {
+   letter-spacing: 0.5px;
+   padding: 0px 20px;
+   font-size: 15px;
+   font-weight: 600;
+   color: #64788a;
+   margin-bottom: -9px;
+}
+.First_Section_Details .Right_Section .Edit_Icon {
+   letter-spacing: 0.5px;
+   padding: 0px 20px;
+   font-size: 15px;
+   font-weight: 600;
+   color: #226baf;
+   display: flex;
+   cursor: pointer;
+}
+.First_Section_Details .Right_Section .Edit_Icon i.material-icons {
+   border: 2px solid #226baf;
+   height: 21px;
+   width: 21px;
+   font-size: 17px;
+}
+.First_Section_Details .Right_Section .Edit_Icon p {
+   margin: 0px;
+   padding: 0px 10px;
+   letter-spacing: 0.5px;
+   font-size: 15px;
+   font-weight: 700;
+   color: #64788a;
+}
+.First_Section_Details .Right_Section .Submit_Button {
+   padding: 0px 5px;
+}
+
+.Second_Section {
+   margin: 10px 5px;
+   padding: 15px;
+   background-color: rgba(234, 234, 234, 0.7);
+}
+.Detail_Header {
+   display: grid;
+   grid-template-columns: 2.5% 30% 30% 30%;
+   column-gap: 2.5%;
+   align-items: center;
+   margin-bottom: 10px;
+   text-align: center;
+   letter-spacing: 0.5px;
+   font-size: 15px;
+   font-weight: 700;
+   color: #64788a;
+}
+.Detail_Row {
+   display: grid;
+   grid-template-columns: 2.5% 30% 30% 30%;
+   column-gap: 2.5%;
+   align-items: center;
+   margin-bottom: 20px;
+}
+.Detail_Row .S-No {
+   letter-spacing: 0.5px;
+   font-size: 15px;
+   font-weight: 600;
+   color: #64788a;
+   text-align: center;
+}

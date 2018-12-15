@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { LoginService } from './../LoginService/login.service';
 
-const API_URL = 'http://139.59.20.129:5000/API/Institution-Management/';
+const API_URL = 'http://localhost:5000/API/Institution-Management/';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +52,15 @@ export class InstitutionManagementService {
             this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
             sessionStorage.setItem('SessionKey', btoa(Date()));
             return this.http.post(API_URL + 'InstitutionManagement_YearlyBatchesList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
+      public InstitutionManagement_YearlyBatches_SimpleList(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionManagement_YearlyBatches_SimpleList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
          } else {
             return this.ValidateEveryRequest();
          }

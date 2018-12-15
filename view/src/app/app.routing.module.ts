@@ -22,11 +22,15 @@ import { AuthGuard } from './Authentication/auth.guard';
 // Queries
    import { ListQueriesComponent } from './Components/Queries/list-queries/list-queries.component';
    import { ViewQueriesComponent } from './Components/Queries/view-queries/view-queries.component';
+// Tutor Management
+   import { ListTutorManagementComponent } from './Components/Tutor-Management/list-tutor-management/list-tutor-management.component';
 // Institution Management
    import { ListInstitutionManagementComponent } from './Components/Institution-Management/list-institution-management/list-institution-management.component';
    import { ListYearlyBatchesComponent } from './Components/Institution-Management/list-yearly-batches/list-yearly-batches.component';
    import { ListSemesterManagementComponent } from './Components/Institution-Management/list-semester-management/list-semester-management.component';
-   // Configuration
+// Current Semesters
+   import { CurrentSemestersComponent } from './Components/Current-Semesters/current-semesters/current-semesters.component';
+// Configuration
    // User Management
       import { ListUserComponent } from './Components/Configuration/User-Management/list-user/list-user.component';
    // Department Config
@@ -126,6 +130,13 @@ import { AuthGuard } from './Authentication/auth.guard';
             canActivate: [AuthGuard],
             data: { animation: { value: 'Queries_View'}  }
          },
+      // Tutor Management
+         {
+            path: 'Tutor_Management',
+            component: ListTutorManagementComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Tutor_Management'}  }
+         },
       // Institution Management
          {
             path: 'Institution_Management',
@@ -150,6 +161,13 @@ import { AuthGuard } from './Authentication/auth.guard';
             component: ListSemesterManagementComponent,
             canActivate: [AuthGuard],
             data: { animation: { value: 'Semester_Management'}  }
+         },
+      // Current Semesters
+         {
+            path: 'Current_Semesters',
+            component: CurrentSemestersComponent,
+            canActivate: [AuthGuard],
+            data: { animation: { value: 'Current_Semesters'}  }
          },
       // Configuration
          // User Management

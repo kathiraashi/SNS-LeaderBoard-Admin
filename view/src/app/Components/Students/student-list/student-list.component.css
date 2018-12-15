@@ -49,108 +49,110 @@
    width:100%;
    display:flex;
 }
-/* ----------- Create and Search Section ---------- */
-.header_part{
-   margin-bottom: 15px;
+
+.Complete_Section{
+   display: grid;
+   grid-template-columns: 23% 75%;
+   grid-column-gap: 2%;
 }
-.Create_Button{
-   letter-spacing: 0.5px;
-   font-weight: 600;
+.Complete_Section .Left_Section{
+   width: 100%;
+}
+.Complete_Section .Left_Section .Left_SectionBox_Effect{
+   background-color: #ffffff;
+   box-shadow: 1px 1px 14px #d4d4d4;
+   padding: 10px 20px;
+}
+
+.Form_Select {
+   margin-bottom: 25px;
+}
+.Form_Select label {
    font-size: 14px;
+   margin-bottom: 5px;
+   font-weight: 700;
+   color: #4e6a7a;
 }
-.Import_Button{
-   margin-left:20px;
-}
-/* ---------- Search Section ----------- */
-.Search_Section{
+
+
+.Right_Section {
    position: relative;
+}
+.BoxSections_List {
+   position: relative;
+   display: grid;
+   grid-template-columns: auto auto auto;
+   grid-column-gap: 15px;
+   grid-row-gap: 15px;
+}
+.Box_Section {
+   position: relative;
+   display: grid;
+   grid-template-columns: 30% 70%;
    background-color: #ffffff;
-   height: 36px;
-   box-shadow: 1px 2px 4px 0px rgba(0,0,0,.2);
+   box-shadow: 1px 1px 14px #d4d4d4;
 }
-.Search_Section input{
+.Box_Section .Box_Img {
+   position: relative;
+   background-color: rgba(34, 107, 175, 0.75);
+}
+.Box_Section .Box_Img img {
    width: 100%;
-   border-radius: 0;
-   border: none;
-   background-color: transparent;
-   padding: 10px;
-   height: 36px;
-   color: #226baf;
-   font-weight: 500;
-   outline: none;
-}
-.Search_Section input::placeholder{
-   color:#cccccc; 
-   font-weight:400;
-}
-.Search_Section i{
+   margin: 0;
    position: absolute;
-   right: 0px;
-   padding: 7px 5px;
-   color: #4E6A7A;
-   font-weight: 600;
-   cursor: pointer;
+   top: 50%;
+   -ms-transform: translateY(-50%);
+   transform: translateY(-50%);
 }
-/* Table Section */
-.Table_Section table {
-   border: 1px solid lightgray;
-   width: 100%;
-   box-shadow: 2px 2px 3px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+.Box_Section .Box_Details {
+   padding: 5px 10px;
 }
-.Table_Section table thead {
-   line-height: 40px;
-   text-align: center;
-   background-color: #ffffff;
-   color: #4d6a7a;
-   font-size: 14px;
+.Box_Section .Box_Details .Name{
+   font-size: 15px;
+   font-weight: 700;
+   color: #226baf;
+   margin-bottom: 0px;
    letter-spacing: 0.5px;
 }
-.Table_Section table thead th{
-   font-weight: 800;
+.Box_Section .Box_Details .Reg_No{
+   font-size: 13px;
+   font-weight: 700;
+   color: #4e6a7a;
+   margin-bottom: 0px;
+   letter-spacing: 0.5px;
 }
-.Table_Section table tbody {
-   border: 1px solid #e8e8e8;
-   background-color: #ffffff;
-}
-.Table_Section table tbody tr {
-   line-height: 42px;
-   text-align: center;
-   align-items: center;
-   border-bottom: 1px solid #eaeaea;
-}
-.Table_Section table tbody tr:nth-child(odd) {
-   background-color: #f1f1f185;
-}
-.Table_Section table tbody tr:hover {
-   background-color: #4f6a7a40;
-}
-.Table_Section table tbody tr td .S_no {
-   font-size: 14px;
-   color: #4d6a7a;
-}
-.Table_Section table tbody tr td .Style_1 {
-   font-size: 14px;
-   color: rgba(77, 106, 122, 0.84);
+.Box_Section .Box_Details .Course{
+   font-size: 13px;
    font-weight: 600;
-   cursor: pointer;
+   color: #6b899a;
+   margin-bottom: 0px;
+   letter-spacing: 0.5px;
 }
-.Table_Section table tbody tr td .Action_Section{
-   color: #ffffff;
-   height: 35px;
-   width: 35px;
-   line-height: 30px;
-   display: flex;
-   border-radius: 5px;
-   cursor: pointer;
-   float: right;
-   margin-right: 10px;
+.Box_Section .Box_Details .Batch{
+   font-size: 13px;
+   font-weight: 600;
+   color: #6b899a;
+   margin-bottom: 0px;
+   letter-spacing: 0.5px;
 }
-.Table_Section table tbody tr td .Action_Section i {
-   width: 100%;
-   line-height: 35px;
+.Box_Section .Box_Details .YearSemester {
+   font-size: 13px;
+   font-weight: 600;
+   color: #6b899a;
+   margin-bottom: 0px;
+   letter-spacing: 0.5px;
 }
-
-
-
-
-
+.Box_Section .Box_Details .Section {
+   font-size: 13px;
+   font-weight: 600;
+   color: #6b899a;
+   margin-bottom: 0px;
+   letter-spacing: 0.5px;
+}
+.Box_Section .Box_Details .Not_Link {
+   font-size: 13px;
+   font-weight: 600;
+   color: #F44336;
+   margin-bottom: 0px;
+   letter-spacing: 0.5px;
+}

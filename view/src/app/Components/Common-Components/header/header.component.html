@@ -73,6 +73,14 @@
             </span>
          </li> -->
          <!-- Reports -->
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Tutor_Management']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Tutor Management </span>
+               </span>
+            </span>
+         </li>
          <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Institution_Management']">
             <span class="Menu_Tree">
                <span class="Menu">
@@ -82,6 +90,14 @@
                <span class="Hidden_Links"> 
                   <span [routerLink]="['/Yearly_Batches']"></span>
                   <span [routerLink]="['/Semester_Management']"></span>
+               </span>
+            </span>
+         </li>
+         <li [routerLinkActive]="['active']" class="Menu_List" [routerLink]="['/Current_Semesters']">
+            <span class="Menu_Tree">
+               <span class="Menu">
+                  <i class="material-icons">people</i>
+                  <span> &nbsp; Current Semesters </span>
                </span>
             </span>
          </li>

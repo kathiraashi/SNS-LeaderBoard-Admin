@@ -48,22 +48,6 @@ export class ModelSemesterInfoCreateComponent implements OnInit {
                   public Staffs_Service: StaffsService,
                   private Service: InstitutionManagementService) {
                      this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-                     // Get Staff's List
-                     const Data = {'User_Id' : this.User_Id };
-                     let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
-                     Info = Info.toString();
-                     this.Staffs_Service.Staff_List({'Info': Info}).subscribe( response => {
-                        const ResponseData = JSON.parse(response['_body']);
-                        if (response['status'] === 200 && ResponseData['Status'] ) {
-                           const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
-                           const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
-                           this.Staffs_List = DecryptedData;
-                        } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
-                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
-                        } else {
-                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Staffs List Getting Error!, But not Identify!' });
-                        }
-                     });
                   }
 
 
@@ -84,6 +68,22 @@ export class ModelSemesterInfoCreateComponent implements OnInit {
             this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
          } else {
             this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Subject List Getting Error!, But not Identify!' });
+         }
+      });
+      this.Staffs_Service.InstitutionBased_StaffsList({'Info': VarInfo}).subscribe( response => {
+         const ResponseData = JSON.parse(response['_body']);
+         if (response['status'] === 200 && ResponseData['Status'] ) {
+            const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+            const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+            DecryptedData.map(obj => {
+               obj['NameAndDepartment'] = obj['Name']  + ' - ' + obj['Department']['Department'];
+               return obj;
+            });
+            this.Staffs_List = DecryptedData;
+         } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+            this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+         } else {
+            this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Staffs List Getting Error!, But not Identify!' });
          }
       });
 

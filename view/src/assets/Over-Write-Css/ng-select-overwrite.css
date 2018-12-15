@@ -104,6 +104,10 @@
     padding-right: 5px;
 }
 
+.ng-select.ClearHide .ng-clear-wrapper{
+   display: none;
+}
+
 
 
 

@@ -75,7 +75,7 @@ export class ListInstitutionManagementComponent implements OnInit {
       this._Institutions_List = this._Institutions_List.map(obj => { obj.class = ''; return obj; } );
       this._Institutions_List[_index].class = 'active';
       // Get Courses List
-      const Data = {'User_Id' : this.User_Id, Institution_Id: this._Institutions_List[_index]._id };
+      const Data = {'User_Id' : this.User_Id, Institution: this._Institutions_List[_index]._id };
       let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
       Info = Info.toString();
       this.Institution_ManagementService.InstitutionManagement_List({'Info': Info}).subscribe( response => {

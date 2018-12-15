@@ -38,7 +38,7 @@ export class ListYearlyBatchesComponent implements OnInit {
             // Get Institutions List
             this.active_route.url.subscribe((u) => {
                this.InsManagement_Id = this.active_route.snapshot.params['InsManagement_Id'];
-               const Data = {'User_Id' : this.User_Id, 'InstitutionManagement_Id': this.InsManagement_Id};
+               const Data = {'User_Id' : this.User_Id, 'InstitutionManagement': this.InsManagement_Id};
                let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
                Info = Info.toString();
                this.Loader = true;

@@ -1,0 +1,86 @@
+<!-- page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <!-- page Identity -->
+      <div class="Page_Identity">
+         <div class="Page_Name">
+            <h5> TUTORS </h5>
+         </div>
+         <div class="Page_Track">
+            <ul >
+               <li class="HeaderName"> Tutor Management </li>
+            </ul>
+         </div>
+      </div>
+      <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+         <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
+            </div>
+         </div>
+      </div>
+      <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+         <!-- Page Header Part -->
+         <div class="row header_part">
+            <div class="col-sm-6">
+               <button class="Create_Button" mat-raised-button (click)="CreateTutorManagement()"> + Create </button>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+               <div class="Search_Section">
+                  <input type="text" placeholder="Search.." name="search">
+                  <i class="material-icons">search</i>
+               </div>
+            </div>
+         </div>
+         <!-- Table Section -->
+         <div class="Table_Section">
+            <table >
+               <thead>
+                  <tr>
+                     <th>S.no</th>
+                     <th> Tutor </th>
+                     <th> Tutor Role </th>
+                     <th> Institution </th>
+                     <th> Department </th>
+                     <th> No.Of Students </th>
+                     <th> Action </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let Tutor of _TutorManagements_List; let i=index">
+                     <td>
+                        <span class="S_no"> {{ i + 1}} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Tutor?._id?.Staff?.Name }}  </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Tutor?._id?.Staff?.StaffRole }} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Tutor?._id?.Institution?.Institution }} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Tutor?._id?.Department?.Department }} </span>
+                     </td>
+                     <td>
+                        <span class="Style_1"> {{ Tutor?.Students.length }} </span>
+                     </td>
+                     <td>
+                        <button (click)="ViewTutorManagement(i)" class="Table_Action_mini Bg_Info" mat-mini-fab color="primary">
+                           <i class="material-icons">zoom_in</i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>

@@ -5,6 +5,7 @@ module.exports = function(app) {
 
    app.post('/API/Institution-Management/InstitutionManagement_List', Controller.InstitutionManagement_List);
    app.post('/API/Institution-Management/InstitutionManagement_YearlyBatchesList', Controller.InstitutionManagement_YearlyBatchesList);
+   app.post('/API/Institution-Management/InstitutionManagement_YearlyBatches_SimpleList', Controller.InstitutionManagement_YearlyBatches_SimpleList);
    app.post('/API/Institution-Management/InstitutionManagement_YearlyBatchesCreate', Controller.InstitutionManagement_YearlyBatchesCreate);
    app.post('/API/Institution-Management/InstitutionManagement_YearlyBatchView', Controller.InstitutionManagement_YearlyBatchView);
 

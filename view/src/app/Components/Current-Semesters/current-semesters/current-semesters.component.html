@@ -1,0 +1,135 @@
+<!-- Page section -->
+<div class="Page_Section">
+   <div class="container-fluid">
+      <div class="Page_Identity">
+         <div class="Page_Track">
+            <ul>
+               <li class="HeaderName"> Current Semesters </li>
+            </ul>
+         </div>
+      </div>
+      <!--  Header Part -->
+      <div [ngClass]="{'Hide': !Loader}" class="DataLoaderStyle_1">
+         <div class="Loading">
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+               <div class="rect6"></div>
+            </div>
+         </div>
+      </div>
+      <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
+         <Form [formGroup]="Form">
+            <!-- Create and search Section -->
+            <div class="row header_part">
+               <div class="col-sm-7">
+               </div>
+               <div class="col-sm-5">
+                  <div class="Select_Section">
+                     <h6> Institution : </h6> 
+                     <div class="Form_Select">
+                        <ng-select class="NgSelect ValueBold ClearHide"
+                                    [items]="_Institutions"
+                                    formControlName="Institution"
+                                    [bindLabel]="'Institution'"
+                                    [bindValue]="'_id'"
+                                    [searchable]="true"
+                                    (change)="InstitutionChange()"
+                                    placeholder="Institution">
+                        </ng-select>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="Content_Section">
+               <div [ngClass]="{'Hide': !Loader_1}" class="DataLoaderStyle_1">
+                  <div class="Loading">
+                        <div class="spinner">
+                           <div class="rect1"></div>
+                           <div class="rect2"></div>
+                           <div class="rect3"></div>
+                           <div class="rect4"></div>
+                           <div class="rect5"></div>
+                           <div class="rect6"></div>
+                        </div>
+                  </div>
+               </div>
+               <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader_1}">
+                  <ng-container formArrayName="Courses_Array">
+                     <div class="First_Section" *ngFor="let Courses of Form.controls['Courses_Array']['controls']; let i = index" [formGroupName]="i">
+                        <div class="First_Section_Details" >
+                           <h6 class="Identity"> <span> {{i + 1}}) </span> {{Courses.controls['Course'].value}} - {{Courses.controls['Department'].value}}</h6>
+                           <div class="Right_Section">
+                              <div class="Edit_Icon" (click)="EditBatches(Courses)" *ngIf="Courses.controls['Expend'].value && !Courses.controls['Update'].value">
+                                 <i class="material-icons">edit</i>
+                                 <p> Edit </p>
+                              </div>
+                              <div class="Submit_Button" *ngIf="Courses.controls['Update'].value">
+                                 <button type="button" (click)="UpdateCancel(Courses)" mat-raised-button color="warn"> Cancel </button>
+                              </div>
+                              <div class="Submit_Button" *ngIf="Courses.controls['Update'].value">
+                                 <button type="button" [disabled]="Courses.status !== 'VALID'" (click)="UpdateBatch(Courses)" mat-raised-button color="primary"> Update </button>
+                              </div>
+                              <div class="Expend_Box"> <mat-checkbox formControlName="Expend" (change)="UpdateCancel(Courses)"> Expend </mat-checkbox></div>
+                           </div>
+                        </div>
+                        <div class="Second_Section" *ngIf="Courses.controls['Expend'].value">
+                           <div class="Second_Section_Details">
+                              <div class="Detail_Header">
+                                 <div class="Style_1"> S.No </div>
+                                 <div class="Style_1"> Batch </div>
+                                 <div class="Style_1"> Year </div>
+                                 <div class="Style_1"> Semester </div>
+                              </div>
+                              <ng-container formArrayName="Batches_Array">
+                                 <div class="Detail_Row" *ngFor="let Batches of Courses.controls['Batches_Array']['controls']; let j = index" [formGroupName]="j">
+                                    <div class="S-No"> {{i + 1}}.{{j + 1}}) </div>
+                                    <div class="Form_Select">
+                                       <ng-select class="NgSelect ValueBold"
+                                                   formControlName="Yearly_Badge"
+                                                   [items]="GetBatchesArray(Courses.controls['Institution_Management'].value)"
+                                                   [bindLabel]="'Batch'"
+                                                   [bindValue]="'_id'"
+                                                   (change)="BatchChange(Batches)"
+                                                   [searchable]="true"
+                                                   placeholder="Batch">
+                                       </ng-select>   
+                                    </div>
+                                    <div class="Form_Select">
+                                       <ng-select class="NgSelect ValueBold"
+                                                   formControlName="Year"
+                                                   [items]="GetYearsArray(Courses.controls['Institution_Management'].value, Batches)"
+                                                   [bindLabel]="'Show_Year'"
+                                                   [bindValue]="'_id'"
+                                                   (change)="YearChange(i, Batches)"
+                                                   [searchable]="true"
+                                                   placeholder="Year">
+                                       </ng-select>   
+                                    </div>
+                                    <div class="Form_Select">
+                                       <ng-select class="NgSelect ValueBold"
+                                                formControlName="Semester"
+                                                [items]="GetSemestersArray(Courses.controls['Institution_Management'].value, Batches)"
+                                                [bindLabel]="'Semester_Name'"
+                                                [bindValue]="'_id'"
+                                                [searchable]="true"
+                                                placeholder="Semester">
+                                       </ng-select>  
+                                    </div>
+                                 </div>
+                              </ng-container>
+                           </div>
+                        </div>
+                     </div>
+                  </ng-container>
+               </div>
+            </div>
+         </Form>
+         <br>
+      </div>
+   </div>
+</div>
+

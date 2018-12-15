@@ -46,11 +46,15 @@
    // Queries
       import { ListQueriesComponent } from './Components/Queries/list-queries/list-queries.component';
       import { ViewQueriesComponent } from './Components/Queries/view-queries/view-queries.component';
+   // Tutor Management
+      import { ListTutorManagementComponent } from './Components/Tutor-Management/list-tutor-management/list-tutor-management.component';
    // Institution Management
       import { ListInstitutionManagementComponent } from './Components/Institution-Management/list-institution-management/list-institution-management.component';
       import { ListYearlyBatchesComponent } from './Components/Institution-Management/list-yearly-batches/list-yearly-batches.component';
       import { ListSemesterManagementComponent } from './Components/Institution-Management/list-semester-management/list-semester-management.component';
-      // Configuration
+   // Current Semesters
+      import { CurrentSemestersComponent } from './Components/Current-Semesters/current-semesters/current-semesters.component';
+   // Configuration
       // User Management
          import { ListUserComponent } from './Components/Configuration/User-Management/list-user/list-user.component';
       // Deportment Config
@@ -69,6 +73,7 @@
 // models
    // Students
       import { ModelStudentImportComponent } from './models/Students/model-student-import/model-student-import.component';
+      import { ModelStudentLinkSemesterComponent } from './models/Students/model-student-link-semester/model-student-link-semester.component';
    // Activities
       import { CreateActivityModelComponent } from './models/Activities/create-activity-model/create-activity-model.component';
       import { ViewActivityModelComponent} from './models/Activities/view-activity-model/view-activity-model.component';
@@ -79,6 +84,9 @@
       import { EditQueriesComponent } from './models/Queries/edit-queries/edit-queries.component';
    // User-Management
       import { CreateUserManagementComponent } from './models/User_Management/create-user-management/create-user-management.component';
+   // Tutor Management
+      import { ModelTutorManagementCreateComponent } from './models/Tutor-Management/model-tutor-management-create/model-tutor-management-create.component';
+      import { ModelTutorManagementViewComponent } from './models/Tutor-Management/model-tutor-management-view/model-tutor-management-view.component';
    // Institution Management
       import { ModelBatchesCreateComponent } from './models/Institution-Management/model-batches-create/model-batches-create.component';
       import { ModelBatchesViewComponent } from './models/Institution-Management/model-batches-view/model-batches-view.component';
@@ -129,10 +137,14 @@
       // Queries
          ListQueriesComponent,
          ViewQueriesComponent,
+      // Tutor Management
+         ListTutorManagementComponent,
       // Institution Management
          ListInstitutionManagementComponent,
          ListYearlyBatchesComponent,
          ListSemesterManagementComponent,
+      // Current Semesters
+         CurrentSemestersComponent,
       // Configuration
          // User Management
             ListUserComponent,
@@ -151,6 +163,7 @@
    // models
       // Students
          ModelStudentImportComponent,
+         ModelStudentLinkSemesterComponent,
       // Activities
          CreateActivityModelComponent,
          ViewActivityModelComponent,
@@ -166,6 +179,9 @@
          ModelBatchesViewComponent,
          ModelSemesterInfoCreateComponent,
          ModelSemesterInfoViewComponent,
+      // Tutor Management
+         ModelTutorManagementCreateComponent,
+         ModelTutorManagementViewComponent,
       // Configuration
          // Department Config
             ModelDepartmentConfigComponent,
@@ -217,6 +233,7 @@
    ModelBatchesCreateComponent,
    ModelBatchesViewComponent,
    ModelStudentImportComponent,
+   ModelStudentLinkSemesterComponent,
    ModelSubjectConfigComponent,
    ModelSemesterInfoCreateComponent,
    ModelSemesterInfoViewComponent,
@@ -225,7 +242,9 @@
    ViewActivityModelComponent,
    ModelRedemptionMethodComponent,
    CreateLevelModelComponent,
-   ViewLevelModelComponent
+   ViewLevelModelComponent,
+   ModelTutorManagementCreateComponent,
+   ModelTutorManagementViewComponent
  ],
   bootstrap: [AppComponent]
 })

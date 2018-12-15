@@ -80,8 +80,7 @@
                      <ng-container formArrayName="More">
                         <div class="SubForm_Section">
                            <div class="row" *ngFor="let Subject of Section['controls']['More']['controls']; let j = index" [formGroupName]="j">
-                              <div class="col-sm-1"> </div>
-                              <div class="col-sm-5 Form_Select">
+                              <div class="col-sm-6 Form_Select">
                                  <label> Subject :</label>
                                  <ng-select class="NgSelect ValueBold"
                                              formControlName="Subject"
@@ -92,18 +91,17 @@
                                              placeholder="Subject">
                                  </ng-select>
                               </div>
-                              <div class="col-sm-5 Form_Select">
+                              <div class="col-sm-6 Form_Select">
                                  <label> Staff :</label>
                                  <ng-select class="NgSelect ValueBold"
                                              formControlName="Staff"
                                              [items]="Staffs_List"
-                                             [bindLabel]="'Name'"
+                                             [bindLabel]="'NameAndDepartment'"
                                              [bindValue]="'_id'"
                                              [searchable]="true"
                                              placeholder="Staff">
                                  </ng-select>
                               </div>
-                              <div class="col-sm-1"> </div>
                            </div>
                         </div>
                      </ng-container>

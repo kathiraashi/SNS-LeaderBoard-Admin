@@ -24,87 +24,112 @@
          </div>
       </div>
       <div class="LoadedDataStyle_1" [ngClass]="{'Show': !Loader}">
-         <!-- Create and search Section -->
-         <div class="row header_part">
-            <div class="col-sm-6">
-               <!-- <button class="Create_Button" mat-button [routerLink]="['/Student_Create']"> + Create </button> -->
-               <button mat-raised-button color="primary"> 
-                  <label style="margin: 0px; cursor: pointer;"> 
-                     <input type="file" style="display: none" (change)="onUploadFileChange($event)" #fileInputFile/>
-                     + Excel Import 
-                  </label>
-               </button>
-            </div>
-            <div class="col-sm-6">
-               <div class="Search_Section">
-                  <input type="text" placeholder="Search.." name="search">
-                  <i class="material-icons">search</i>
+         <div class="Complete_Section">
+            <div class="Left_Section">
+               <div class="Left_SectionBox_Effect">
+                  <form [formGroup]="Form">
+                     <div class="Form_Select">
+                        <label> Institution</label>
+                        <ng-select class="NgSelect ValueBold ClearHide"
+                                    [items]="_Institutions"
+                                    formControlName="Institution"
+                                    [bindLabel]="'Institution'"
+                                    [bindValue]="'_id'"
+                                    [searchable]="true"
+                                    (change)="InstitutionChange()"
+                                    placeholder="Institution">
+                        </ng-select>
+                     </div>
+                     <div class="Form_Select">
+                        <label> Course & Department</label>
+                        <ng-select class="NgSelect ValueBold"
+                                       [items]="_Institution_Managements"
+                                       formControlName="Institution_Management"
+                                       [bindLabel]="'CourseAndDepartment'"
+                                       [bindValue]="'_id'"
+                                       [searchable]="true"
+                                       (change)="InstitutionManagementChange()"
+                                       placeholder="Course & Department">
+                           </ng-select>
+                     </div>                  
+                     <div class="Form_Select">
+                        <label> Current Semesters </label>
+                        <ng-select class="NgSelect ValueBold"
+                                       [items]="_CurrentSemesters"
+                                       formControlName="CurrentSemester"
+                                       [bindLabel]="'ShowData'"
+                                       [bindValue]="'Semester._id'"
+                                       [searchable]="true"
+                                       (change)="CurrentSemesterChange()"
+                                       placeholder="Current Semesters">
+                           </ng-select>
+                     </div>
+                     <div class="Form_Select">
+                        <label> Section </label>
+                        <ng-select class="NgSelect ValueBold"
+                                    [items]="_Sections"
+                                    formControlName="Section"
+                                    [searchable]="true"
+                                    (change)="SectionChange()"
+                                    placeholder="Section">
+                        </ng-select>
+                     </div>
+                  </form>
+                  <ng-container *ngIf="Form.controls['CurrentSemester'].value && Form.controls['CurrentSemester'].value !== null">
+                     <div class="row">
+                        <div class="col-sm-6 text-center" style="margin-bottom: 15px;">
+                           <button (click)="LinkSemester()" mat-raised-button color="primary"> Link To Semester </button>
+                        </div>
+                        <div class="col-sm-6 text-center" style="margin-bottom: 15px;">
+                           <button mat-raised-button color="accent">
+                              <label style="margin: 0px; cursor: pointer;"> 
+                                 <input type="file" accept=".xlsx, .xls, .csv" style="display: none" (change)="onUploadFileChange($event)" #fileInputFile/>
+                                 Import to Batch
+                              </label> 
+                           </button>
+                        </div>
+                     </div>
+                  </ng-container>
                </div>
             </div>
-         </div>
-         <!-- Table Section -->
-         <div class="Table_Section">
-            <table>
-               <thead>
-                  <tr>
-                     <th>S.no</th>
-                     <th>Roll No</th>
-                     <th>Student Name</th>
-                     <th>Institution</th>
-                     <th>Department</th>
-                     <th>Batch</th>
-                     <th>Year </th>
-                     <th>Semester </th>
-                     <th>Action</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr *ngFor="let Student of Students_List; let i=index">
-                     <td>
-                        <span class="S_no"> {{ i + 1}} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{Student.Roll_No}} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{Student.Name}} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{Student.Institution_Management?.Institution?.Institution}} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{Student.Institution_Management?.Course?.Course}} - {{Student.Institution_Management?.Department?.Department}} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{Student.Yearly_Badge?.Starting_MonthAndYear | date:'MMMM yyyy'}} - {{Student.Yearly_Badge?.Ending_MonthAndYear | date:'MMMM yyyy'}} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{ Student.Year?.Show_Year }} </span>
-                     </td>
-                     <td>
-                        <span class="Style_1"> {{ Student.Semester?.Semester_Name }} </span>
-                     </td>
-                     <td>
-                        <!-- <button mat-raised-button color="primary" [matMenuTriggerFor]="Action"> Action </button> -->
-                     </td>
-                  </tr>
-               </tbody>
-            </table>
+            <div class="Right_Section">
+               <div [ngClass]="{'Hide': !Loader_1}" class="DataLoaderStyle_2">
+                  <div class="Loading">
+                     <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                        <div class="rect6"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="LoadedDataStyle_2" [ngClass]="{'Show': !Loader_1}">
+                  <div class="BoxSections_List">
+                     <div class="Box_Section" *ngFor="let Student of Students_List; let i=index">
+                        <div class="Box_Img"> 
+                           <img src="assets/images/basic/user_1.png" alt="">
+                        </div>
+                        <div class="Box_Details">
+                           <p class="Name"> {{Student.Name}} </p>
+                           <p class="Reg_No"> {{Student.Reg_No}} </p>
+                           <p class="Course"> {{Student.Institution_Management?.Course?.Course_ShortCode}} - {{Student.Institution_Management?.Department?.Department}} </p>
+                           <p class="Batch"> {{Student.Yearly_Badge?.Batch}} </p>
+                           <ng-container *ngIf="Student?.Linked_Sections === null">
+                              <p class="Not_Link"> Semester Not Linked! </p>
+                           </ng-container>
+                           <ng-container *ngIf="Student?.Linked_Sections !== null">
+                              <p class="YearSemester"> {{Student?.Linked_Sections?.Year?.Show_Year}} - {{Student?.Linked_Sections?.Semester?.Semester_Name}} </p>
+                              <p class="Section"> {{Student?.Linked_Sections?.Section}} </p>
+                           </ng-container>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
          </div>
          <br>
       </div>
    </div>
 </div>
-
-<!-- Dropdown menus -->
-<mat-menu class="MenuStyleOne" #Action="matMenu" [overlapTrigger]="false" xPosition="after" yPosition="below" class="MenuStyleOne">
-   <button mat-menu-item [routerLink]="['/Student_Create']">
-      <span>Edit</span>
-   </button>
-   <button mat-menu-item [routerLink]="['/Student_View']">
-      <span>View</span>
-   </button>
-   <button mat-menu-item (click)="DeleteStudent()">
-      <span>Delete</span>
-   </button>
-</mat-menu>

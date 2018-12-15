@@ -1,0 +1,71 @@
+<!-- If View The Activity -->
+<div class="Modal_Content">
+   <div class="Modal_Header">
+      <p>View Tutor Management </p>
+      <span data-dismiss="modal" (click)="bsModalRef.hide()">&times;</span>
+   </div>
+   <div class="Model_Body">
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static"> Tutor </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data?._id?.Staff?.Name }}</div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Tutor Roll </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data?._id?.Staff?.StaffRole }}</div>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="view_item">
+               <div class="Static"> Institution </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data?._id?.Institution?.Institution }}</div>
+            </div>
+            <div class="view_item">
+               <div class="Static"> Department </div>
+               <div class="dots"> : </div>
+               <div class="Data"> {{ Data?._id?.Department?.Department }}</div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="view_item" *ngIf="Data.Students">
+               <div class="Static"> Students Details </div>
+               <div class="dots"> : </div>
+               <div class="Data"> </div>
+            </div>
+         </div>
+      </div>
+      <div class="Table_Sec"  *ngIf="Data.Students">
+         <table>
+            <thead>
+               <tr>               
+                  <th> S.No </th>
+                  <th> Student </th>
+                  <th> Roll No </th>
+                  <th> Batch </th>
+                  <th> Semester </th>
+                  <th> Section </th>
+                  <th> Last Modified </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let Student of Data.Students; let i=index">
+                  <td> {{ i + 1}} </td>
+                  <td> {{ Student?.Student?.Name }} </td>
+                  <td> {{ Student?.Student?.Reg_No }} </td>
+                  <td> {{ Student?.Yearly_Badge?.Starting_MonthAndYear | date: 'MMMM-yyyy' }}  - {{ Student?.Yearly_Badge?.Ending_MonthAndYear | date: 'MMMM-yyyy' }} </td>
+                  <td> {{ Student?.Year_Semester?.Semester_Name}} </td>
+                  <td> {{ Student?.Section }} <br>
+                  <td> {{ Student?.Last_Modified?.Name }} <br>
+                  <small> {{ Student?.updatedAt | date:'medium' }} </small> </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>

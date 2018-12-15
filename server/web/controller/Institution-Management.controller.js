@@ -11,11 +11,11 @@ exports.InstitutionManagement_List= function(req, res) {
 
    if (!ReceivingData.User_Id || ReceivingData.User_Id === ''  ) {
       res.status(400).send({Status: false, Message: "User Details can not be empty" });
-   } else if (!ReceivingData.Institution_Id || ReceivingData.Institution_Id === ''  ) {
+   } else if (!ReceivingData.Institution || ReceivingData.Institution === ''  ) {
       res.status(400).send({Status: false, Message: "Institution Details can not be empty" });
    } else {
       InstitutionManagementModel.InstitutionManagementSchema
-         .find({ 'Institution': mongoose.Types.ObjectId(ReceivingData.Institution_Id)}, {}, {})
+         .find({ 'Institution': mongoose.Types.ObjectId(ReceivingData.Institution)}, {}, {})
          .populate({ path: 'Institution', select: ['Institution'] })
          .populate({ path: 'Course', select: ['Course']})
          .populate({ path: 'Department', select: ['Department']})
@@ -44,11 +44,11 @@ exports.InstitutionManagement_YearlyBatchesList= function(req, res) {
 
    if (!ReceivingData.User_Id || ReceivingData.User_Id === ''  ) {
       res.status(400).send({Status: false, Message: "User Details can not be empty" });
-   } else if (!ReceivingData.InstitutionManagement_Id || ReceivingData.InstitutionManagement_Id === ''  ) {
+   } else if (!ReceivingData.InstitutionManagement || ReceivingData.InstitutionManagement === ''  ) {
       res.status(400).send({Status: false, Message: "Institution Management Details can not be empty" });
    } else {
       InstitutionManagementModel.InstitutionManagementSchema
-      .findOne({ '_id': mongoose.Types.ObjectId(ReceivingData.InstitutionManagement_Id)}, {}, {})
+      .findOne({ '_id': mongoose.Types.ObjectId(ReceivingData.InstitutionManagement)}, {}, {})
       .populate({ path: 'Institution', select: ['Institution'] })
       .populate({ path: 'Course', select: ['Course', 'NoOfYears']})
       .populate({ path: 'Department', select: ['Department']})
@@ -59,14 +59,14 @@ exports.InstitutionManagement_YearlyBatchesList= function(req, res) {
          } else {
             if (result !== null) {
                InstitutionManagementModel.YearlyBatchesSchema
-               .find({ 'InstitutionManagement': mongoose.Types.ObjectId(ReceivingData.InstitutionManagement_Id)}, {}, { sort: { Ending_MonthAndYear: -1 } })
+               .find({ 'InstitutionManagement': mongoose.Types.ObjectId(ReceivingData.InstitutionManagement)}, {}, { sort: { Ending_MonthAndYear: -1 } })
                .populate({ path: 'InstitutionManagement', select: 'Institution', populate: { path: 'Institution', select: 'Institution' } })
                .populate({ path: 'InstitutionManagement', select: 'Course', populate: { path: 'Course', select: ['Course', 'NoOfYears'] } })
                .populate({ path: 'InstitutionManagement', select: 'Department', populate: { path: 'Department', select: 'Department' } })
                .populate({ path: 'Created_By', select: ['Name', 'User_Type'] })
                .populate({ path: 'Last_Modified_By', select: ['Name', 'User_Type'] })
                .exec(function(err_1, result_1) {
-                  if(err) {
+                  if(err_1) {
                      ErrorManagement.ErrorHandling.ErrorLogCreation(req, 'Institution Management Yearly Batches Find Query Error', 'Institution-Management.controller.js', err_1);
                      res.status(417).send({status: false, Message: "Some error occurred while Find The Institution Management Yearly Batches!."});
                   } else {
@@ -130,6 +130,77 @@ exports.InstitutionManagement_YearlyBatchesList= function(req, res) {
    }
 };
 
+
+// Batches Simple List -----------------------------------------------
+exports.InstitutionManagement_YearlyBatches_SimpleList= function(req, res) {
+   var CryptoBytes  = CryptoJS.AES.decrypt(req.body.Info, 'SecretKeyIn@123');
+   var ReceivingData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+
+   if (!ReceivingData.User_Id || ReceivingData.User_Id === ''  ) {
+      res.status(400).send({Status: false, Message: "User Details can not be empty" });
+   } else if (!ReceivingData.InstitutionManagement || ReceivingData.InstitutionManagement === ''  ) {
+      res.status(400).send({Status: false, Message: "Institution Management Details can not be empty" });
+   } else {
+
+      InstitutionManagementModel.YearlyBatchesSchema
+      .find({ 'InstitutionManagement': mongoose.Types.ObjectId(ReceivingData.InstitutionManagement)}, {InstitutionManagement: 1, Ending_MonthAndYear: 1, Starting_MonthAndYear: 1}, { sort: { Ending_MonthAndYear: -1 } })
+      .exec(function(err_1, result_1) {
+         if(err_1) {
+            ErrorManagement.ErrorHandling.ErrorLogCreation(req, 'Institution Management Yearly Batches Find Query Error', 'Institution-Management.controller.js', err_1);
+            res.status(417).send({status: false, Message: "Some error occurred while Find The Institution Management Yearly Batches!."});
+         } else {
+            Promise.all(
+               result_1.map(obj => YearsArrayFind(obj))
+            ).then(response => {
+               var ReturnData_1 = CryptoJS.AES.encrypt(JSON.stringify(response), 'SecretKeyOut@123');
+               ReturnData_1 = ReturnData_1.toString();
+               res.status(200).send({Status: true, Response: ReturnData_1,  });
+            }).catch( catch_err => {
+               ErrorManagement.ErrorHandling.ErrorLogCreation(req, 'Institution Management Yearly Batches Find Query Error', 'Institution-Management.controller.js', catch_err);
+               res.status(417).send({status: false, Message: "Some error occurred while Find The Institution Management Yearly Batches!."})
+            });
+
+            function YearsArrayFind(obj) {
+               return new Promise((resolve, reject ) => {
+                  InstitutionManagementModel.BatchYearsSchema
+                  .find({ 'YearlyBatch': mongoose.Types.ObjectId(obj._id)}, { From_Year: 1, To_Year: 1, Show_Year: 1}, { sort: { To_Year: 1 } })
+                  .exec(function(err_2, result_2) {
+                     if (err_2) {
+                        reject(err_2)
+                     }else {
+                        Promise.all(
+                           result_2.map(obj_1 => Semesters(obj_1))
+                        ).then(response_1 => {
+                           var Json_obj = JSON.parse(JSON.stringify(obj));
+                              Json_obj =  Object.assign({Years_Array: response_1 }, Json_obj);
+                           resolve(Json_obj);
+                        }).catch( catch_err1 => {
+                           reject(catch_err1);
+                        });
+
+                        function Semesters(obj_1) {
+                           return new Promise((resolve_1, reject_1) => {
+                              InstitutionManagementModel.YearSemestersSchema
+                                 .find({ 'BatchYear': mongoose.Types.ObjectId(obj_1._id)}, {Semester_Start: 1, Semester_Name: 1, Semester_End: 1, Sections_Arr: 1}, { sort: { Semester_End: 1 } })
+                                 .exec(function(err_3, result_3) {
+                                    if (err_3) {
+                                       reject_1(err_3)
+                                    }else {
+                                       var Json_obj_1 = JSON.parse(JSON.stringify(obj_1));
+                                       Json_obj_1 =  Object.assign({Semesters: result_3 }, Json_obj_1)
+                                       resolve_1(Json_obj_1);
+                                    }
+                                 })
+                           });
+                        }
+                     }
+                  })
+               })
+            }
+         }
+      });
+   }
+};
 // Batches List -----------------------------------------------
 exports.InstitutionManagement_YearlyBatchView= function(req, res) {
    var CryptoBytes  = CryptoJS.AES.decrypt(req.body.Info, 'SecretKeyIn@123');
