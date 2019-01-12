@@ -39,33 +39,38 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/API/Uploads', express.static('Uploads'));
+// Admin Panel
+      require('./server/web/routes/Admin-Panel/Admin/RegisterAndLogin.routes.js')(app);
+      // Admin
+      require('./server/web/routes/Admin-Panel/Admin/AdminManagement.routes.js')(app);
+      // Students
+      require('./server/web/routes/Admin-Panel/Students.routes.js')(app);
+      // Staff's
+      require('./server/web/routes/Admin-Panel/Staffs.routes.js')(app);
+      // Activities
+      require('./server/web/routes/Admin-Panel/Activities.routes.js')(app);
+      // Levels
+      require('./server/web/routes/Admin-Panel/Levels.routes.js')(app);
+      // Institution Management
+      require('./server/web/routes/Admin-Panel/Institution-Management.routes.js')(app);
+      // Tutor Management
+      require('./server/web/routes/Admin-Panel/Tutor-Management.routes.js')(app);
+      // Current Semesters
+      require('./server/web/routes/Admin-Panel/Current-Semesters.routes.js')(app);
+      // Configuration
+      require('./server/web/routes/Admin-Panel/Configuration/Institution.routes.js')(app);
+      require('./server/web/routes/Admin-Panel/Configuration/Department.routes.js')(app);
+      require('./server/web/routes/Admin-Panel/Configuration/Course.routes.js')(app);
+      require('./server/web/routes/Admin-Panel/Configuration/Activity_Config/ActivityLevel.routes.js')(app);
+      require('./server/web/routes/Admin-Panel/Configuration/Activity_Config/AchievementType.routes.js')(app);
+      require('./server/web/routes/Admin-Panel/Configuration/Activity_Config/RedemptionMethod.routes.js')(app);
+      require('./server/web/routes/Admin-Panel/Configuration/Subject.routes.js')(app);
 
- require('./server/web/routes/Admin/RegisterAndLogin.routes.js')(app);
+// Student Panel
+      // Register And Login
+      require('./server/web/routes/Student-Panel/RegisterAndLogin.routes.js')(app);
+      require('./server/web/routes/Student-Panel/Activities.routes.js')(app);
 
-// Admin
-   require('./server/web/routes/Admin/AdminManagement.routes.js')(app);
-// Students
-   require('./server/web/routes/Students.routes.js')(app);
-// Staff's
-   require('./server/web/routes/Staffs.routes.js')(app);
-// Activities
-   require('./server/web/routes/Activities.routes.js')(app);
-// Levels
-   require('./server/web/routes/Levels.routes.js')(app);
-// Institution Management
-   require('./server/web/routes/Institution-Management.routes.js')(app);
-// Tutor Management
-   require('./server/web/routes/Tutor-Management.routes.js')(app);
-// Current Semesters
-   require('./server/web/routes/Current-Semesters.routes.js')(app);
-// Configuration
-   require('./server/web/routes/Configuration/Institution.routes.js')(app);
-   require('./server/web/routes/Configuration/Department.routes.js')(app);
-   require('./server/web/routes/Configuration/Course.routes.js')(app);
-   require('./server/web/routes/Configuration/Activity_Config/ActivityLevel.routes.js')(app);
-   require('./server/web/routes/Configuration/Activity_Config/AchievementType.routes.js')(app);
-   require('./server/web/routes/Configuration/Activity_Config/RedemptionMethod.routes.js')(app);
-   require('./server/web/routes/Configuration/Subject.routes.js')(app);
 
 
    app.use(express.static(__dirname + '/view/dist/view/'));

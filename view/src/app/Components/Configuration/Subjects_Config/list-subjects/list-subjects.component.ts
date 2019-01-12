@@ -24,7 +24,8 @@ export class ListSubjectsComponent implements OnInit {
    Loader: Boolean = true;
    _List: any[] = [];
 
-   User_Id;
+   User_Id: any;
+   User_Type: string;
 
    constructor(   private modalService: BsModalService,
                   private Service: SubjectsService,
@@ -32,7 +33,30 @@ export class ListSubjectsComponent implements OnInit {
                   public Login_Service: LoginService
                ) {
                   this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-                  // Get Subjects List
+                  this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+                  if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                      // Get Institution Based Subjects List
+                      const Data = {'User_Id' : this.User_Id, Institution: this.Login_Service.LoginUser_Info()['Staff']['Institution']['_id']};
+                      let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+                      Info = Info.toString();
+                      this.Loader = true;
+                      this.Service.InstitutionBased_SubjectList({'Info': Info}).subscribe( response => {
+                         const ResponseData = JSON.parse(response['_body']);
+                         this.Loader = false;
+                         if (response['status'] === 200 && ResponseData['Status'] ) {
+                            const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+                            const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+                            this._List = DecryptedData;
+                         } else if (response['status'] === 400 || response['status'] === 417 && !ResponseData['Status']) {
+                            this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                         } else if (response['status'] === 401 && !ResponseData['Status']) {
+                            this.Toastr.NewToastrMessage({ Type: 'Error',  Message: ResponseData['Message'] });
+                         } else {
+                            this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Subject List Getting Error!, But not Identify!' });
+                         }
+                      });
+                  } else {
+                     // Get Subjects List
                      const Data = {'User_Id' : this.User_Id };
                      let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
                      Info = Info.toString();
@@ -53,6 +77,7 @@ export class ListSubjectsComponent implements OnInit {
                         }
                      });
                   }
+               }
 
    ngOnInit() {
    }
@@ -61,9 +86,9 @@ export class ListSubjectsComponent implements OnInit {
    CreateSubject() {
       const initialState = { Type: 'Create' };
       this.bsModalRef = this.modalService.show(ModelSubjectConfigComponent, Object.assign({initialState}, {ignoreBackdropClick: true, class: 'modal-lg' }));
-      this.bsModalRef.content.onClose.subscribe(response => {
+      this.bsModalRef.content.onClose.subscribe((response: { [x: string]: { map: (arg0: (obj: any) => void) => void; }; }) => {
          if (response['Status']) {
-            response['Response'].map(obj => {
+            response['Response'].map((obj: any) => {
                this._List.splice(0, 0, obj);
             });
          }
@@ -73,7 +98,7 @@ export class ListSubjectsComponent implements OnInit {
    EditSubject(_index) {
       const initialState = { Type: 'Edit', Data: this._List[_index] };
       this.bsModalRef = this.modalService.show(ModelSubjectConfigComponent, Object.assign({initialState}, {ignoreBackdropClick: true, class: 'modal-lg' }));
-      this.bsModalRef.content.onClose.subscribe(response => {
+      this.bsModalRef.content.onClose.subscribe((response: { [x: string]: any; }) => {
          if (response['Status']) {
             this._List[_index] = response['Response'];
          }
@@ -88,7 +113,7 @@ export class ListSubjectsComponent implements OnInit {
    DeleteSubject(_index) {
       const initialState = { Text: ' Subject ' };
       this.bsModalRef = this.modalService.show(DeleteConfirmationComponent, Object.assign({initialState}, {ignoreBackdropClick: true, class: 'modal-sm' }));
-      this.bsModalRef.content.onClose.subscribe(response => {
+      this.bsModalRef.content.onClose.subscribe((response: { Status: any; }) => {
          if (response.Status) {
             const Data = { 'Subject_Id' : this._List[_index]._id, 'Modified_By' : this.User_Id };
             let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');

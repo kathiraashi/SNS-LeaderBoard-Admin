@@ -56,6 +56,16 @@ export class CurrentSemestersService {
             return this.ValidateEveryRequest();
          }
       }
+   // Department Based Current Semesters List
+      public DepartmentBased_CurrentSemesters_List(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'DepartmentBased_CurrentSemesters_List', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
    // Institution Management Based Current Semesters List
       public InstitutionManagementBased_CurrentSemestersList(Info: any): Observable<any[]> {
          if (this.Service.If_LoggedIn()) {

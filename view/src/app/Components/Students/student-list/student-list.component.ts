@@ -29,7 +29,10 @@ export class StudentListComponent implements OnInit {
 
    @ViewChild('fileInputFile') fileInputFile: ElementRef;
    bsModalRef: BsModalRef;
-   User_Id;
+   User_Id: any;
+   User_Type: any;
+
+   StudentURL: String = 'http://localhost:5000/API/Uploads/Students/';
 
    _Institutions: any[] = [];
    _Institution_Managements: any[] = [];
@@ -51,6 +54,20 @@ export class StudentListComponent implements OnInit {
       public Current_Semesters: CurrentSemestersService
       ) {
          this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
+         this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+         if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+            this._Institutions.push(this.Login_Service.LoginUser_Info()['Staff']['Institution']);
+            setTimeout(() => {
+               this.Form.controls['Institution'].setValue(this._Institutions[0]['_id']);
+               this.Form.controls['Institution'].disable();
+               this.Loader = false;
+               if (this.User_Type !== 'Principal') {
+                  this.DepartmentChange();
+               } else {
+                  this.InstitutionChange();
+               }
+            }, 100);
+         } else {
             // Get Institutions List
             const Data = {'User_Id' : this.User_Id };
             let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
@@ -71,6 +88,7 @@ export class StudentListComponent implements OnInit {
                   this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
                }
             });
+         }
       }
 
    ngOnInit() {
@@ -92,7 +110,6 @@ export class StudentListComponent implements OnInit {
       this.Form.controls['Section'].setValue(null);
       this.Form.controls['Section'].disable();
       if (Institution !== null && Institution !== undefined) {
-         // Institution Based Students List
          const Data = {'User_Id' : this.User_Id, Institution: Institution };
          let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
          Info = Info.toString();
@@ -113,6 +130,7 @@ export class StudentListComponent implements OnInit {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Course and Department List Getting Error!, But not Identify!' });
             }
          });
+         // Institution Based Students List
          this.Loader_1 = true;
          this.Students_Service.InstitutionBased_StudentsList({'Info': Info}).subscribe( response => {
             this.Loader_1 = false;
@@ -124,8 +142,8 @@ export class StudentListComponent implements OnInit {
                   obj['Yearly_Badge']['Batch'] = formatDate(new Date(obj['Yearly_Badge']['Starting_MonthAndYear']), 'MMM yyyy ', 'en-US')  + ' - ' + formatDate(new Date(obj['Yearly_Badge']['Ending_MonthAndYear']), 'MMM yyyy ', 'en-US');
                   return obj;
                });
+               console.log(DecryptedData);
                this.Students_List = DecryptedData;
-               console.log(this.Students_List);
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
             } else {
@@ -137,6 +155,62 @@ export class StudentListComponent implements OnInit {
          this.Students_List = [];
       }
    }
+
+   DepartmentChange() {
+      const Institution = this.Form.controls['Institution'].value;
+      this.Form.controls['Institution_Management'].setValue(null);
+      this.Form.controls['Institution_Management'].disable();
+      this.Form.controls['CurrentSemester'].setValue(null);
+      this.Form.controls['CurrentSemester'].disable();
+      this.Form.controls['Section'].setValue(null);
+      this.Form.controls['Section'].disable();
+      if (Institution !== null && Institution !== undefined) {
+
+         const Data = {'User_Id' : this.User_Id, Institution: Institution, Department: this.Login_Service.LoginUser_Info()['Staff']['Department']['_id'] };
+         let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+         Info = Info.toString();
+         this.Institution_Management.DepartmentBased_InstitutionManagement_List({'Info': Info}).subscribe( response => {
+            const ResponseData = JSON.parse(response['_body']);
+            if (response['status'] === 200 && ResponseData['Status'] ) {
+               const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+               const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+               DecryptedData.map(obj => {
+                  obj['CourseAndDepartment'] = obj['Course']['Course']  + ' - ' + obj['Department']['Department'];
+                  return obj;
+               });
+               this._Institution_Managements = DecryptedData;
+               this.Form.controls['Institution_Management'].enable();
+            } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+            } else {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Course and Department List Getting Error!, But not Identify!' });
+            }
+            });
+            // Institution Based Students List
+         this.Loader_1 = true;
+         this.Students_Service.DepartmentBased_StudentsList({'Info': Info}).subscribe( response => {
+            this.Loader_1 = false;
+            const ResponseData = JSON.parse(response['_body']);
+            if (response['status'] === 200 && ResponseData['Status'] ) {
+               const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+               const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+               DecryptedData.map(obj => {
+                  obj['Yearly_Badge']['Batch'] = formatDate(new Date(obj['Yearly_Badge']['Starting_MonthAndYear']), 'MMM yyyy ', 'en-US')  + ' - ' + formatDate(new Date(obj['Yearly_Badge']['Ending_MonthAndYear']), 'MMM yyyy ', 'en-US');
+                  return obj;
+               });
+               this.Students_List = DecryptedData;
+            } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+            } else {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Students List Getting Error!, But not Identify!' });
+            }
+         });
+      } else {
+         this._Institution_Managements = [];
+         this.Students_List = [];
+      }
+   }
+
 
    InstitutionManagementChange() {
       const Institution_Management = this.Form.controls['Institution_Management'].value;
@@ -162,7 +236,6 @@ export class StudentListComponent implements OnInit {
                   return obj;
                });
                this.Students_List = DecryptedData;
-               console.log(this.Students_List);
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
             } else {
@@ -182,7 +255,6 @@ export class StudentListComponent implements OnInit {
                });
                this._CurrentSemesters = DecryptedData;
                this.Form.controls['CurrentSemester'].enable();
-               console.log(DecryptedData);
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
             } else {
@@ -221,7 +293,6 @@ export class StudentListComponent implements OnInit {
                   return obj;
                });
                this.Students_List = DecryptedData;
-               console.log(this.Students_List);
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
             } else {
@@ -256,7 +327,6 @@ export class StudentListComponent implements OnInit {
                   return obj;
                });
                this.Students_List = DecryptedData;
-               console.log(this.Students_List);
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
             } else {
@@ -293,11 +363,12 @@ export class StudentListComponent implements OnInit {
       const Institution = this._Institutions[_index];
       const _indexOne = this._Institution_Managements.findIndex(obj => obj._id === this.Form.controls['Institution_Management'].value);
       const Institution_Management = this._Institution_Managements[_indexOne];
+      const Department = this._Institution_Managements[_indexOne]['Department'];
       const _indexTwo = this._CurrentSemesters.findIndex(obj => obj['Semester']._id === this.Form.controls['CurrentSemester'].value);
       const Yearly_Badge = this._CurrentSemesters[_indexTwo]['Yearly_Badge'];
       const initialState = {
          Type: 'Import',
-         _BasicData: {Institution: Institution, Institution_Management: Institution_Management, Yearly_Badge: Yearly_Badge},
+         _BasicData: {Institution: Institution, Department: Department, Institution_Management: Institution_Management, Yearly_Badge: Yearly_Badge},
          _Data: _Data
       };
       this.bsModalRef = this.modalService.show(ModelStudentImportComponent, Object.assign({initialState}, {ignoreBackdropClick: true, class: 'modal-lg max-width-85' }));

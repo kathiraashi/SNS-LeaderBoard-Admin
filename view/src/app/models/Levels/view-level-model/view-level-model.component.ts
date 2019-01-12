@@ -10,10 +10,12 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class ViewLevelModelComponent implements OnInit {
 
-   Data;
+   Data: any;
+   BatchURL: String = 'http://localhost:5000/API/Uploads/Batches/';
 
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit() {
+     console.log(this.Data);
   }
 }

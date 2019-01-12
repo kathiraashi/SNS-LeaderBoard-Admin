@@ -26,7 +26,8 @@ export class ModelAchievementTypeComponent implements OnInit {
 
    Uploading: Boolean = false;
    Form: FormGroup;
-   User_Id;
+   User_Id: any;
+   User_Type: any;
 
    constructor( public bsModalRef: BsModalRef,
                 public Service: AchievementTypeService,
@@ -35,26 +36,38 @@ export class ModelAchievementTypeComponent implements OnInit {
                 private Institution_Service: InstitutionsService,
             ) {
                this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-               this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
+               this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+               if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                  this._List.push(this.Login_Service.LoginUser_Info()['Staff']['Institution']);
+                  setTimeout(() => {
+                     this.Form.controls['Institution'].disable();
+                     if (this.Type === 'Edit') {
+                        this.Form.controls['Institution'].setValue(this._List[0]['_id']);
+                     } else {
+                        this.Form.controls['Institution'].setValue([this._List[0]['_id']]);
+                     }
+                  }, 100);
+               } else {
                   // Get Institutions List
-                     const Data = {'User_Id' : this.User_Id };
-                     let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
-                     Info = Info.toString();
-                     this.Institution_Service.Institution_List({'Info': Info}).subscribe( response => {
-                        const ResponseData = JSON.parse(response['_body']);
-                        if (response['status'] === 200 && ResponseData['Status'] ) {
-                           const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
-                           const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
-                           this._List = DecryptedData;
-                           this.updateInstitutions();
-                        } else if (response['status'] === 400 || response['status'] === 417 && !ResponseData['Status']) {
-                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
-                        } else if (response['status'] === 401 && !ResponseData['Status']) {
-                           this.Toastr.NewToastrMessage({ Type: 'Error',  Message: ResponseData['Message'] });
-                        } else {
-                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
-                        }
-                     });
+                  const Data = {'User_Id' : this.User_Id };
+                  let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+                  Info = Info.toString();
+                  this.Institution_Service.Institution_List({'Info': Info}).subscribe( response => {
+                     const ResponseData = JSON.parse(response['_body']);
+                     if (response['status'] === 200 && ResponseData['Status'] ) {
+                        const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+                        const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+                        this._List = DecryptedData;
+                        this.updateInstitutions();
+                     } else if (response['status'] === 400 || response['status'] === 417 && !ResponseData['Status']) {
+                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                     } else if (response['status'] === 401 && !ResponseData['Status']) {
+                        this.Toastr.NewToastrMessage({ Type: 'Error',  Message: ResponseData['Message'] });
+                     } else {
+                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
+                     }
+                  });
+               }
             }
 
    ngOnInit() {

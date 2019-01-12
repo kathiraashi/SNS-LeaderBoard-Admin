@@ -34,7 +34,7 @@
                                  placeholder="Select Institution">
                      </ng-select>
                   </div>
-                  <div *ngIf="Show_Department" class="col-sm-4 Form_Select">
+                  <div *ngIf="Form.controls['Department']" class="col-sm-4 Form_Select">
                      <label> Department: </label>
                      <ng-select class="NgSelect ValueBold"
                                  formControlName="Department"

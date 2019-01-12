@@ -108,8 +108,13 @@
                <div class="LoadedDataStyle_2" [ngClass]="{'Show': !Loader_1}">
                   <div class="BoxSections_List">
                      <div class="Box_Section" *ngFor="let Student of Students_List; let i=index">
-                        <div class="Box_Img"> 
-                           <img src="assets/images/basic/user_1.png" alt="">
+                        <div class="Box_Img">
+                           <ng-container *ngIf="Student.Image && Student.Image.filename">
+                              <img [src]="StudentURL +  Student.Image.filename" alt="">
+                           </ng-container>
+                           <ng-container *ngIf="!Student.Image || !Student.Image.filename">
+                              <img src="assets/images/basic/student-avatar-1.png" alt="">
+                           </ng-container>
                         </div>
                         <div class="Box_Details">
                            <p class="Name"> {{Student.Name}} </p>

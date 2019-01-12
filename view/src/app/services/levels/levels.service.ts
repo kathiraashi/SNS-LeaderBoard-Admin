@@ -46,12 +46,12 @@ export class LevelsService {
             return this.ValidateEveryRequest();
          }
       }
-   // Department Based Levels Simple List
-      public DepartmentBased_Levels_SimpleList(Info: any): Observable<any[]> {
+   // Institution Based Levels Simple List
+      public InstitutionBased_Levels_SimpleList(Info: any): Observable<any[]> {
          if (this.Service.If_LoggedIn()) {
             this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
             sessionStorage.setItem('SessionKey', btoa(Date()));
-            return this.http.post(API_URL + 'DepartmentBased_Levels_SimpleList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+            return this.http.post(API_URL + 'InstitutionBased_Levels_SimpleList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
          } else {
             return this.ValidateEveryRequest();
          }

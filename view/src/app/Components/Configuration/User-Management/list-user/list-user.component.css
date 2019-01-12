@@ -86,7 +86,7 @@
    background-color: #ffffff;
 }
 .Table_Section table tbody tr {
-   line-height: 42px;
+   height: 42px;
    text-align: center;
    align-items: center;
    border-bottom: 1px solid #eaeaea;
@@ -106,6 +106,7 @@
    color: rgba(77, 106, 122, 0.84);
    font-weight: 600;
    cursor: pointer;
+   display: block;
 }
 .Table_Section table tbody tr td .Action_Section{
    color: #ffffff;

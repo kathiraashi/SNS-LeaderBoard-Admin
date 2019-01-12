@@ -39,14 +39,14 @@
          <table>
             <thead>
                <tr>
-                  <th style="width: 80px;">S.no</th>
-                  <th>Name</th>
-                  <th>User Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>User Type</th>
-                  <th>Last Modified By</th>
-                  <th>Status</th>
+                  <th style="width: 80px;"> S.no </th>
+                  <th> Name </th>
+                  <th> User Name </th>
+                  <th> Email </th>
+                  <th> Phone </th>
+                  <th> User Type </th>
+                  <th> Institution </th>
+                  <th> Status </th>
                </tr>
                </thead>
                <tbody>
@@ -55,22 +55,26 @@
                      <span class="S_no"> {{i + 1}} </span>
                   </td>
                   <td>
-                     <span class="Style_1"> {{item['Name']}} </span>
+                     <span *ngIf="!item['Staff_Linked']" class="Style_1"> {{item['Name']}} </span>
+                     <span *ngIf="item['Staff_Linked']" class="Style_1"> {{item['Staff']['Name']}} </span>
                   </td>
                   <td>
                      <span class="Style_1"> {{item['User_Name']}} </span>
                   </td>
                   <td>
-                     <span class="Style_1"> {{item['Email']}} </span>
+                     <span *ngIf="!item['Staff_Linked']" class="Style_1"> {{item['Email']}} </span>
+                     <span *ngIf="item['Staff_Linked']" class="Style_1"> {{item['Staff']['Email']}} </span>
                   </td>
                   <td>
-                     <span class="Style_1"> {{item['Phone']}} </span>
+                     <span *ngIf="!item['Staff_Linked']" class="Style_1"> {{item['Phone']}} </span>
+                     <span *ngIf="item['Staff_Linked']" class="Style_1"> {{item['Staff']['Phone']}} </span>
                   </td>
                   <td>
                      <span class="Style_1"> {{item['User_Type']}}  </span>
                   </td>
                   <td>
-                     <span class="Style_1"> {{item['updatedAt'] | date:'medium'}} </span>
+                     <span *ngIf="item['Staff_Linked']" class="Style_1"> {{item['Staff']['Institution']['Institution']}} </span>
+                     <span *ngIf="item['Staff_Linked'] && item['Staff']['Department']" class="Style_1"> ( {{item['Staff']['Department']['Department']}} ) </span>
                   </td>
                   <td>
                      <span class="Style_1" *ngIf="item.Active_Status"> Active </span>

@@ -82,4 +82,8 @@
    border: 1px solid #4f6a7a;
    display: inline-flex;
 }
+.Batch_Img img {
+   width: 96%;
+   margin-left: 4%;
+}
 

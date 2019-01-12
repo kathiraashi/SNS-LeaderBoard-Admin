@@ -33,7 +33,8 @@ export class StaffCreateComponent implements OnInit {
    _StaffRole: any[] =  [ 'Principal', 'HOD', 'Professor', 'Assistant Professor', 'User'];
    _Gender: any[] = ['Male', 'Female', 'Other' ];
 
-   User_Id;
+   User_Id: any;
+   User_Type: any;
 
    Loader: Boolean = true;
    Async_Loading: Boolean = true;
@@ -54,29 +55,58 @@ export class StaffCreateComponent implements OnInit {
                private Staffs_Service: StaffsService,
                public router: Router
             ) {
+
                this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-               // Get Institutions List
-               const Data = {'User_Id' : this.User_Id };
-               let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
-               Info = Info.toString();
-               this.Institutions_Service.Institution_List({'Info': Info}).subscribe( response => {
-                  const ResponseData = JSON.parse(response['_body']);
-                  if (response['status'] === 200 && ResponseData['Status'] ) {
-                     const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
-                     const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
-                     this.Institutions_List = DecryptedData;
-                  } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
-                     this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
-                  } else {
-                     this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
+               this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+
+               if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                  this._StaffRole = this._StaffRole.slice(1);
+                  this.Institutions_List.push(this.Login_Service.LoginUser_Info()['Staff']['Institution']);
+                  if (this.User_Type !== 'Principal') {
+                     this.Departments_List.push(this.Login_Service.LoginUser_Info()['Staff']['Department']);
                   }
-               });
+                  setTimeout(() => {
+                     this.Form.controls['Institution'].setValue(this.Institutions_List[0]['_id']);
+                     this.Form.controls['Institution'].disable();
+                     this.Loader = false;
+                     if (this.User_Type !== 'Principal') {
+                        this._StaffRole = this._StaffRole.slice(1);
+                        if (this.User_Type !== 'HOD') {
+                           this._StaffRole = this._StaffRole.slice(1);
+                           if (this.User_Type !== 'Professor') {
+                              this._StaffRole = this._StaffRole.slice(1);
+                           } else {
+                              this.router.navigate(['/Staff_List']);
+                           }
+                        }
+                        this.Form.addControl('Department', new FormControl({value: this.Departments_List[0]['_id'], disabled: true}, Validators.required));
+                     } else {
+                        this.Institution_Change(this.Institutions_List[0]['_id']);
+                     }
+                  }, 100);
+               } else {
+                  // Get Institutions List
+                  const Data = {'User_Id' : this.User_Id };
+                  let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+                  Info = Info.toString();
+                  this.Institutions_Service.Institution_List({'Info': Info}).subscribe( response => {
+                     const ResponseData = JSON.parse(response['_body']);
+                     if (response['status'] === 200 && ResponseData['Status'] ) {
+                        const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+                        const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+                        this.Institutions_List = DecryptedData;
+                     } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                     } else {
+                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
+                     }
+                  });
+               }
             }
 
    ngOnInit() {
       this.Form = new FormGroup({
          Institution: new FormControl(null, Validators.required ),
-         Department: new FormControl({value: null, disabled: true}, Validators.required),
          StaffRole: new FormControl(null, Validators.required),
 
          Name: new FormControl(null, Validators.required),
@@ -95,30 +125,51 @@ export class StaffCreateComponent implements OnInit {
 
    NotAllow(): boolean {return false; }
 
-   StaffRoll_Change(Roll) {
+   StaffRoll_Change(Roll: string) {
       if (Roll === 'Principal') {
-         this.Form.controls['Department'].setValue(null);
-         this.Form.controls['Department'].clearValidators();
-         this.Form.updateValueAndValidity();
-         this.Show_Department = false;
+         this.Form.removeControl('Department');
       } else {
-         this.Show_Department = true;
-         this.Form.controls['Department'].setValidators(Validators.required);
-         if (this.Form.controls['Institution'].status === 'VALID') {
-            this.Form.controls['Department'].enable();
+         if (this.Form.controls['Department'] === undefined || !this.Form.controls['Department']) {
+            if (this.Form.controls['Institution'].status === 'VALID') {
+               this.Form.addControl('Department', new FormControl(null, Validators.required));
+            } else {
+               this.Form.addControl('Department', new FormControl({value: null, disabled: true}, Validators.required));
+            }
          } else {
-            this.Form.controls['Department'].disable();
+            this.Form.controls['Department'].enable();
          }
       }
    }
 
-   Institution_Change(Ins) {
+   Institution_Change(Ins: string) {
       if (Ins !== null && Ins !== undefined && Ins !== '') {
-         this.Departments_List = Ins['Departments'];
-         this.Form.controls['Department'].enable();
+         const Institution = this.Form.controls['Institution'].value;
+         const Data = {'User_Id' : this.User_Id, 'Institution': Institution };
+         let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+         Info = Info.toString();
+         this.Institutions_Service.InstitutionBased_DepartmentsSimpleList({'Info': Info}).subscribe( response => {
+            this.Loader = false;
+            const ResponseData = JSON.parse(response['_body']);
+            if (response['status'] === 200 && ResponseData['Status'] ) {
+               const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+               const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+               this.Departments_List = DecryptedData;
+               if (this.Form.controls['Department']) {
+                  this.Form.controls['Department'].setValue(null);
+                  this.Form.controls['Department'].enable();
+               }
+            } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+            } else {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
+            }
+         });
       } else {
-         this.Form.controls['Department'].setValue(null);
-         this.Form.controls['Department'].disable();
+         this.Departments_List = [];
+         if (this.Form.controls['Department']) {
+            this.Form.controls['Department'].setValue(null);
+            this.Form.controls['Department'].disable();
+         }
       }
    }
 
@@ -132,8 +183,6 @@ export class StaffCreateComponent implements OnInit {
             this.Uploading = false;
             const ReceivingData = JSON.parse(response['_body']);
             if (response['status'] === 200 && ReceivingData.Status) {
-               const CryptoBytes  = CryptoJS.AES.decrypt(ReceivingData['Response'], 'SecretKeyOut@123');
-               const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
                this.Toastr.NewToastrMessage( { Type: 'Success', Message: 'Staff Successfully Created' } );
                this.router.navigate(['/Staff_List']);
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ReceivingData.Status) {

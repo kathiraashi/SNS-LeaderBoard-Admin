@@ -27,7 +27,8 @@ export class CurrentSemestersComponent implements OnInit {
 
    Loader: Boolean = true;
    Loader_1: Boolean = true;
-   User_Id;
+   User_Id: any;
+   User_Type: any;
 
    Form: FormGroup;
 
@@ -39,25 +40,36 @@ export class CurrentSemestersComponent implements OnInit {
                public Institution_Management: InstitutionManagementService
             ) {
                this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-               // Get Institutions List
-               const Data = {'User_Id' : this.User_Id };
-               let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
-               Info = Info.toString();
-               this.Loader = true;
-               this.Institutions_Service.Institution_SimpleList({'Info': Info}).subscribe( response => {
-                  this.Loader = false;
-                  const ResponseData = JSON.parse(response['_body']);
-                  if (response['status'] === 200 && ResponseData['Status'] ) {
-                     const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
-                     const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
-                     this._Institutions = DecryptedData;
-                     this.LoadCurrentSemestersDetails(this._Institutions[0]['_id']);
-                  } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
-                     this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
-                  } else {
-                     this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
-                  }
-               });
+               this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+               if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                  this._Institutions.push(this.Login_Service.LoginUser_Info()['Staff']['Institution']);
+                  setTimeout(() => {
+                     this.Form.controls['Institution'].setValue(this._Institutions[0]['_id']);
+                     this.Form.controls['Institution'].disable();
+                     this.InstitutionChange();
+                     this.Loader = false;
+                  }, 100);
+               } else {
+                  // Get Institutions List
+                  const Data = {'User_Id' : this.User_Id };
+                  let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+                  Info = Info.toString();
+                  this.Loader = true;
+                  this.Institutions_Service.Institution_SimpleList({'Info': Info}).subscribe( response => {
+                     this.Loader = false;
+                     const ResponseData = JSON.parse(response['_body']);
+                     if (response['status'] === 200 && ResponseData['Status'] ) {
+                        const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+                        const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+                        this._Institutions = DecryptedData;
+                        this.LoadCurrentSemestersDetails(this._Institutions[0]['_id']);
+                     } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                     } else {
+                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
+                     }
+                  });
+               }
             }
 
    ngOnInit() {
@@ -73,7 +85,12 @@ export class CurrentSemestersComponent implements OnInit {
       ArrayForm.controls = [];
       this._YearlyBatches = [];
       if (Institution !== null && Institution !== undefined) {
-         this.LoadCurrentSemestersDetails(Institution);
+         if ( this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin' && this.User_Type !== 'Principal') {
+            const Department = this.Login_Service.LoginUser_Info()['Staff']['Department']['_id'];
+            this.LoadDepartmentBased_CurrentSemestersDetails(Institution, Department);
+         } else {
+            this.LoadCurrentSemestersDetails(Institution);
+         }
       }
    }
 
@@ -99,13 +116,36 @@ export class CurrentSemestersComponent implements OnInit {
       });
    }
 
+   LoadDepartmentBased_CurrentSemestersDetails(Institution, Department) {
+      this.Form.controls['Institution'].setValue(Institution);
+      const Data = {'User_Id' : this.User_Id, 'Institution': Institution, 'Department': Department};
+      let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+      Info = Info.toString();
+      this.Loader_1 = true;
+      this.Service.DepartmentBased_CurrentSemesters_List({'Info': Info}).subscribe( response => {
+         this.Loader_1 = false;
+         const ResponseData = JSON.parse(response['_body']);
+         if (response['status'] === 200 && ResponseData['Status'] ) {
+            const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+            const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+            this._List = DecryptedData;
+            this.LoadFormArray();
+         } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+            this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+         } else {
+            this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Current Semesters List Getting Error!, But not Identify!' });
+         }
+      });
+   }
+
    LoadFormArray() {
       this._List.map(Obj => {
          const NewGroup =  new FormGroup({
             Institution: new FormControl(Obj.Institution, Validators.required ),
+            Department: new FormControl(Obj.Department._id, Validators.required ),
             Institution_Management: new FormControl(Obj._id, Validators.required ),
             Course: new FormControl(Obj.Course.Course, Validators.required ),
-            Department: new FormControl(Obj.Department.Department, Validators.required ),
+            Show_Department: new FormControl(Obj.Department.Department, Validators.required ),
             Expend: new FormControl(false),
             Edit: new FormControl(false),
             Update: new FormControl(false),

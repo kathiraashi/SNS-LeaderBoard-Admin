@@ -29,8 +29,22 @@ var Schema = mongoose.Schema;
 
 
 
+   // Student Activities Management Schema
+   var StudentActivitiesManagementSchema = mongoose.Schema({
+      Activity: { type: Schema.Types.ObjectId, ref: 'Activities', required : true },
+      Student: { type: Schema.Types.ObjectId, ref: 'Students',  required : true },
+      Level: { type: Schema.Types.ObjectId, ref: 'Levels',  required : true },
+      Activity_Status: { type: String, required : true },
+      Active_Status: { type : Boolean , required : true},
+      If_Deleted: { type : Boolean , required : true }
+      },
+      { timestamps: true }
+   );
+   var VarStudentActivitiesManagement = mongoose.model('StudentActivitiesManagement', StudentActivitiesManagementSchema, 'StudentActivitiesManagement_List');
+
 
 
 module.exports = {
-   ActivitiesSchema: VarActivities
+   ActivitiesSchema: VarActivities,
+   StudentActivitiesManagementSchema: VarStudentActivitiesManagement
 };

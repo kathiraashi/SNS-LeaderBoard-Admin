@@ -58,6 +58,7 @@ constructor(   public bsModalRef: BsModalRef,
 
       this.Form = new FormGroup({
          Institution: new FormControl({value: this._BasicData['Institution']['_id'], disabled: true}, Validators.required ),
+         Department: new FormControl({value: this._BasicData['Department']['_id'], disabled: true}, Validators.required ),
          Institution_Management: new FormControl({value: this._BasicData['Institution_Management']['_id'], disabled: true}, Validators.required),
          Yearly_Badge: new FormControl({value: this._BasicData['Yearly_Badge']['_id'], disabled: true}, Validators.required),
          Students_Array: new FormArray([]),

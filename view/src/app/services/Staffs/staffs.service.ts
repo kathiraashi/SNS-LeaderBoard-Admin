@@ -75,6 +75,16 @@ export class StaffsService {
             return this.ValidateEveryRequest();
          }
       }
+   // Department Based Staffs List
+      public DepartmentBased_StaffsList(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'DepartmentBased_StaffsList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
    // Department Based Staffs Simple List
       public DepartmentBased_StaffsSimpleList(Info: any): Observable<any[]> {
          if (this.Service.If_LoggedIn()) {
@@ -86,4 +96,14 @@ export class StaffsService {
          }
       }
 
+   // Institution And RollBased Staffs Simple List
+      public InstitutionAndRollBased_StaffsSimpleList(Info: any): Observable<any[]> {
+         if (this.Service.If_LoggedIn()) {
+            this.headers.set('Authorization', atob(sessionStorage.getItem('SessionToken')));
+            sessionStorage.setItem('SessionKey', btoa(Date()));
+            return this.http.post(API_URL + 'InstitutionAndRollBased_StaffsSimpleList', Info, {headers: this.headers }).pipe( map(response => response),  catchError(error => of(error)));
+         } else {
+            return this.ValidateEveryRequest();
+         }
+      }
 }

@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
    // Current Semesters Schema
    var CurrentSemestersSchema = mongoose.Schema({
       Institution: { type: Schema.Types.ObjectId, ref: 'Institution', required : true },
+      Department: { type: Schema.Types.ObjectId, ref: 'Department', required : true },
       Institution_Management: { type: Schema.Types.ObjectId, ref: 'InstitutionManagements', required : true },
       Yearly_Badge: { type: Schema.Types.ObjectId, ref: 'YearlyBatches', required : true },
       Year: { type: Schema.Types.ObjectId, ref: 'BatchYears', required : true },

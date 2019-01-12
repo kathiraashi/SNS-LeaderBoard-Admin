@@ -23,7 +23,9 @@ export class ListAchievementTypeComponent implements OnInit {
    Loader: Boolean = true;
    _List: any[] = [];
 
-   User_Id;
+   User_Id: any;
+   User_Type: any;
+
 
    constructor(   private modalService: BsModalService,
                   private Service: AchievementTypeService,
@@ -31,7 +33,30 @@ export class ListAchievementTypeComponent implements OnInit {
                   public Login_Service: LoginService
                ) {
                   this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-                  // Get Achievement Type List
+                  this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+                  if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                      // Get Institution Based Achievement Type List
+                      const Data = {'User_Id' : this.User_Id, Institution: this.Login_Service.LoginUser_Info()['Staff']['Institution']['_id']};
+                      let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+                      Info = Info.toString();
+                      this.Loader = true;
+                      this.Service.InstitutionBased_AchievementType_List({'Info': Info}).subscribe( response => {
+                         const ResponseData = JSON.parse(response['_body']);
+                         this.Loader = false;
+                         if (response['status'] === 200 && ResponseData['Status'] ) {
+                            const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+                            const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+                            this._List = DecryptedData;
+                         } else if (response['status'] === 400 || response['status'] === 417 && !ResponseData['Status']) {
+                            this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                         } else if (response['status'] === 401 && !ResponseData['Status']) {
+                            this.Toastr.NewToastrMessage({ Type: 'Error',  Message: ResponseData['Message'] });
+                         } else {
+                            this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Subject List Getting Error!, But not Identify!' });
+                         }
+                      });
+                  } else {
+                     // Get Achievement Type List
                      const Data = {'User_Id' : this.User_Id };
                      let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
                      Info = Info.toString();
@@ -43,13 +68,16 @@ export class ListAchievementTypeComponent implements OnInit {
                            const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
                            const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
                            this._List = DecryptedData;
-                        } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+                        } else if (response['status'] === 400 || response['status'] === 417 && !ResponseData['Status']) {
                            this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                        } else if (response['status'] === 401 && !ResponseData['Status']) {
+                           this.Toastr.NewToastrMessage({ Type: 'Error',  Message: ResponseData['Message'] });
                         } else {
-                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Achievement Type List Getting Error!, But not Identify!' });
+                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Subject List Getting Error!, But not Identify!' });
                         }
                      });
                   }
+               }
 
    ngOnInit() {
    }

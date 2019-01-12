@@ -15,6 +15,8 @@ var Schema = mongoose.Schema;
       Mobile: { type: String, required : true },
       Email: { type: String, required : true },
       Address: { type: String, required : true },
+      UserManagement_Linked: { type : Boolean , required : true},
+      UserManagement: { type: Schema.Types.ObjectId, ref: 'User_Management' },
       Created_By: { type: Schema.Types.ObjectId, ref: 'User_Management', required : true },
       Last_Modified_By: { type: Schema.Types.ObjectId, ref: 'User_Management', required : true },
       Active_Status: { type : Boolean , required : true},

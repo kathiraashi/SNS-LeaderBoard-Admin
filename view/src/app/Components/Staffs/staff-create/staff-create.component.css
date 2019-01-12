@@ -141,10 +141,10 @@
    word-spacing: 1px;
    letter-spacing: 0.4px;
 }
-.Form_Input.Form_Err input{
+.Form_Input input.ng-dirty.ng-invalid{
    border-color: rgb(221, 10, 10);
 }
-.Form_Input.Form_Success input{
+.Form_Input input.ng-valid.ng-dirty{
    border-color: #4ab65f;
 }
 /* Company details */

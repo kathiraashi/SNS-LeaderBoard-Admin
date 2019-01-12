@@ -37,48 +37,18 @@
                </p>
             </div>
             <div class="col-sm-4 Form_Select">
-               <label> Yearly Batch </label>
+               <label> Current Semester </label>
                <ng-select class="NgSelect ValueBold"
-                           formControlName="Yearly_Badge"
-                           [items]="Yearly_Badge_List"
-                           [bindLabel]="'Batch'"
-                           [bindValue]="'_id'"
+                           formControlName="CurrentSemester"
+                           [items]="_CurrentSemesters"
+                           [bindLabel]="'ShowData'"
+                           [bindValue]="'Semester._id'"
                            [searchable]="true"
-                           (change)="YearlyBatch_Change()"
+                           (change)="CurrentSemesterChange()"
                            placeholder="Yearly Badge">
                </ng-select>
-               <p class="error" *ngIf="Form.controls['Yearly_Badge'].errors && !Form.controls['Yearly_Badge'].pristine">
-                  <span *ngIf="Form.controls['Yearly_Badge'].errors.required"> Yearly Badge is required</span>
-               </p>
-            </div>
-            <div class="col-sm-4 Form_Select">
-               <label> Year </label>
-               <ng-select class="NgSelect ValueBold"
-                           formControlName="Year"
-                           [items]="Years_List"
-                           [bindLabel]="'Show_Year'"
-                           [bindValue]="'_id'"
-                           [searchable]="true"
-                           (change)="Year_Change()"
-                           placeholder="Year">
-               </ng-select>
-               <p class="error" *ngIf="Form.controls['Year'].errors && !Form.controls['Year'].pristine">
-                  <span *ngIf="Form.controls['Year'].errors.required"> Year is required</span>
-               </p>
-            </div>
-            <div class="col-sm-4 Form_Select">
-               <label> Semester </label>
-               <ng-select class="NgSelect ValueBold"
-                           formControlName="Semester"
-                           [items]="Semesters_List"
-                           [bindLabel]="'Semester_Name'"
-                           [bindValue]="'_id'"
-                           [searchable]="true"
-                           (change)="Semester_Change()"
-                           placeholder="Semester">
-               </ng-select>
-               <p class="error" *ngIf="Form.controls['Semester'].errors && !Form.controls['Semester'].pristine">
-                  <span *ngIf="Form.controls['Semester'].errors.required"> Semester is required</span>
+               <p class="error" *ngIf="Form.controls['CurrentSemester'].errors && !Form.controls['CurrentSemester'].pristine">
+                  <span *ngIf="Form.controls['CurrentSemester'].errors.required"> Current Semester is required</span>
                </p>
             </div>
             <div class="col-sm-4 Form_Select">
@@ -122,7 +92,7 @@
                         <h6> Student Name </h6>
                      </div>
                      <div class="col-sm-4">
-                        <h6> Roll No </h6>
+                        <h6> Reg No </h6>
                      </div>
                      <div class="col-sm-3" style="text-align: center">
                         <mat-checkbox formControlName="AllStudents_Selected" (change)="SelectAllStudent_Change()"></mat-checkbox>

@@ -11,6 +11,8 @@ import { InstitutionsService } from './../../../services/Configurations/institut
 import { StudentsService } from './../../../services/Students/students.service';
 import { StaffsService } from './../../../services/Staffs/staffs.service';
 import { InstitutionManagementService } from './../../../services/Institution-Management/institution-management.service';
+import { CurrentSemestersService } from './../../../services/Current-Semesters/current-semesters.service';
+
 import { TutorManagementService } from './../../../services/Tutor-Management/tutor-management.service';
 import { ToastrService } from './../../../services/common-services/toastr-service/toastr.service';
 import { LoginService } from './../../../services/LoginService/login.service';
@@ -29,9 +31,7 @@ export class ModelTutorManagementCreateComponent implements OnInit {
    Data;
    Institutions_List: any[] = [];
    Institution_Management_List: any[] = [];
-   Yearly_Badge_List: any[] = [];
-   Years_List: any[] = [];
-   Semesters_List: any[] = [];
+   _CurrentSemesters: any[] = [];
    Sections_List: any[] = [];
    Staffs_List: any[] = [];
    Students_List: any[] = [];
@@ -39,7 +39,8 @@ export class ModelTutorManagementCreateComponent implements OnInit {
    Uploading: Boolean = false;
    Async_Loading: Boolean = false;
    Form: FormGroup;
-   User_Id;
+   User_Id: any;
+   User_Type: any;
    Min_StudentValidate: Boolean = false;
 
 
@@ -50,25 +51,40 @@ export class ModelTutorManagementCreateComponent implements OnInit {
                   public Login_Service: LoginService,
                   public Service: TutorManagementService,
                   private Institution_Service: InstitutionsService,
+                  public Current_Semesters: CurrentSemestersService,
                   public Students_Service: StudentsService
                ) {
                   this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-                  // Get Institutions List
-                  const Data = {'User_Id' : this.User_Id };
-                  let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
-                  Info = Info.toString();
-                  this.Institution_Service.Institution_SimpleList({'Info': Info}).subscribe( response => {
-                     const ResponseData = JSON.parse(response['_body']);
-                     if (response['status'] === 200 && ResponseData['Status'] ) {
-                        const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
-                        const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
-                        this.Institutions_List = DecryptedData;
-                     } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
-                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
-                     } else {
-                        this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
-                     }
-                  });
+                  this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+                  if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                     this.Institutions_List.push(this.Login_Service.LoginUser_Info()['Staff']['Institution']);
+                     setTimeout(() => {
+                        this.Form.controls['Institution'].setValue(this.Institutions_List[0]['_id']);
+                        this.Form.controls['Institution'].disable();
+                        if (this.User_Type !== 'Principal') {
+                           this.DepartmentChange(this.Login_Service.LoginUser_Info()['Staff']['Department']['_id']);
+                        } else {
+                           this.InstitutionChange();
+                        }
+                     }, 100);
+                  } else {
+                     // Get Institutions List
+                     const Data = {'User_Id' : this.User_Id };
+                     let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+                     Info = Info.toString();
+                     this.Institution_Service.Institution_SimpleList({'Info': Info}).subscribe( response => {
+                        const ResponseData = JSON.parse(response['_body']);
+                        if (response['status'] === 200 && ResponseData['Status'] ) {
+                           const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+                           const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+                           this.Institutions_List = DecryptedData;
+                        } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+                        } else {
+                           this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
+                        }
+                     });
+                  }
                }
 
    ngOnInit() {
@@ -77,9 +93,7 @@ export class ModelTutorManagementCreateComponent implements OnInit {
       this.Form = new FormGroup({
          Institution: new FormControl(null, Validators.required ),
          Institution_Management: new FormControl({value: null, disabled: true}, Validators.required),
-         Yearly_Badge: new FormControl({value: null, disabled: true}, Validators.required),
-         Year: new FormControl({value: null, disabled: true}, Validators.required),
-         Semester: new FormControl({value: null, disabled: true}, Validators.required),
+         CurrentSemester: new FormControl({value: null, disabled: true}),
          Section: new FormControl({value: null, disabled: true}, Validators.required),
          Staff: new FormControl({value: null, disabled: true}, Validators.required ),
          AllStudents_Selected: new FormControl(false),
@@ -92,12 +106,8 @@ export class ModelTutorManagementCreateComponent implements OnInit {
       const Ins = this.Form.controls['Institution'].value;
       this.Form.controls['Institution_Management'].setValue(null);
       this.Form.controls['Institution_Management'].disable();
-      this.Form.controls['Yearly_Badge'].setValue(null);
-      this.Form.controls['Yearly_Badge'].disable();
-      this.Form.controls['Year'].setValue(null);
-      this.Form.controls['Year'].disable();
-      this.Form.controls['Semester'].setValue(null);
-      this.Form.controls['Semester'].disable();
+      this.Form.controls['CurrentSemester'].setValue(null);
+      this.Form.controls['CurrentSemester'].disable();
       this.Form.controls['Section'].setValue(null);
       this.Form.controls['Section'].disable();
       this.Form.controls['Staff'].setValue(null);
@@ -129,14 +139,47 @@ export class ModelTutorManagementCreateComponent implements OnInit {
             });
       }
    }
+
+
+   DepartmentChange(Department: any) {
+      const Institution = this.Form.controls['Institution'].value;
+      this.Form.controls['Institution_Management'].setValue(null);
+      this.Form.controls['Institution_Management'].disable();
+      this.Form.controls['CurrentSemester'].setValue(null);
+      this.Form.controls['CurrentSemester'].disable();
+      this.Form.controls['Section'].setValue(null);
+      this.Form.controls['Section'].disable();
+      this.Form.controls['Staff'].setValue(null);
+      this.Form.controls['Staff'].disable();
+      this.ClearStudentArray();
+      if (Institution !== null && Institution !== undefined && Department !== null && Department !== undefined) {
+         const Data = {'User_Id' : this.User_Id, Institution: Institution, Department: Department };
+         let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
+         Info = Info.toString();
+         this.Institution_Management.DepartmentBased_InstitutionManagement_List({'Info': Info}).subscribe( response => {
+            const ResponseData = JSON.parse(response['_body']);
+            if (response['status'] === 200 && ResponseData['Status'] ) {
+               const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
+               const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
+               DecryptedData.map(obj => {
+                  obj['CourseAndDepartment'] = obj['Course']['Course']  + ' - ' + obj['Department']['Department'];
+                  return obj;
+               });
+               this.Institution_Management_List = DecryptedData;
+               this.Form.controls['Institution_Management'].enable();
+            } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
+            } else {
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Course and Department List Getting Error!, But not Identify!' });
+            }
+         });
+      }
+   }
+
    InsManagementChange() {
       const Ins_Management = this.Form.controls['Institution_Management'].value;
-      this.Form.controls['Yearly_Badge'].setValue(null);
-      this.Form.controls['Yearly_Badge'].disable();
-      this.Form.controls['Year'].setValue(null);
-      this.Form.controls['Year'].disable();
-      this.Form.controls['Semester'].setValue(null);
-      this.Form.controls['Semester'].disable();
+      this.Form.controls['CurrentSemester'].setValue(null);
+      this.Form.controls['CurrentSemester'].disable();
       this.Form.controls['Section'].setValue(null);
       this.Form.controls['Section'].disable();
       this.Form.controls['Staff'].setValue(null);
@@ -151,25 +194,23 @@ export class ModelTutorManagementCreateComponent implements OnInit {
          let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
          Info = Info.toString();
          Ins_Management_Loading = true;
-         this.Institution_Management.InstitutionManagement_YearlyBatchesList({'Info': Info}).subscribe( response => {
+         this.Current_Semesters.InstitutionManagementBased_CurrentSemestersList({'Info': Info}).subscribe( response => {
             const ResponseData = JSON.parse(response['_body']);
-            Ins_Management_Loading = false;
-            if (!Staffs_List_Loading && !Ins_Management_Loading) {
-               this.Async_Loading = false;
-            }
             if (response['status'] === 200 && ResponseData['Status'] ) {
                const CryptoBytes  = CryptoJS.AES.decrypt(ResponseData['Response'], 'SecretKeyOut@123');
                const DecryptedData = JSON.parse(CryptoBytes.toString(CryptoJS.enc.Utf8));
                DecryptedData.map(obj => {
-                  obj['Batch'] = formatDate(new Date(obj['Starting_MonthAndYear']), 'MMM yyyy ', 'en-US')  + ' - ' + formatDate(new Date(obj['Ending_MonthAndYear']), 'MMM yyyy ', 'en-US');
+                  // tslint:disable-next-line:max-line-length
+                  obj['ShowData'] = obj['Year']['Show_Year'] + ' - ' +  obj['Semester']['Semester_Name']  +  ' (' + formatDate(new Date(obj['Yearly_Badge']['Starting_MonthAndYear']), 'yyyy', 'en-US')  + '-' + formatDate(new Date(obj['Yearly_Badge']['Ending_MonthAndYear']), 'yyyy', 'en-US') + ')';
+                  obj['Yearly_Badge']['Batch'] = formatDate(new Date(obj['Yearly_Badge']['Starting_MonthAndYear']), 'MMM yyyy ', 'en-US')  + '-' + formatDate(new Date(obj['Yearly_Badge']['Ending_MonthAndYear']), ' MMM yyyy', 'en-US') ;
                   return obj;
                });
-               this.Yearly_Badge_List = DecryptedData;
-               this.Form.controls['Yearly_Badge'].enable();
+               this._CurrentSemesters = DecryptedData;
+               this.Form.controls['CurrentSemester'].enable();
             } else if (response['status'] === 400 || response['status'] === 417 || response['status'] === 401 && !ResponseData['Status']) {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: ResponseData['Message'] });
             } else {
-               this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Yearly Batches List Getting Error!, But not Identify!' });
+               this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Current Semester List Getting Error!, But not Identify!' });
             }
          });
          // Get Staff's List
@@ -196,45 +237,24 @@ export class ModelTutorManagementCreateComponent implements OnInit {
                this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Yearly Batches List Getting Error!, But not Identify!' });
             }
          });
+      } else {
+         if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin' && this.User_Type !== 'Principal') {
+            this.InstitutionChange();
+         } else {
+            this.DepartmentChange(this.Login_Service.LoginUser_Info()['Staff']['Department']['_id']);
+         }
       }
    }
-   YearlyBatch_Change() {
-      const Batch = this.Form.controls['Yearly_Badge'].value;
-      this.Form.controls['Year'].setValue(null);
-      this.Form.controls['Year'].disable();
-      this.Form.controls['Semester'].setValue(null);
-      this.Form.controls['Semester'].disable();
+   CurrentSemesterChange() {
+      const CurrentSemester = this.Form.controls['CurrentSemester'].value;
       this.Form.controls['Section'].setValue(null);
       this.Form.controls['Section'].disable();
-      this.ClearStudentArray();
-      if (Batch !== null && Batch !== undefined && Batch !== '') {
-         const _index = this.Yearly_Badge_List.findIndex(obj => obj._id === Batch);
-         this.Years_List = this.Yearly_Badge_List[_index]['Years_Array'];
-         this.Form.controls['Year'].enable();
-      }
-   }
-   Year_Change() {
-      const Year = this.Form.controls['Year'].value;
-      this.Form.controls['Semester'].setValue(null);
-      this.Form.controls['Semester'].disable();
-      this.Form.controls['Section'].setValue(null);
-      this.Form.controls['Section'].disable();
-      this.ClearStudentArray();
-      if (Year !== null && Year !== undefined && Year !== '') {
-         const Years_index = this.Years_List.findIndex(obj => obj._id === Year);
-         this.Semesters_List = this.Years_List[Years_index]['Semesters'];
-         this.Form.controls['Semester'].enable();
-      }
-   }
-   Semester_Change() {
-      const Semester = this.Form.controls['Semester'].value;
-      this.Form.controls['Section'].setValue(null);
-      this.Form.controls['Section'].disable();
-      this.ClearStudentArray();
-      if (Semester !== null && Semester !== undefined && Semester !== '') {
-         const Semester_index = this.Semesters_List.findIndex(obj => obj._id === Semester);
-         this.Sections_List = this.Semesters_List[Semester_index]['Sections_Arr'];
+      if (CurrentSemester !== null && CurrentSemester !== undefined) {
+         const _index = this._CurrentSemesters.findIndex(obj => obj['Semester']._id === CurrentSemester);
+         this.Sections_List = this._CurrentSemesters[_index]['Semester']['Sections_Arr'];
          this.Form.controls['Section'].enable();
+      } else {
+         this.InsManagementChange();
       }
    }
    Section_Change() {
@@ -243,19 +263,18 @@ export class ModelTutorManagementCreateComponent implements OnInit {
       this.Form.controls['AllStudents_Selected'].setValue(false);
       if (Section !== null && Section !== undefined && Section !== '') {
          this.Form.controls['Staff'].enable();
-         const Ins_Management = this.Form.controls['Institution_Management'].value;
-         const Yearly_Badge = this.Form.controls['Yearly_Badge'].value;
-         const Semester = this.Form.controls['Semester'].value;
-         const Data = {   'User_Id' : this.User_Id,
-                              'Institution_Management': Ins_Management,
-                              'Yearly_Badge': Yearly_Badge,
-                              'Semester': Semester,
-                              'Section': Section
-                           };
+         const _indexTwo = this._CurrentSemesters.findIndex(obj => obj['Semester']._id === this.Form.controls['CurrentSemester'].value);
+         const Yearly_Badge = this._CurrentSemesters[_indexTwo]['Yearly_Badge']['_id'];
+         const Semester = this._CurrentSemesters[_indexTwo]['Semester']['_id'];
+         const Data = { 'User_Id' : this.User_Id,
+                        'Yearly_Badge': Yearly_Badge,
+                        'Semester': Semester,
+                        'Section': Section
+                     };
          let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
          Info = Info.toString();
          this.Async_Loading = true;
-         this.Students_Service.SemesterBased_StudentsList({'Info': Info}).subscribe( response => {
+         this.Students_Service.SectionBased_StudentsList({'Info': Info}).subscribe( response => {
             this.Async_Loading = false;
             const ResponseData = JSON.parse(response['_body']);
             if (response['status'] === 200 && ResponseData['Status'] ) {

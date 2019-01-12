@@ -25,7 +25,8 @@ export class ModelSubjectConfigComponent implements OnInit {
 
    Uploading: Boolean = false;
    Form: FormGroup;
-   User_Id;
+   User_Id: any;
+   User_Type: string;
 
    constructor( public bsModalRef: BsModalRef,
                 public Service: SubjectsService,
@@ -34,8 +35,19 @@ export class ModelSubjectConfigComponent implements OnInit {
                 private Institution_Service: InstitutionsService,
             ) {
                this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-               this.User_Id = this.Login_Service.LoginUser_Info()['_id'];
-                  // Get Institutions List
+               this.User_Type = this.Login_Service.LoginUser_Info()['User_Type'];
+                  if (this.User_Type !== 'Admin' && this.User_Type !== 'Sub Admin') {
+                     this._List.push(this.Login_Service.LoginUser_Info()['Staff']['Institution']);
+                     setTimeout(() => {
+                        this.Form.controls['Institution'].disable();
+                        if (this.Type === 'Edit') {
+                           this.Form.controls['Institution'].setValue(this._List[0]['_id']);
+                        } else {
+                           this.Form.controls['Institution'].setValue([this._List[0]['_id']]);
+                        }
+                     }, 100);
+                  } else {
+                     // Get Institutions List
                      const Data = {'User_Id' : this.User_Id };
                      let Info = CryptoJS.AES.encrypt(JSON.stringify(Data), 'SecretKeyIn@123');
                      Info = Info.toString();
@@ -54,6 +66,8 @@ export class ModelSubjectConfigComponent implements OnInit {
                            this.Toastr.NewToastrMessage({ Type: 'Error', Message: 'Institutions List Getting Error!, But not Identify!' });
                         }
                      });
+                  }
+
             }
 
    ngOnInit() {
@@ -81,6 +95,7 @@ export class ModelSubjectConfigComponent implements OnInit {
    updateInstitutions() {
       if (this.Type === 'Edit') {
          this.Form.controls['Institution'].setValue(this.Data.Institution._id);
+         this.Form.controls['Institution'].disable();
       }
    }
    // onSubmit Function

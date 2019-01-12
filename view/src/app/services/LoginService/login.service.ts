@@ -5,7 +5,6 @@ import { map, catchError } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 
 const API_URL = 'http://localhost:5000/API/RegisterAndLogin/';
-const Live_API_URL = 'http://localhost:5000/API/RegisterAndLogin/';
 
 @Injectable({
   providedIn: 'root'

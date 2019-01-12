@@ -61,7 +61,7 @@
                   <ng-container formArrayName="Courses_Array">
                      <div class="First_Section" *ngFor="let Courses of Form.controls['Courses_Array']['controls']; let i = index" [formGroupName]="i">
                         <div class="First_Section_Details" >
-                           <h6 class="Identity"> <span> {{i + 1}}) </span> {{Courses.controls['Course'].value}} - {{Courses.controls['Department'].value}}</h6>
+                           <h6 class="Identity"> <span> {{i + 1}}) </span> {{Courses.controls['Course'].value}} - {{Courses.controls['Show_Department'].value}}</h6>
                            <div class="Right_Section">
                               <div class="Edit_Icon" (click)="EditBatches(Courses)" *ngIf="Courses.controls['Expend'].value && !Courses.controls['Update'].value">
                                  <i class="material-icons">edit</i>

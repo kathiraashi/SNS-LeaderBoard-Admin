@@ -6,14 +6,7 @@
    <div class="Model_Body">
       <Form [formGroup]="Form"> 
          <div class="row">
-            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Name'].errors && !Form.controls['Name'].pristine, 'Form_Success': Form.controls['Name'].valid && !Form.controls['Name'].pristine }">
-               <label> Name : </label>
-               <input type="text" formControlName="Name" >
-               <p class="error" *ngIf="Form.controls['Name'].errors && !Form.controls['Name'].pristine">
-                  <span *ngIf="Form.controls['Name'].errors.required">Name is required</span>
-               </p>
-            </div><br>
-            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': !Form.controls['User_Name'].pristine && Form.controls['User_Name'].errors, 'Form_Success': Form.controls['User_Name'].valid && !Form.controls['User_Name'].pristine }">
+            <div class="col-sm-6 Form_Input" >
                <label> User Name :</label>
                <input type="text" formControlName="User_Name"> 
                <p class="error" *ngIf="Form.controls['User_Name'].errors && !Form.controls['User_Name'].pristine">
@@ -21,14 +14,60 @@
                   <span *ngIf="Form.controls['User_Name'].errors.UserName_NotAvailable"> User Name Already Exist</span>
                </p>
             </div>
-            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['User_Password'].errors && !Form.controls['User_Password'].pristine, 'Form_Success': Form.controls['User_Password'].valid && !Form.controls['User_Password'].pristine }">
+            <div class="col-sm-6 Form_Input">
                <label> User Password :</label>
                <input type="password" formControlName="User_Password" >
                <p class="error" *ngIf="Form.controls['User_Password'].errors && !Form.controls['User_Password'].pristine">
                   <span *ngIf="Form.controls['User_Password'].errors.required"> User Password is required</span>
                </p>
             </div>
-            <div class="col-sm-6 Form_Input" [ngClass]="{'Form_Err': Form.controls['Email'].errors && !Form.controls['Email'].pristine, 'Form_Success': Form.controls['Email'].valid && !Form.controls['Email'].pristine }">
+            <div class="col-sm-6 Form_Select">
+               <label>User Type :</label>
+               <ng-select class="NgSelect"
+                        [items]="_UserTypes"
+                        [searchable]="true"
+                        (change)="UserType_Change()"
+                        formControlName="User_Type">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['User_Type'].errors && !Form.controls['User_Type'].pristine">
+                  <span *ngIf="Form.controls['User_Type'].errors.required"> User Type is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" *ngIf="Form.controls['Institution']">
+               <label> Institution : </label>
+               <ng-select class="NgSelect"
+                        [items]="_Institutions"
+                        [bindLabel]="'Institution'"
+                        [bindValue]="'_id'"
+                        [searchable]="true"
+                        (change)="Institution_Change()"
+                        formControlName="Institution">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Institution'].errors && !Form.controls['Institution'].pristine">
+                  <span *ngIf="Form.controls['Institution'].errors.required">Institution is required</span>
+               </p>
+            </div>
+            <div class="col-sm-10 Form_Input" *ngIf="Form.controls['Staff']">
+               <label> Staff And Department: </label>
+               <ng-select class="NgSelect"
+                        [items]="_Staffs"
+                        [bindLabel]="'NameAndDepartment'"
+                        [bindValue]="'_id'"
+                        [searchable]="true"
+                        formControlName="Staff">
+               </ng-select>
+               <p class="error" *ngIf="Form.controls['Staff'].errors && !Form.controls['Staff'].pristine">
+                  <span *ngIf="Form.controls['Staff'].errors.required">Staff is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" *ngIf="Form.controls['User_Type'].value === 'Sub Admin'">
+               <label> Name : </label>
+               <input type="text" formControlName="Name" >
+               <p class="error" *ngIf="Form.controls['Name'].errors && !Form.controls['Name'].pristine">
+                  <span *ngIf="Form.controls['Name'].errors.required">Name is required</span>
+               </p>
+            </div>
+            <div class="col-sm-6 Form_Input" *ngIf="Form.controls['User_Type'].value === 'Sub Admin'">
                <label> Email :</label>
                <input type="email" formControlName="Email" >
                <p class="error" *ngIf="Form.controls['Email'].errors && !Form.controls['Email'].pristine">
@@ -36,29 +75,17 @@
                   <span *ngIf="Form.controls['Email'].errors.email"> Email must be a valid email address </span>
                </p>
             </div>
-            <div class="col-sm-6 Form_Input">
+            <div class="col-sm-6 Form_Input" *ngIf="Form.controls['User_Type'].value === 'Sub Admin'">
                <label> Phone :</label>
                <input type="text" formControlName="Phone" >
-            </div>
-            <div class="col-sm-6 Form_Select">
-               <label>User Type :</label>
-               <ng-select class="NgSelect"
-                        [searchable]="true"
-                        formControlName="User_Type">
-                  <ng-option *ngFor="let Type of _UserTypes" [value]="Type">{{Type}}</ng-option>
-               </ng-select>
-               <p class="error" *ngIf="Form.controls['User_Type'].errors && !Form.controls['User_Type'].pristine">
-                  <span *ngIf="Form.controls['User_Type'].errors.required"> User Type is required</span>
-               </p>
             </div>
          </div>
       </Form>
    </div>
    <div class="Model_Footer">
-         <button type="submit"   [disabled]="Form.status !== 'VALID' || Uploading"  mat-raised-button color="primary">
-            <span *ngIf="!Uploading" >Submit</span>
-            <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
-         </button>
-      <button mat-raised-button (click)="submit()" [disabled]="!Form.valid" color="primary" > Submit </button>
+      <button type="button" (click)="submit()" [disabled]="Form.status !== 'VALID' || Uploading"  mat-raised-button color="primary">
+         <span *ngIf="!Uploading" >Submit</span>
+         <span *ngIf="Uploading" class="UploadingBtn"> <i class="fa fa-refresh fa-spin"></i> Loading... </span>
+      </button>
    </div>
 </div>

@@ -97,12 +97,14 @@
    background-color: rgba(34, 107, 175, 0.75);
 }
 .Box_Section .Box_Img img {
-   width: 100%;
+   max-width: 95%;
+   max-height: 95%;
    margin: 0;
    position: absolute;
    top: 50%;
-   -ms-transform: translateY(-50%);
-   transform: translateY(-50%);
+   left: 50%;
+   -webkit-transform: translateY(-50%) translateX(-50%);
+   transform: translateY(-50%) translateX(-50%);
 }
 .Box_Section .Box_Details {
    padding: 5px 10px;

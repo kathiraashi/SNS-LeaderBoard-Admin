@@ -102,7 +102,7 @@
             </span>
          </li>
          <!-- Configuration -->
-         <li [routerLinkActive]="['active']" class="Menu_List">
+         <li *ngIf="User_Type === 'Admin' || User_Type === 'Sub Admin'" [routerLinkActive]="['active']" class="Menu_List">
             <span class="Menu_Tree">
                <span class="Menu">
                   <i class="material-icons">people</i>
@@ -118,7 +118,7 @@
                         <span class="Menu">
                            <span> Activities Config </span> 
                         </span>
-                        <ul class="Menu_Tree_View">
+                        <ul class="Menu_Tree_View Left">
                            <li [routerLinkActive]="['active']" [routerLink]="['/Activity_Levels']" class="Menu_Tree_List">  <a> Activity level </a>  </li>
                            <li [routerLinkActive]="['active']" [routerLink]="['/Achievement_Types']" class="Menu_Tree_List">  <a> Achievement Type </a>  </li>
                            <li [routerLinkActive]="['active']" [routerLink]="['/Redemption_Methods']" class="Menu_Tree_List">  <a> Redemption Method</a>  </li>
@@ -129,6 +129,24 @@
                </ul>
             </span>
          </li>
+
+         <li *ngIf="User_Type !== 'Admin' && User_Type !== 'Sub Admin'" [routerLinkActive]="['active']" class="Menu_List">
+               <span class="Menu_Tree">
+                  <span class="Menu">
+                     <i class="material-icons">people</i>
+                     <span> &nbsp; Configuration </span> 
+                  </span>
+                  <ul class="Menu_Tree_View">
+                     <li [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/Subjects_Config']"><a> Subjects Config </a></li>
+
+                     <li [routerLinkActive]="['active']" [routerLink]="['/Activity_Levels']" class="Menu_Tree_List">  <a> Activity level </a>  </li>
+                     <li [routerLinkActive]="['active']" [routerLink]="['/Achievement_Types']" class="Menu_Tree_List">  <a> Achievement Type </a>  </li>
+                     <li [routerLinkActive]="['active']" [routerLink]="['/Redemption_Methods']" class="Menu_Tree_List">  <a> Redemption Method</a>  </li>
+
+                     <li *ngIf=" User_Type === 'Principal' || User_Type === 'HOD'" [routerLinkActive]="['active']" class="Menu_Tree_List" [routerLink]="['/User_List']"><a> User Management  </a></li>
+                  </ul>
+               </span>
+            </li>
       </ul>
    </div>
 </div>
